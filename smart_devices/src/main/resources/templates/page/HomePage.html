@@ -1,0 +1,223 @@
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{/index}">
+<body>
+<div layout:fragment="Content">
+   <main>
+        <section class="position-relative w-100">
+            <img src="https://privateprep.com/wp-content/uploads/2023/06/shutterstock_2269866089-scaled.jpg" alt=""
+                class="img-fluid w-100" style="border-bottom-left-radius: 40rem;">
+            <div class="position-absolute" style="top: 20rem; left: 5rem;">
+                <h1 style="font-size: 55px;">Welcome to Sdevice!</h1>
+                <p style="font-size: 35px;">Explore our products and add them to your cart.</p>
+            </div>
+        </section>
+    </main>
+    <!-- Add this after the main tag -->
+
+    <div class="container mt-5 py-2">
+        <div class="container px-4 py-5" id="custom-cards">
+            <h2 class="pb-2 border-bottom">Custom cards</h2>
+            <div class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5">
+                <div class="col">
+                    <div class="card card-cover h-100 overflow-hidden text-white bg-dark rounded-5 shadow-lg"
+                        style="background-image: url('https://mobilecity.co.nz/wp-content/uploads/2021/03/K11-1-scaled-e1614209483900-1024x1024.jpg'); background-size: cover;">
+                        <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
+                            <h2 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">Short title, long jacket</h2>
+                            <ul class="d-flex list-unstyled mt-auto">
+                                <li class="me-auto">
+                                    <img src="https://github.com/twbs.png" alt="Bootstrap" width="32" height="32"
+                                        class="rounded-circle border border-white">
+                                </li>
+                                <li class="d-flex align-items-center me-3">
+                                    <svg class="bi me-2" width="1em" height="1em">
+                                        <use xlink:href="#geo-fill"></use>
+                                    </svg>
+                                    <small>Earth</small>
+                                </li>
+                                <li class="d-flex align-items-center">
+                                    <svg class="bi me-2" width="1em" height="1em">
+                                        <use xlink:href="#calendar3"></use>
+                                    </svg>
+                                    <small>3d</small>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="card card-cover h-100 overflow-hidden text-white bg-dark rounded-5 shadow-lg"
+                        style="background-image: url('https://th.bing.com/th/id/R.a7510b8d58beaa392b062fa644b092e4?rik=p%2f1bISeaepQ1zg&pid=ImgRaw&r=0'); background-size: cover;">
+                        <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
+                            <h2 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">Much longer title that wraps to
+                                multiple lines</h2>
+                            <ul class="d-flex list-unstyled mt-auto">
+                                <li class="me-auto">
+                                    <img src="https://github.com/twbs.png" alt="Bootstrap" width="32" height="32"
+                                        class="rounded-circle border border-white">
+                                </li>
+                                <li class="d-flex align-items-center me-3">
+                                    <svg class="bi me-2" width="1em" height="1em">
+                                        <use xlink:href="#geo-fill"></use>
+                                    </svg>
+                                    <small>Pakistan</small>
+                                </li>
+                                <li class="d-flex align-items-center">
+                                    <svg class="bi me-2" width="1em" height="1em">
+                                        <use xlink:href="#calendar3"></use>
+                                    </svg>
+                                    <small>4d</small>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="card card-cover h-100 overflow-hidden text-white bg-dark rounded-5 shadow-lg"
+                        style="background-image: url('https://api.duniagames.co.id/api/content/upload/file/11553592121678345953.jpg'); background-size: cover;">
+                        <div class="d-flex flex-column h-100 p-5 pb-3 text-shadow-1">
+                            <h2 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">Another longer title belongs here</h2>
+                            <ul class="d-flex list-unstyled mt-auto">
+                                <li class="me-auto">
+                                    <img src="https://github.com/twbs.png" alt="Bootstrap" width="32" height="32"
+                                        class="rounded-circle border border-white">
+                                </li>
+                                <li class="d-flex align-items-center me-3">
+                                    <svg class="bi me-2" width="1em" height="1em">
+                                        <use xlink:href="#geo-fill"></use>
+                                    </svg>
+                                    <small>California</small>
+                                </li>
+                                <li class="d-flex align-items-center">
+                                    <svg class="bi me-2" width="1em" height="1em">
+                                        <use xlink:href="#calendar3"></use>
+                                    </svg>
+                                    <small>5d</small>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <main>
+            <section class="hero py-5">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-md-6">
+                            <h1 class="display-4 mb-4">Upgrade Your Mobile Experience</h1>
+                            <p class="lead mb-4">Discover the latest smartphones and accessories at our store.</p>
+                            <a href="#" class="btn btn-primary btn-lg">Shop Now</a>
+                        </div>
+                        <div class="col-md-6">
+                            <img src="https://www.windowscentral.com/sites/wpcentral.com/files/styles/larger_wm_brw/public/field/image/2015/02/lumia-830-software-update.jpg?itok=J2ROgMpL"
+                                alt="Hero Phone" class="img-fluid rounded" style="border-top-left-radius: 35% !important;
+                                border-bottom-right-radius: 35% !important;">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="featured-products py-5">
+                <div class="container">
+                    <h2 class="mb-4">Featured Products</h2>
+                    <div class="row row-cols-1 row-cols-md-3 g-4">
+                        <div class="col">
+                            <div class="card h-100">
+                                <img th:src="@{image/iphone.jpg}" class="card-img-top p-5" alt="Product 1">
+                                <div class="card-body">
+                                    <h5 class="card-title">iPhone</h5>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <a href="#" class="btn btn-primary">Buy Now</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card h-100">
+                                <img th:src="@{image/oppo.png}" class="card-img-top p-5" alt="Product 1">
+                                <div class="card-body">
+                                    <h5 class="card-title">Oppo</h5>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <a href="#" class="btn btn-primary">Buy Now</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card h-100">
+                                <img th:src="@{image/realme.jpg}" class="card-img-top p-5" alt="Product 1">
+                                <div class="card-body">
+                                    <h5 class="card-title">Realme</h5>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <a href="#" class="btn btn-primary">Buy Now</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card h-100">
+                                <img th:src="@{image/samsung.jpg}" class="card-img-top p-5" alt="Product 1">
+                                <div class="card-body">
+                                    <h5 class="card-title">Samsung</h5>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <a href="#" class="btn btn-primary">Buy Now</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card h-100">
+                                <img th:src="@{image/vivo.webp}" class="card-img-top p-5" alt="Product 1">
+                                <div class="card-body">
+                                    <h5 class="card-title">Vivo</h5>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <a href="#" class="btn btn-primary">Buy Now</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card h-100">
+                                <img th:src="@{image/redmi.jpg}" class="card-img-top p-5" alt="Product 1">
+                                <div class="card-body">
+                                    <h5 class="card-title">Redmi</h5>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <a href="#" class="btn btn-primary">Buy Now</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Add more featured product cards here -->
+                    </div>
+                </div>
+            </section>
+
+            <section class="about py-5">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-md-6">
+                            <img src="https://gldbath.com/wp-content/uploads/2017/05/company-prfile2.jpg" alt="About Us"
+                                class="img-fluid rounded" style="border-top-right-radius: 35% !important;
+                                border-bottom-left-radius: 35% !important;">
+                        </div>
+                        <div class="col-md-6">
+                            <h2 class="mb-4">About Us</h2>
+                            <p class="lead">
+                                Welcome to Phone Shop, your one-stop destination for the latest and greatest
+                                smartphones and
+                                accessories. We are a team of tech enthusiasts dedicated to providing our customers
+                                with the
+                                best shopping experience.
+                            </p>
+                            <a href="#" class="btn btn-primary">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+</div>
+</body>
+</html>

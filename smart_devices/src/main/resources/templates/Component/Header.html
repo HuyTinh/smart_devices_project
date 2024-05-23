@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+	 <nav layout:fragment="Header" class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="#">Sdevice</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" th:href="@{'/product'}">Product</a>
+                    </li>
+                </ul>
+                <div class="ms-auto d-flex gap-1">
+                    <button type="button" class="btn btn-light btn-sm border" @click="open = ! open"><i
+                            class="fas fa-shipping-fast fa-flip-horizontal"></i>
+                        Cart History
+                    </button>
+                    <button type="button" class="btn btn-light btn-sm border" @click="open = ! open"
+                        data-bs-toggle="modal" data-bs-target="#authModal">
+                        <div><i class="fas fa-cart-plus"></i></div>
+                        Cart
+                    </button>
+                    <button type="button" class="btn btn-dark btn-sm" data-bs-toggle="modal"
+                        data-bs-target="#authModal">
+                        <div><i class="far fa-user"></i></div>
+                        Sign In
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+</html>
