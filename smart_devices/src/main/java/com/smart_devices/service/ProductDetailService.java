@@ -14,4 +14,7 @@ public interface ProductDetailService {
 	ProductDetail findByTitle(String title);
 	
 	List<ProductDetail> findByProduct(Product product, Sort sort);
+
+	List<ProductDetail> findAll();
+
 }
