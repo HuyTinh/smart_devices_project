@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{dashBoard}" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>CatPhone - Admin</title>
+</head>
+<body>
+	<div layout:fragment="content">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="mt-5 col">
+					<input class="form-control me-2" type="text" placeholder="Search">
+				</div>
+				<div class="col mt-5 d-flex justify-content-end">
+					<button type="button" class="btn btn-outline-primary me-2">Add</button>
+					<button type="button" class="btn btn-outline-danger me-2">Delete</button>
+					<button type="button" class="btn btn-outline-secondary me-2">Import
+						Excel</button>
+					<button type="button" class="btn btn-outline-success">Export
+						Excel</button>
+				</div>
+			</div>
+			<hr>
+			<div class="location p-2">
+				<span>Admin/Product/Phone</span>
+			</div>
+			<div class="card">
+				<div class="card-body">
+					<table class="table text-center">
+						<thead>
+							<tr>
+								<th scope="col">No.</th>
+								<th scope="col">Image</th>
+								<th scope="col">Title</th>
+								<th scope="col">Price</th>
+								<th scope="col">Stock</th>
+								<th scope="col">Action</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="product,productStart : ${productDetailList}">
+								<td th:text="${productStart.count}"></td>
+								<td><img th:src="${product.productImage.get(0).imagePath}"
+									width="50"></td>
+								<td th:text="${product.title}"></td>
+								<td th:text="${product.price}"></td>
+								<td th:text="${product.stock}"></td>
+								<td><a
+									th:href="@{/cat-phone/admin/product/phone-manage/edit/{id}(id=${product.id})}"
+									class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">Edit</a></td>
+							</tr>
+						</tbody>
+					</table>
+					
+				</div>
+			</div>
+		</div>
+		<div class="modal fade" id="myModal">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title">Products</h4>
+						<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+					</div>
+					<div class="modal-body">
+						<form>
+							<div class="row">
+								<div class="col">
+									<div class="mb-3">
+										<img id="selectedImage" src="" width="100">
+									</div>
+									<div class="mb-3">
+										<input type="file" id="imageInput" style="display: none"
+											accept="image/*">
+										<button type="button" class="btn btn-secondary"
+											onclick="document.getElementById('imageInput').click();">Select
+											Photo</button>
+									</div>
+									<div class="mb-3">
+										<label for="lineOfProduct" class="form-label">Line Of
+											Product:</label> <input type="text" class="form-control"
+											id="lineOfProduct" name="lineOfProduct">
+									</div>
+									<div class="mb-3">
+										<label for="series" class="form-label">Series:</label> <input
+											type="text" class="form-control" id="series" name="series">
+									</div>
+									<div class="mb-3">
+										<label for="version" class="form-label">Version:</label> <input
+											type="text" class="form-control" id="version" name="version">
+									</div>
+									<div class="mb-3">
+										<label for="name" class="form-label">Name :</label> <input
+											type="text" class="form-control" id="name" name="name">
+									</div>
+									<div class="mb-3">
+										<label for="size" class="form-label">Size:</label> <input
+											type="text" class="form-control" id="size" name="size">
+									</div>
+								</div>
+								<div class="col">
+									<div class="mb-3">
+										<label for="weight" class="form-label">Weight:</label> <input
+											type="text" class="form-control" id="weight" name="weight">
+									</div>
+									<div class="mb-3">
+										<label for="stock" class="form-label">Stock:</label> <input
+											type="number" class="form-control" id="stock" name="stock">
+									</div>
+									<div class="mb-3">
+										<label for="price" class="form-label">Price:</label> <input
+											type="text" class="form-control" id="price" name="price">
+									</div>
+									<div class="mb-3">
+										<label for="category" class="form-label">Category:</label> <select
+											id="category" class="form-select"
+											aria-label="Default select example">
+											<option value="1">One</option>
+											<option value="2">Two</option>
+											<option value="3">Three</option>
+										</select>
+									</div>
+									<div class="mb-3">
+										<label for="brand" class="form-label">Brand:</label> <select
+											id="brand" class="form-select"
+											aria-label="Default select example">
+											<option value="1">One</option>
+											<option value="2">Two</option>
+											<option value="3">Three</option>
+										</select>
+									</div>
+									<div class="mb-3">
+										<label for="category" class="form-label">GPU :</label> <select
+											id="category" class="form-select"
+											aria-label="Default select example">
+											<option value="1">One</option>
+											<option value="2">Two</option>
+											<option value="3">Three</option>
+										</select>
+									</div>
+								</div>
+								<div class="col">
+									<div class="mb-3">
+										<label for="category" class="form-label">Storage :</label> <select
+											id="category" class="form-select"
+											aria-label="Default select example">
+											<option value="1">One</option>
+											<option value="2">Two</option>
+											<option value="3">Three</option>
+										</select>
+									</div>
+									<div class="mb-3">
+										<label for="category" class="form-label">Processor :</label> <select
+											id="category" class="form-select"
+											aria-label="Default select example">
+											<option value="1">One</option>
+											<option value="2">Two</option>
+											<option value="3">Three</option>
+										</select>
+									</div>
+									<div class="mb-3">
+										<label for="category" class="form-label">Operating
+											System :</label> <select id="category" class="form-select"
+											aria-label="Default select example">
+											<option value="1">One</option>
+											<option value="2">Two</option>
+											<option value="3">Three</option>
+										</select>
+									</div>
+									<div class="mb-3">
+										<label for="category" class="form-label">Ram :</label> <select
+											id="category" class="form-select"
+											aria-label="Default select example">
+											<option value="1">One</option>
+											<option value="2">Two</option>
+											<option value="3">Three</option>
+										</select>
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+					<div class="modal-footer d-flex justify-content-start">
+						<button type="button" class="btn btn-outline-info">New</button>
+						<button type="button" class="btn btn-outline-primary">Add</button>
+						<button type="button" class="btn btn-outline-success">Save</button>
+						<button type="button" class="btn btn-outline-danger">Delete</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

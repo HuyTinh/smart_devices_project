@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{dashBoard}">
+<head>
+<meta charset="UTF-8">
+<title>CatPhone - Admin</title>
+</head>
+<body>
+	<div layout:fragment="content">
+		<div class="container-fluid">
+			<div class="location">
+				<span>Admin/Product/Phone-Accessories</span>
+			</div>
+			<div class="card">
+				<div class="card-body">
+					<ul class="nav nav-tabs" id="myTab" role="tablist">
+						<li class="nav-item" role="presentation"><a
+							class="nav-link active" id="product-brands-tab"
+							data-bs-toggle="tab" href="#brands" role="tab"
+							aria-controls="brands" aria-selected="true">Brands</a></li>
+						<li class="nav-item" role="presentation"><a class="nav-link"
+							id="category-tab" data-bs-toggle="tab" href="#categories"
+							role="tab" aria-controls="categories" aria-selected="false">Categories</a>
+						</li>
+						<li class="nav-item" role="presentation"><a class="nav-link"
+							id="processor-tab" data-bs-toggle="tab" href="#processor"
+							role="tab" aria-controls="processor" aria-selected="false">Processor</a>
+						</li>
+						<li class="nav-item" role="presentation"><a class="nav-link"
+							id="storage-tab" data-bs-toggle="tab" href="#storage" role="tab"
+							aria-controls="storage" aria-selected="false">Storage</a></li>
+						<li class="nav-item" role="presentation"><a class="nav-link"
+							id="gpu-tab" data-bs-toggle="tab" href="#gpu" role="tab"
+							aria-controls="gpu" aria-selected="false">GPU</a></li>
+						<li class="nav-item" role="presentation"><a class="nav-link"
+							id="ram-tab" data-bs-toggle="tab" href="#ram" role="tab"
+							aria-controls="gpu" aria-selected="false">RAM</a></li>
+
+						<li class="nav-item" role="presentation"><a class="nav-link"
+							id="operating_system-tab" data-bs-toggle="tab"
+							href="#operating_system" role="tab"
+							aria-controls="operating_system" aria-selected="false">Operating
+								System</a></li>
+					</ul>
+					<div class="tab-content" id="myTabContent">
+						<div class="tab-pane fade show active" id="brands" role="tabpanel"
+							aria-labelledby="product-brands-tab">
+							<div class="row">
+								<div class="mt-5 col">
+									<input class="form-control me-2" type="text"
+										placeholder="Search">
+								</div>
+								<div class="col mt-5 d-flex justify-content-end">
+									<button type="button" class="btn btn-outline-primary me-2">Add</button>
+									<button type="button" class="btn btn-outline-secondary me-2">Import
+										Excel</button>
+									<button type="button" class="btn btn-outline-success">Export
+										Excel</button>
+								</div>
+							</div>
+							<hr>
+							<div class="card mt-4">
+								<table class="table">
+									<thead>
+										<tr>
+											<th scope="col">No.</th>
+											<th scope="col">Brand ID</th>
+											<th scope="col">Name</th>
+											<th scope="col">Create At</th>
+											<th scope="col">Update At</th>
+											<th scope="col">Action</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<th scope="row">1</th>
+											<td>B001</td>
+											<td>Iphone</td>
+											<td>11/02/2024</td>
+											<td>12/02/2024</td>
+											<td><a href="#" class="btn btn-outline-primary"
+												data-bs-toggle="modal" data-bs-target="#brandModal">Edit</a></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<div class="tab-pane fade" id="categories" role="tabpanel"
+							aria-labelledby="category-tab">
+							<div class="row">
+								<div class="mt-5 col">
+									<input class="form-control me-2" type="text"
+										placeholder="Search">
+								</div>
+								<div class="col mt-5 d-flex justify-content-end">
+									<button type="button" class="btn btn-outline-primary me-2">Add</button>
+									<button type="button" class="btn btn-outline-secondary me-2">Import
+										Excel</button>
+									<button type="button" class="btn btn-outline-success">Export
+										Excel</button>
+								</div>
+							</div>
+							<hr>
+							<div class="card mt-4">
+								<table class="table">
+									<thead>
+										<tr>
+											<th scope="col">No.</th>
+											<th scope="col">Category ID</th>
+											<th scope="col">Name</th>
+											<th scope="col">Create At</th>
+											<th scope="col">Update At</th>
+											<th scope="col">Action</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<th scope="row">1</th>
+											<td>C001</td>
+											<td>Category</td>
+											<td>11/02/2024</td>
+											<td>12/02/2024</td>
+											<td><a href="#" class="btn btn-outline-primary"
+												data-bs-toggle="modal" data-bs-target="#categoryModal">Edit</a></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<div class="tab-pane fade" id="processor" role="tabpanel"
+							aria-labelledby="processor-tab">
+							<div class="row">
+								<div class="mt-5 col">
+									<input class="form-control me-2" type="text"
+										placeholder="Search">
+								</div>
+								<div class="col mt-5 d-flex justify-content-end">
+									<button type="button" class="btn btn-outline-primary me-2">Add</button>
+									<button type="button" class="btn btn-outline-secondary me-2">Import
+										Excel</button>
+									<button type="button" class="btn btn-outline-success">Export
+										Excel</button>
+								</div>
+							</div>
+							<hr>
+							<div class="card mt-4">
+								<table class="table">
+									<thead>
+										<tr>
+											<th scope="col">No.</th>
+											<th scope="col">Processor ID</th>
+											<th scope="col">Name</th>
+											<th scope="col">Create At</th>
+											<th scope="col">Update At</th>
+											<th scope="col">Action</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<th scope="row">1</th>
+											<td>C001</td>
+											<td>Processor</td>
+											<td>11/02/2024</td>
+											<td>12/02/2024</td>
+											<td><a href="#" class="btn btn-outline-primary"
+												data-bs-toggle="modal" data-bs-target="#processorModal">Edit</a></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<div class="tab-pane fade" id="storage" role="tabpanel"
+							aria-labelledby="storage-tab">
+							<div class="row">
+								<div class="mt-5 col">
+									<input class="form-control me-2" type="text"
+										placeholder="Search">
+								</div>
+								<div class="col mt-5 d-flex justify-content-end">
+									<button type="button" class="btn btn-outline-primary me-2">Add</button>
+									<button type="button" class="btn btn-outline-secondary me-2">Import
+										Excel</button>
+									<button type="button" class="btn btn-outline-success">Export
+										Excel</button>
+								</div>
+							</div>
+							<hr>
+							<div class="card mt-4">
+								<table class="table">
+									<thead>
+										<tr>
+											<th scope="col">No.</th>
+											<th scope="col">Storage ID</th>
+											<th scope="col">Name</th>
+											<th scope="col">Create At</th>
+											<th scope="col">Update At</th>
+											<th scope="col">Action</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<th scope="row">1</th>
+											<td>C001</td>
+											<td>Storage</td>
+											<td>11/02/2024</td>
+											<td>12/02/2024</td>
+											<td><a href="#" class="btn btn-outline-primary"
+												data-bs-toggle="modal" data-bs-target="#storageModal">Edit</a></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<div class="tab-pane fade" id="gpu" role="tabpanel"
+							aria-labelledby="gpu-tab">
+							<div class="row">
+								<div class="mt-5 col">
+									<input class="form-control me-2" type="text"
+										placeholder="Search">
+								</div>
+								<div class="col mt-5 d-flex justify-content-end">
+									<button type="button" class="btn btn-outline-primary me-2">Add</button>
+									<button type="button" class="btn btn-outline-secondary me-2">Import
+										Excel</button>
+									<button type="button" class="btn btn-outline-success">Export
+										Excel</button>
+								</div>
+							</div>
+							<hr>
+							<div class="card mt-4">
+								<table class="table">
+									<thead>
+										<tr>
+											<th scope="col">No.</th>
+											<th scope="col">GPU ID</th>
+											<th scope="col">Name</th>
+											<th scope="col">Create At</th>
+											<th scope="col">Update At</th>
+											<th scope="col">Action</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<th scope="row">1</th>
+											<td>C001</td>
+											<td>GPU</td>
+											<td>11/02/2024</td>
+											<td>12/02/2024</td>
+											<td><a href="#" class="btn btn-outline-primary"
+												data-bs-toggle="modal" data-bs-target="#gpuModal">Edit</a></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<div class="tab-pane fade" id="ram" role="tabpanel"
+							aria-labelledby="ram-tab">
+							<div class="row">
+								<div class="mt-5 col">
+									<input class="form-control me-2" type="text"
+										placeholder="Search">
+								</div>
+								<div class="col mt-5 d-flex justify-content-end">
+									<button type="button" class="btn btn-outline-primary me-2">Add</button>
+									<button type="button" class="btn btn-outline-secondary me-2">Import
+										Excel</button>
+									<button type="button" class="btn btn-outline-success">Export
+										Excel</button>
+								</div>
+							</div>
+							<hr>
+							<div class="card mt-4">
+								<table class="table">
+									<thead>
+										<tr>
+											<th scope="col">No.</th>
+											<th scope="col">RAM ID</th>
+											<th scope="col">Name</th>
+											<th scope="col">Create At</th>
+											<th scope="col">Update At</th>
+											<th scope="col">Action</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<th scope="row">1</th>
+											<td>C001</td>
+											<td>RAM</td>
+											<td>11/02/2024</td>
+											<td>12/02/2024</td>
+											<td><a href="#" class="btn btn-outline-primary"
+												data-bs-toggle="modal" data-bs-target="#ramModal">Edit</a></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<div class="tab-pane fade" id="operating_system" role="tabpanel"
+							aria-labelledby="operating_system-tab">
+							<div class="row">
+								<div class="mt-5 col">
+									<input class="form-control me-2" type="text"
+										placeholder="Search">
+								</div>
+								<div class="col mt-5 d-flex justify-content-end">
+									<button type="button" class="btn btn-outline-primary me-2">Add</button>
+									<button type="button" class="btn btn-outline-secondary me-2">Import
+										Excel</button>
+									<button type="button" class="btn btn-outline-success">Export
+										Excel</button>
+								</div>
+							</div>
+							<hr>
+							<div class="card mt-4">
+								<table class="table">
+									<thead>
+										<tr>
+											<th scope="col">No.</th>
+											<th scope="col">Operating System ID</th>
+											<th scope="col">Name</th>
+											<th scope="col">Create At</th>
+											<th scope="col">Update At</th>
+											<th scope="col">Action</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<th scope="row">1</th>
+											<td>C001</td>
+											<td>RAM</td>
+											<td>11/02/2024</td>
+											<td>12/02/2024</td>
+											<td><a href="#" class="btn btn-outline-primary"
+												data-bs-toggle="modal"
+												data-bs-target="#operating_systemModal">Edit</a></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade" id="brandModal">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title">Brand</h4>
+						<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+					</div>
+					<div class="modal-body">
+						<form>
+							<div class="row">
+								<div class="col">
+									<div class="mb-3">
+										<label for="brandName" class="form-label">Brand Name :</label>
+										<input type="text" class="form-control" id="brandName"
+											name="brandName">
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+					<div class="modal-footer d-flex justify-content-start">
+						<button type="button" class="btn btn-outline-info">New</button>
+						<button type="button" class="btn btn-outline-primary">Add</button>
+						<button type="button" class="btn btn-outline-success">Save</button>
+						<button type="button" class="btn btn-outline-danger">Delete</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade" id="categoryModal">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title">Category</h4>
+						<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+					</div>
+					<div class="modal-body">
+						<form>
+							<div class="row">
+								<div class="col">
+									<div class="mb-3">
+										<label for="categoryName" class="form-label">Category
+											Name :</label> <input type="text" class="form-control"
+											id="categoryName" name="categoryName">
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+					<div class="modal-footer d-flex justify-content-start">
+						<button type="button" class="btn btn-outline-info">New</button>
+						<button type="button" class="btn btn-outline-primary">Add</button>
+						<button type="button" class="btn btn-outline-success">Save</button>
+						<button type="button" class="btn btn-outline-danger">Delete</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade" id="processorModal">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title">Processor</h4>
+						<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+					</div>
+					<div class="modal-body">
+						<form>
+							<div class="row">
+								<div class="col">
+									<div class="mb-3">
+										<label for="processorName" class="form-label">Processor
+											Name :</label> <input type="text" class="form-control"
+											id="processorName" name="processorName">
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+					<div class="modal-footer d-flex justify-content-start">
+						<button type="button" class="btn btn-outline-info">New</button>
+						<button type="button" class="btn btn-outline-primary">Add</button>
+						<button type="button" class="btn btn-outline-success">Save</button>
+						<button type="button" class="btn btn-outline-danger">Delete</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade" id="storageModal">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title">Storage</h4>
+						<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+					</div>
+					<div class="modal-body">
+						<form>
+							<div class="row">
+								<div class="col">
+									<div class="mb-3">
+										<label for="storageName" class="form-label">Storage
+											Name :</label> <input type="text" class="form-control"
+											id="storageName" name="storageName">
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+					<div class="modal-footer d-flex justify-content-start">
+						<button type="button" class="btn btn-outline-info">New</button>
+						<button type="button" class="btn btn-outline-primary">Add</button>
+						<button type="button" class="btn btn-outline-success">Save</button>
+						<button type="button" class="btn btn-outline-danger">Delete</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade" id="gpuModal">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title">GPU</h4>
+						<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+					</div>
+					<div class="modal-body">
+						<form>
+							<div class="row">
+								<div class="col">
+									<div class="mb-3">
+										<label for="gpuName" class="form-label">GPU Name :</label> <input
+											type="text" class="form-control" id="gpuName" name="gpuName">
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+					<div class="modal-footer d-flex justify-content-start">
+						<button type="button" class="btn btn-outline-info">New</button>
+						<button type="button" class="btn btn-outline-primary">Add</button>
+						<button type="button" class="btn btn-outline-success">Save</button>
+						<button type="button" class="btn btn-outline-danger">Delete</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade" id="ramModal">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title">RAM</h4>
+						<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+					</div>
+					<div class="modal-body">
+						<form>
+							<div class="row">
+								<div class="col">
+									<div class="mb-3">
+										<label for="ramName" class="form-label">RAM Name :</label> <input
+											type="text" class="form-control" id="ramName" name="ramName">
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+					<div class="modal-footer d-flex justify-content-start">
+						<button type="button" class="btn btn-outline-info">New</button>
+						<button type="button" class="btn btn-outline-primary">Add</button>
+						<button type="button" class="btn btn-outline-success">Save</button>
+						<button type="button" class="btn btn-outline-danger">Delete</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade" id="operating_systemModal">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title">Operating System</h4>
+						<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+					</div>
+					<div class="modal-body">
+						<form>
+							<div class="row">
+								<div class="col">
+									<div class="mb-3">
+										<label for="operating_systemName" class="form-label">Operating
+											System Name :</label> <input type="text" class="form-control"
+											id="operating_systemName" name="operating_systemName">
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+					<div class="modal-footer d-flex justify-content-start">
+						<button type="button" class="btn btn-outline-info">New</button>
+						<button type="button" class="btn btn-outline-primary">Add</button>
+						<button type="button" class="btn btn-outline-success">Save</button>
+						<button type="button" class="btn btn-outline-danger">Delete</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

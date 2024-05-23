@@ -35,4 +35,10 @@ public class ProductDetailServiceImlp implements ProductDetailService {
 		return productDetailRespository.findById(id).get();
 	}
 
+	@Override
+	public List<ProductDetail> findAll() {
+		return productDetailRespository.findAll();
+	}
+	
+
 }

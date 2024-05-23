@@ -18,4 +18,5 @@ public interface ProductDetailRespository extends JpaRepository<ProductDetail, I
 	Optional<ProductDetail> findByTitle(String title);
 	
 	List<ProductDetail> findByProduct(Product product, Sort sort);
+	
 }
