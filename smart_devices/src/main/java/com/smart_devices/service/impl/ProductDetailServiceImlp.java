@@ -3,6 +3,8 @@ package com.smart_devices.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -41,9 +43,14 @@ public class ProductDetailServiceImlp implements ProductDetailService {
 	}
 
 	@Override
+<<<<<<< HEAD
 	public void saveAll(List<ProductDetail> productDetails) {
 		// TODO Auto-generated method stub
 		productDetailRespository.saveAll(productDetails);
+=======
+	public Page<ProductDetail> findAll(Pageable pageable) {
+		return productDetailRespository.findAll(pageable);
+>>>>>>> branch 'master' of https://github.com/HuyTinh/smart_devices_project.git
 	}
 	
 

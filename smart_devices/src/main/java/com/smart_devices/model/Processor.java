@@ -32,7 +32,7 @@ public class Processor extends Model {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	int id;
 
-	@Column(name = "title")
+	@Column(name = "name")
 	String title;
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "processor", cascade = CascadeType.ALL)

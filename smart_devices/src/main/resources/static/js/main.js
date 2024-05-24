@@ -8,3 +8,4 @@ document.getElementById('imageInput').addEventListener('change', function(event)
 		reader.readAsDataURL(file);
 	}
 });
+
