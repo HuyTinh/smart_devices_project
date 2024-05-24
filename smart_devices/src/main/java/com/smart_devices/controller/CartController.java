@@ -5,7 +5,6 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.smart_devices.model.Cart;
 import com.smart_devices.model.Order;
 import com.smart_devices.model.OrderDetail;
-import com.smart_devices.model.ProductDetail;
 import com.smart_devices.service.CartService;
 import com.smart_devices.service.OrderService;
 import com.smart_devices.service.UserService;
