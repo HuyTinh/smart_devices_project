@@ -39,6 +39,12 @@ public class ProductDetailServiceImlp implements ProductDetailService {
 	public List<ProductDetail> findAll() {
 		return productDetailRespository.findAll();
 	}
+
+	@Override
+	public void saveAll(List<ProductDetail> productDetails) {
+		// TODO Auto-generated method stub
+		productDetailRespository.saveAll(productDetails);
+	}
 	
 
 }

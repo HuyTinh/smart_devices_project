@@ -18,6 +18,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
@@ -44,7 +45,8 @@ public class Order extends Model {
 	
 	@Column(name = "order_status")
 	@Enumerated(EnumType.STRING)
-	OrderStatus status;
+	@Builder.Default
+	OrderStatus status = OrderStatus.SHIPPING;
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "order", cascade = CascadeType.ALL)
 	List<OrderDetail> orderDetails;

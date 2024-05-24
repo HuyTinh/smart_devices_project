@@ -13,6 +13,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Digits;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -75,7 +76,7 @@ public class ProductDetail extends Model {
 	String size;
 	
 	@Column(name = "weight")
-	String weight;
+	int weight;
 	
 	@Column(name = "stock")
 	int stock;
@@ -87,10 +88,10 @@ public class ProductDetail extends Model {
 	@Enumerated(EnumType.STRING)
 	ProductDetailStatus status;  
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "productDetail", cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "productDetail", cascade = CascadeType.ALL)
 	List<OrderDetail> orderDetails;
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "productDetail", cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "productDetail", cascade = CascadeType.ALL)
 	List<ProductImage> productImage;
 }
 

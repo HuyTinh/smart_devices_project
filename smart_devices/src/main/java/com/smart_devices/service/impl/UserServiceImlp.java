@@ -3,21 +3,23 @@ package com.smart_devices.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
-import org.springframework.web.context.annotation.SessionScope;
 
+import com.smart_devices.model.Cart;
 import com.smart_devices.model.User;
+import com.smart_devices.repository.CartRepository;
 import com.smart_devices.repository.UserRepository;
 import com.smart_devices.service.UserService;
 
 @Service
-@SessionScope
 public class UserServiceImlp implements UserService {
 	@Autowired
 	UserRepository userRepository;
 
-	User user = null;
+	@Autowired
+	CartRepository cartRepository;
+	
+	private User user;
 	
 	@Override
 	public List<User> findAll() {
@@ -40,6 +42,22 @@ public class UserServiceImlp implements UserService {
 	public void delete(User user) {
 		// TODO Auto-generated method stub
 		userRepository.delete(user);
+	}
+
+	public List<Cart> getCartList(){
+		return this.user.getCarts();
+	}
+
+	@Override
+	public void setLoginUser(User user) {
+		// TODO Auto-generated method stub
+		this.user = user;
+	}
+	
+@Override
+	public User getLoginUser() {
+		// TODO Auto-generated method stub
+		return this.user;
 	}
 	
 }

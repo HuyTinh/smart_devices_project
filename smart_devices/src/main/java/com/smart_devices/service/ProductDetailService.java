@@ -17,4 +17,5 @@ public interface ProductDetailService {
 
 	List<ProductDetail> findAll();
 
+	void saveAll(List<ProductDetail> productDetails);
 }

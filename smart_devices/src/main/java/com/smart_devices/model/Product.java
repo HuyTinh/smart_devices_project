@@ -47,6 +47,6 @@ public class Product extends Model {
 	@JoinColumn(name = "brand_id")
 	Brand brand;
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "product", cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "product", cascade = CascadeType.ALL)
 	List<ProductDetail> productDetails;
 }

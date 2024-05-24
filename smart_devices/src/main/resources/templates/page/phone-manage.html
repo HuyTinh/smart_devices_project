@@ -15,8 +15,11 @@
 				<div class="col mt-5 d-flex justify-content-end">
 					<button type="button" class="btn btn-outline-primary me-2">Add</button>
 					<button type="button" class="btn btn-outline-danger me-2">Delete</button>
-					<button type="button" class="btn btn-outline-secondary me-2">Import
+					<form action="" method="POST" enctype="multipart/form-data">
+					<input type="file" name="importExcel">
+					<button type="submit" formaction="/cat-phone/admin/product/phone-manage" class="btn btn-outline-secondary me-2">Import
 						Excel</button>
+					</form>
 					<button type="button" class="btn btn-outline-success">Export
 						Excel</button>
 				</div>
@@ -41,10 +44,10 @@
 						<tbody>
 							<tr th:each="product,productStart : ${productDetailList}">
 								<td th:text="${productStart.count}"></td>
-								<td><img th:src="${product.productImage.get(0).imagePath}"
+								<td><img th:src="${product.productImage.size() > 0 ? product.productImage.get(0).imagePath : '' }"
 									width="50"></td>
 								<td th:text="${product.title}"></td>
-								<td th:text="${product.price}"></td>
+								<td th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 0, 'POINT') + ' VND'}"></td>
 								<td th:text="${product.stock}"></td>
 								<td><a
 									th:href="@{/cat-phone/admin/product/phone-manage/edit/{id}(id=${product.id})}"

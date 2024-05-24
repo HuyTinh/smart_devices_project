@@ -10,18 +10,17 @@ import com.smart_devices.model.ProductDetail;
 import com.smart_devices.model.User;
 import com.smart_devices.repository.CartRepository;
 import com.smart_devices.service.CartService;
+import com.smart_devices.service.UserService;
 
 @Service
 public class CartServiceImlp implements CartService {
 
-	private List<Cart> list;
-
 	@Autowired
 	CartRepository cartRepository;
-	
+
 	@Autowired
-	UserServiceImlp userServiceImlp;
-	
+	UserService userService;
+
 	@Override
 	public List<Cart> findByCustomer(User user) {
 		// TODO Auto-generated method stub
@@ -30,41 +29,44 @@ public class CartServiceImlp implements CartService {
 
 	@Override
 	public Double getAmount() {
-		User user = userServiceImlp.findById(2);
 		// TODO Auto-generated method stub
-		return 	user.getCarts().stream().mapToDouble((c) -> c.getQuantity() * c.getProductDetail().getPrice()).sum();
-	}
-
-	@Override
-	public void delete(Cart cart) {
-		// TODO Auto-generated method stub
-		cartRepository.delete(cart);;
+		User user = userService.getLoginUser();
+		return user.getCarts().stream().mapToDouble((c) -> c.getQuantity() * c.getProductDetail().getPrice()).sum();
 	}
 
 	@Override
 	public void addToCart(ProductDetail productDetail) {
 		// TODO Auto-generated method stub
-		User user = userServiceImlp.findById(2);
+		User user = userService.getLoginUser();
 		List<Cart> carts = user.getCarts();
-		carts.stream().filter((pd) -> pd.equals(productDetail)).findFirst().ifPresentOrElse((value) -> {
+		carts.stream().filter((pd) -> pd.getProductDetail().getId() == productDetail.getId()).findFirst().ifPresentOrElse((value) -> {
 			value.setQuantity(value.getQuantity() + 1);
 		}, () -> carts.add(Cart.builder().productDetail(productDetail).user(user).build()));
 
-		userServiceImlp.save(user);
+		userService.save(user);
 	}
 
 	@Override
-	public void removeFromCart(ProductDetail productDetail) {
+	public void removeFromCart(int productDetailId) {
 		// TODO Auto-generated method stub
-		User user = userServiceImlp.findById(2);
+		User user = userService.getLoginUser();
 		List<Cart> carts = user.getCarts();
-		carts.stream().filter((pd) -> pd.equals(productDetail))
-			.findFirst()
-			.ifPresent(carts::remove);	
+		carts.stream().filter((pd) -> pd.getProductDetail().getId() == productDetailId).findFirst().ifPresent(carts::remove);
+		userService.save(user);
+	}
 
+	@Override
+	public List<Cart> findAll() {
+		// TODO Auto-generated method stub
+		return cartRepository.findAll();
 	}
 	
-	
-	
-	
+	@Override
+	public void clearCart() {
+		// TODO Auto-generated method stub
+		User user = userService.getLoginUser();
+		List<Cart> carts = user.getCarts();
+		carts.clear();
+		userService.save(user);
+	}
 }

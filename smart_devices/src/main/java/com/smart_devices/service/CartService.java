@@ -7,13 +7,16 @@ import com.smart_devices.model.ProductDetail;
 import com.smart_devices.model.User;
 
 public interface CartService {
+	
+	List<Cart> findAll();
+	
 	List<Cart> findByCustomer(User user);
 	
 	Double getAmount();
 	
-	void delete(Cart cart);
-	
 	void addToCart(ProductDetail productDetail);
 
-	void removeFromCart(ProductDetail productDetail);
+	void removeFromCart(int productDetailId);
+	
+	void clearCart();
 }

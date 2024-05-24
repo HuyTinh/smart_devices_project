@@ -26,7 +26,7 @@ public class PaymentService {
 		String vnp_Version = "2.1.0";
 		String vnp_Command = "pay";
 		String orderType = "other";
-		long amount = Integer.parseInt(req.getParameter("amount")) * 100;
+		long amount = (long) (Integer.parseInt(req.getParameter("amount"))* 100.0);
 		String bankCode = req.getParameter("bankCode");
 
 		String vnp_TxnRef = VNPAYConfig.getRandomNumber(8);
@@ -111,7 +111,7 @@ public class PaymentService {
 
 		try {
 			Payment payment = payPalConfig.createPayment(amount, currency, method, intent, description,
-					"http://localhost:8080/cart", "http://localhost:8080/");
+					"http://localhost:8080/cart", "http://localhost:8080/cart?paid=true");
 			for (Links link : payment.getLinks()) {
 				if (link.getRel().equals("approval_url")) {
 					resp.sendRedirect(link.getHref());
