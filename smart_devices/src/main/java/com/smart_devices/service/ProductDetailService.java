@@ -2,6 +2,8 @@ package com.smart_devices.service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
 import com.smart_devices.model.Product;
@@ -16,5 +18,7 @@ public interface ProductDetailService {
 	List<ProductDetail> findByProduct(Product product, Sort sort);
 
 	List<ProductDetail> findAll();
+
+	Page<ProductDetail> findAll(Pageable pageable);
 
 }

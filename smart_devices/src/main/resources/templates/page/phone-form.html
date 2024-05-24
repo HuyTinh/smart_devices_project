@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{dashBoard}" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Phone-Form</title>
+</head>
+<body>
+<div layout:fragment="content">
+        <div class="container-fluid">
+        <div class="location p-2">
+				<span>Admin/Product/Phone-Form</span>
+			</div>
+            <div class="card">
+                <div class="card-body">
+                    <form>
+                        <div class="row">
+                            <div class="col">
+                                <div class="mb-3">
+                                    <img id="selectedImage" src="" width="100">
+                                </div>
+                                <div class="mb-3">
+                                    <input type="file" id="imageInput" style="display: none" accept="image/*">
+                                    <button type="button" class="btn btn-secondary"
+                                        onclick="document.getElementById('imageInput').click();">Select
+                                        Photo</button>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="lineOfProduct" class="form-label">Line Of
+                                        Product:</label> <input type="text" class="form-control" id="lineOfProduct"
+                                        name="lineOfProduct">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="series" class="form-label">Series:</label> <input type="text" class="form-control"
+                                        id="series" name="series">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="version" class="form-label">Version:</label> <input type="text" class="form-control"
+                                        id="version" name="version">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="name" class="form-label">Name :</label> <input type="text" class="form-control"
+                                        id="name" name="name">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="size" class="form-label">Size:</label> <input type="text" class="form-control" id="size"
+                                        name="size">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="mb-3">
+                                    <label for="weight" class="form-label">Weight:</label> <input type="text" class="form-control"
+                                        id="weight" name="weight">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="stock" class="form-label">Stock:</label> <input type="number" class="form-control"
+                                        id="stock" name="stock">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="price" class="form-label">Price:</label> <input type="text" class="form-control"
+                                        id="price" name="price">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="category" class="form-label">Category:</label> <select id="category" class="form-select"
+                                        aria-label="Default select example" name="category">
+                                        <option th:each="category : ${categoryList}" th:value="${category.id}"
+                                            th:text="${category.title}">
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="brand" class="form-label">Brand:</label> <select id="brand" class="form-select"
+                                        aria-label="Default select example" name="brand">
+                                        <option th:each="brand : ${brandList}" th:value="${brand.id}" th:text="${brand.title}">
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="gpu" class="form-label">GPU :</label> <select id="gpu" class="form-select"
+                                        aria-label="Default select example" name="gpu">
+                                        <option th:each="gpu : ${gpuList}" th:value="${gpu.id}" th:text="${gpu.capacity}">
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="mb-3">
+                                    <label for="storage" class="form-label">Storage :</label> <select id="storage" class="form-select"
+                                        aria-label="Default select example" name="storage">
+                                        <option th:each="storage : ${storageList}" th:value="${storage.id}"
+                                            th:text="${storage.capacity}">
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="processor" class="form-label">Processor :</label> <select id="processor"
+                                        class="form-select" aria-label="Default select example" name="processor">
+                                        <option th:each="processor : ${processorList}" th:value="${processor.id}"
+                                            th:text="${processor.title}">
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="operatingSystem" class="form-label">Operating
+                                        System :</label> <select id="operatingSystem" class="form-select"
+                                        aria-label="Default select example" name="operatingSystem">
+                                        <option th:each="operatingSystem : ${operatingSystemList}" th:value="${operatingSystem.id}"
+                                            th:text="${operatingSystem.name}">
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="ram" class="form-label">Ram :</label> <select id="ram" class="form-select"
+                                        aria-label="Default select example" name="ram">
+                                        <option th:each="ram : ${ramList}" th:value="${ram.id}" th:text="${ram.capacity}">
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-outline-info">New</button>
+                        <button type="button" class="btn btn-outline-primary">Add</button>
+                        <button type="button" class="btn btn-outline-success">Save</button>
+                        <button type="button" class="btn btn-outline-danger">Delete</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

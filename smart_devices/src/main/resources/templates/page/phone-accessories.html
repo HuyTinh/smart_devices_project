@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorate="~{dashBoard}">
+	layout:decorate="~{dashBoard}" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <title>CatPhone - Admin</title>
@@ -66,20 +66,17 @@
 											<th scope="col">No.</th>
 											<th scope="col">Brand ID</th>
 											<th scope="col">Name</th>
-											<th scope="col">Create At</th>
-											<th scope="col">Update At</th>
 											<th scope="col">Action</th>
 										</tr>
 									</thead>
 									<tbody>
-										<tr>
-											<th scope="row">1</th>
-											<td>B001</td>
-											<td>Iphone</td>
-											<td>11/02/2024</td>
-											<td>12/02/2024</td>
-											<td><a href="#" class="btn btn-outline-primary"
-												data-bs-toggle="modal" data-bs-target="#brandModal">Edit</a></td>
+										<tr th:each="brand, iterStat : ${brandList}">
+											<th scope="row" th:text="${iterStat.count}"></th>
+											<td th:text="${brand.id}"></td>
+											<td th:text="${brand.title}"></td>
+											<td><a class="btn btn-outline-primary"
+												th:href="@{/cat-phone/admin/product/phone-accessories/edit(brandid=${brand.id})}"
+												>Edit</a></td>
 										</tr>
 									</tbody>
 								</table>
@@ -108,20 +105,17 @@
 											<th scope="col">No.</th>
 											<th scope="col">Category ID</th>
 											<th scope="col">Name</th>
-											<th scope="col">Create At</th>
-											<th scope="col">Update At</th>
 											<th scope="col">Action</th>
 										</tr>
 									</thead>
 									<tbody>
-										<tr>
-											<th scope="row">1</th>
-											<td>C001</td>
-											<td>Category</td>
-											<td>11/02/2024</td>
-											<td>12/02/2024</td>
+										<tr th:each="category, iterStat : ${categoryList}">
+											<th scope="row" th:text="${iterStat.count}"></th>
+											<td th:text="${category.id}"></td>
+											<td th:text="${category.title}"></td>
 											<td><a href="#" class="btn btn-outline-primary"
-												data-bs-toggle="modal" data-bs-target="#categoryModal">Edit</a></td>
+												data-bs-toggle="modal" data-bs-target="#brandModal">Edit</a>
+											</td>
 										</tr>
 									</tbody>
 								</table>
@@ -150,20 +144,17 @@
 											<th scope="col">No.</th>
 											<th scope="col">Processor ID</th>
 											<th scope="col">Name</th>
-											<th scope="col">Create At</th>
-											<th scope="col">Update At</th>
 											<th scope="col">Action</th>
 										</tr>
 									</thead>
 									<tbody>
-										<tr>
-											<th scope="row">1</th>
-											<td>C001</td>
-											<td>Processor</td>
-											<td>11/02/2024</td>
-											<td>12/02/2024</td>
+										<tr th:each="processor, iterStat : ${processorList}">
+											<th scope="row" th:text="${iterStat.count}"></th>
+											<td th:text="${processor.id}"></td>
+											<td th:text="${processor.title}"></td>
 											<td><a href="#" class="btn btn-outline-primary"
-												data-bs-toggle="modal" data-bs-target="#processorModal">Edit</a></td>
+												data-bs-toggle="modal" data-bs-target="#brandModal">Edit</a>
+											</td>
 										</tr>
 									</tbody>
 								</table>
@@ -192,20 +183,17 @@
 											<th scope="col">No.</th>
 											<th scope="col">Storage ID</th>
 											<th scope="col">Name</th>
-											<th scope="col">Create At</th>
-											<th scope="col">Update At</th>
 											<th scope="col">Action</th>
 										</tr>
 									</thead>
 									<tbody>
-										<tr>
-											<th scope="row">1</th>
-											<td>C001</td>
-											<td>Storage</td>
-											<td>11/02/2024</td>
-											<td>12/02/2024</td>
+										<tr th:each="storage, iterStat : ${storageList}">
+											<th scope="row" th:text="${iterStat.count}"></th>
+											<td th:text="${storage.id}"></td>
+											<td th:text="${storage.capacity}"></td>
 											<td><a href="#" class="btn btn-outline-primary"
-												data-bs-toggle="modal" data-bs-target="#storageModal">Edit</a></td>
+												data-bs-toggle="modal" data-bs-target="#brandModal">Edit</a>
+											</td>
 										</tr>
 									</tbody>
 								</table>
@@ -234,20 +222,17 @@
 											<th scope="col">No.</th>
 											<th scope="col">GPU ID</th>
 											<th scope="col">Name</th>
-											<th scope="col">Create At</th>
-											<th scope="col">Update At</th>
 											<th scope="col">Action</th>
 										</tr>
 									</thead>
 									<tbody>
-										<tr>
-											<th scope="row">1</th>
-											<td>C001</td>
-											<td>GPU</td>
-											<td>11/02/2024</td>
-											<td>12/02/2024</td>
+										<tr th:each="gpu, iterStat : ${gpuList}">
+											<th scope="row" th:text="${iterStat.count}"></th>
+											<td th:text="${gpu.id}"></td>
+											<td th:text="${gpu.capacity}"></td>
 											<td><a href="#" class="btn btn-outline-primary"
-												data-bs-toggle="modal" data-bs-target="#gpuModal">Edit</a></td>
+												data-bs-toggle="modal" data-bs-target="#brandModal">Edit</a>
+											</td>
 										</tr>
 									</tbody>
 								</table>
@@ -276,20 +261,17 @@
 											<th scope="col">No.</th>
 											<th scope="col">RAM ID</th>
 											<th scope="col">Name</th>
-											<th scope="col">Create At</th>
-											<th scope="col">Update At</th>
 											<th scope="col">Action</th>
 										</tr>
 									</thead>
 									<tbody>
-										<tr>
-											<th scope="row">1</th>
-											<td>C001</td>
-											<td>RAM</td>
-											<td>11/02/2024</td>
-											<td>12/02/2024</td>
+										<tr th:each="ram, iterStat : ${ramList}">
+											<th scope="row" th:text="${iterStat.count}"></th>
+											<td th:text="${ram.id}"></td>
+											<td th:text="${ram.capacity}"></td>
 											<td><a href="#" class="btn btn-outline-primary"
-												data-bs-toggle="modal" data-bs-target="#ramModal">Edit</a></td>
+												data-bs-toggle="modal" data-bs-target="#brandModal">Edit</a>
+											</td>
 										</tr>
 									</tbody>
 								</table>
@@ -318,21 +300,18 @@
 											<th scope="col">No.</th>
 											<th scope="col">Operating System ID</th>
 											<th scope="col">Name</th>
-											<th scope="col">Create At</th>
-											<th scope="col">Update At</th>
 											<th scope="col">Action</th>
 										</tr>
 									</thead>
 									<tbody>
-										<tr>
-											<th scope="row">1</th>
-											<td>C001</td>
-											<td>RAM</td>
-											<td>11/02/2024</td>
-											<td>12/02/2024</td>
+										<tr
+											th:each="operatingSystem, iterStat : ${operatingSystemList}">
+											<th scope="row" th:text="${iterStat.count}"></th>
+											<td th:text="${operatingSystem.id}"></td>
+											<td th:text="${operatingSystem.name}"></td>
 											<td><a href="#" class="btn btn-outline-primary"
-												data-bs-toggle="modal"
-												data-bs-target="#operating_systemModal">Edit</a></td>
+												data-bs-toggle="modal" data-bs-target="#brandModal">Edit</a>
+											</td>
 										</tr>
 									</tbody>
 								</table>
@@ -342,35 +321,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="modal fade" id="brandModal">
-			<div class="modal-dialog modal-lg">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h4 class="modal-title">Brand</h4>
-						<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-					</div>
-					<div class="modal-body">
-						<form>
-							<div class="row">
-								<div class="col">
-									<div class="mb-3">
-										<label for="brandName" class="form-label">Brand Name :</label>
-										<input type="text" class="form-control" id="brandName"
-											name="brandName">
-									</div>
-								</div>
-							</div>
-						</form>
-					</div>
-					<div class="modal-footer d-flex justify-content-start">
-						<button type="button" class="btn btn-outline-info">New</button>
-						<button type="button" class="btn btn-outline-primary">Add</button>
-						<button type="button" class="btn btn-outline-success">Save</button>
-						<button type="button" class="btn btn-outline-danger">Delete</button>
-					</div>
-				</div>
-			</div>
-		</div>
+		
 		<div class="modal fade" id="categoryModal">
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
@@ -544,5 +495,6 @@
 			</div>
 		</div>
 	</div>
+	
 </body>
 </html>

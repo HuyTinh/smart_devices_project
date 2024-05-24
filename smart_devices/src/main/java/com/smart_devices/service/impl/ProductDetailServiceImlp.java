@@ -3,6 +3,8 @@ package com.smart_devices.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -38,6 +40,11 @@ public class ProductDetailServiceImlp implements ProductDetailService {
 	@Override
 	public List<ProductDetail> findAll() {
 		return productDetailRespository.findAll();
+	}
+
+	@Override
+	public Page<ProductDetail> findAll(Pageable pageable) {
+		return productDetailRespository.findAll(pageable);
 	}
 	
 
