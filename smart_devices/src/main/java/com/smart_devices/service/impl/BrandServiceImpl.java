@@ -33,6 +33,11 @@ public class BrandServiceImpl implements BrandService {
 	public void deleteAllById(List<Integer> ids) {
 		brandRespository.deleteAllById(ids);
 	}
+
+	@Override
+	public void deleteById(Integer id) {
+		brandRespository.deleteById(id);
+	}
 	
 	
 }

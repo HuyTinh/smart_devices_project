@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -91,11 +92,25 @@ public class ProductAdminController {
 	public Brand getBrand() {
 		return Brand.builder().build();
 	}
-	@GetMapping("product/phone-accessories/edit")
+	@GetMapping("product/phone-accessories/brand")
+	public String brand_form() {
+		return "page/brand-form";
+	}
+	@GetMapping("product/phone-accessories/brand/edit")
 	public String editAccessories(Model model, @RequestParam("brandid") Integer branid) {
 		model.addAttribute("brand", brandService.getById(branid));
-		return "page/accessories-form";
+		return "page/brand-form";
 	}
-	
+	@PostMapping("product/phone-accessories/brand/add")
+	public String addBrand(@ModelAttribute("brand") Brand brand) {
+		brandService.save(brand);
+		return "redirect:/cat-phone/admin/product/phone-accessories";
+	}
+	@RequestMapping("product/phone-accessories/brand/delete")
+	public String deleteBrand(@RequestParam("brandid") Integer brandid) {
+		brandService.deleteById(brandid);
+		return "redirect:/cat-phone/admin/product/phone-accessories";
+	}
+
 	
 }

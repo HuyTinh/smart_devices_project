@@ -14,4 +14,6 @@ public interface BrandService {
 
 	Brand save(Brand entity);
 
+	void deleteById(Integer id);
+
 }

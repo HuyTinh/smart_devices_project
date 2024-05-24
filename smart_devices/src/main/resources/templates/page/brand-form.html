@@ -10,21 +10,22 @@
 		<div class="container-fluid">
 			<div class="card">
 				<div class="card-body">
-					<form th:object="${brand}">
+					<form th:object="${brand}" method="post">
 						<div class="row">
 							<div class="col">
 								<div class="mb-3">
 									<label for="brandName" class="form-label">Brand Name:</label> <input
 										type="text" class="form-control" id="brandName"
-										th:field="*{title}" th:value="*{title}">
+										th:field="*{title}" th:value="*{title}" name="title">
 								</div>
 							</div>
 						</div>
 						<div class="d-flex justify-content-start">
-							<button type="button" class="btn btn-outline-info">New</button>
-							<button type="button" class="btn btn-outline-primary">Add</button>
-							<button type="button" class="btn btn-outline-success">Save</button>
-							<button type="button" class="btn btn-outline-danger">Delete</button>
+							<a href="/cat-phone/admin/product/phone-accessories/brand" class="btn btn-outline-info me-2">New</a>
+							<button type="submit" formaction="/cat-phone/admin/product/phone-accessories/brand/add" class="btn btn-outline-primary me-2">Add</button>
+							<button type="submit"
+							th:attr="formaction=@{/cat-phone/admin/product/phone-accessories/brand/delete(brandid=${brand.id})}"
+							 class="btn btn-outline-danger me-2">Delete</button>
 						</div>
 					</form>
 				</div>

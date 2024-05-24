@@ -51,7 +51,7 @@
 										placeholder="Search">
 								</div>
 								<div class="col mt-5 d-flex justify-content-end">
-									<button type="button" class="btn btn-outline-primary me-2">Add</button>
+									<a href="/cat-phone/admin/product/phone-accessories/brand" class="btn btn-outline-primary me-2">Add</a>
 									<button type="button" class="btn btn-outline-secondary me-2">Import
 										Excel</button>
 									<button type="button" class="btn btn-outline-success">Export
@@ -75,7 +75,7 @@
 											<td th:text="${brand.id}"></td>
 											<td th:text="${brand.title}"></td>
 											<td><a class="btn btn-outline-primary"
-												th:href="@{/cat-phone/admin/product/phone-accessories/edit(brandid=${brand.id})}"
+												th:href="@{/cat-phone/admin/product/phone-accessories/brand/edit(brandid=${brand.id})}"
 												>Edit</a></td>
 										</tr>
 									</tbody>
