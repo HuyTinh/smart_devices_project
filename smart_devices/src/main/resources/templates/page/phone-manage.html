@@ -48,12 +48,7 @@
 								<td><img th:src="${product.productImage.size() > 0 ? product.productImage.get(0).imagePath : '' }"
 									width="50"></td>
 								<td th:text="${product.title}"></td>
-<<<<<<< HEAD
 								<td th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 0, 'POINT') + ' VND'}"></td>
-=======
-								<td
-									th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 0, 'POINT')} + ' VNĐ'"></td>
->>>>>>> branch 'master' of https://github.com/HuyTinh/smart_devices_project.git
 								<td th:text="${product.stock}"></td>
 								<td><a
 									th:href="@{/cat-phone/admin/product/phone-form/{id}(id=${product.id})}"

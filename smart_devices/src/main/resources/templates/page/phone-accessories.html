@@ -76,7 +76,11 @@
 											<td th:text="${brand.title}"></td>
 											<td><a class="btn btn-outline-primary"
 												th:href="@{/cat-phone/admin/product/phone-accessories/brand/edit(brandid=${brand.id})}"
-												>Edit</a></td>
+												>Edit</a>
+												<a class="btn btn-outline-danger"
+												th:href="@{/cat-phone/admin/product/phone-accessories/brand/delete(brandid=${brand.id})}"
+												>Delete</a>
+												</td>
 										</tr>
 									</tbody>
 								</table>
