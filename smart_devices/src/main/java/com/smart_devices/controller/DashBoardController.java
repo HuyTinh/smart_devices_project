@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("cat-phone/admin")
-public class dashBoardController {
+public class DashBoardController {
 	@GetMapping
 	public String showDashBoard() {
 		return "dashBoard";
