@@ -32,7 +32,7 @@ public class RamServiceImpl implements RamService {
 
 	@Override
 	public Ram getById(Integer id) {
-		return ramRepository.getById(id);
+		return ramRepository.findById(id).get();
 	}
 
 	@Override

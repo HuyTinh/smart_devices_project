@@ -1,7 +1,6 @@
 package com.smart_devices.service.impl;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,7 +32,7 @@ public class StorageServiceImpl implements StorageService{
 
 	@Override
 	public Storage getById(Integer id) {
-		return storageRepository.getById(id);
+		return storageRepository.findById(id).get();
 	}
 
 	@Override
