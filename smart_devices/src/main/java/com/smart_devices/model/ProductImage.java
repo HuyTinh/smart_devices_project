@@ -31,7 +31,7 @@ public class ProductImage extends Model {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	int id;
 	
-	@Column(name = "image_path")
+	@Column(name = "image_path", length = 2000)
 	String imagePath;
 	
 	@ManyToOne

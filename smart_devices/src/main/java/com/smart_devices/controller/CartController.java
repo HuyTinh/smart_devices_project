@@ -78,7 +78,7 @@ public class CartController {
 
 	@ModelAttribute("carts")
 	public List<Cart> getCarts() {
-		return userService.getCartList();
+		return userService.getCurrentUser().getCarts();
 	}
 
 	@ModelAttribute("amount")
