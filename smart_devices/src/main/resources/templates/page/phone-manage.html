@@ -17,9 +17,10 @@
 						class="btn btn-outline-primary me-2">Add</a>
 					<button type="button" class="btn btn-outline-danger me-2">Delete</button>
 					<form action="" method="POST" enctype="multipart/form-data">
-					<input type="file" name="importExcel">
-					<button type="submit" formaction="/cat-phone/admin/product/phone-manage" class="btn btn-outline-secondary me-2">Import
-						Excel</button>
+						<input type="file" name="importExcel">
+						<button type="submit"
+							formaction="/cat-phone/admin/product/phone-manage"
+							class="btn btn-outline-secondary me-2">Import Excel</button>
 					</form>
 					<button type="button" class="btn btn-outline-success">Export
 						Excel</button>
@@ -45,10 +46,12 @@
 						<tbody>
 							<tr th:each="product,productStart : ${productDetailList}">
 								<td th:text="${productStart.count}"></td>
-								<td><img th:src="${product.productImage.size() > 0 ? product.productImage.get(0).imagePath : '' }"
+								<td><img
+									th:src="${product.productImage.size() > 0 ? product.productImage.get(0).imagePath : '' }"
 									width="50"></td>
 								<td th:text="${product.title}"></td>
-								<td th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 0, 'POINT') + ' VND'}"></td>
+								<td
+									th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 0, 'POINT') + ' VND'}"></td>
 								<td th:text="${product.stock}"></td>
 								<td><a
 									th:href="@{/cat-phone/admin/product/phone-form/{id}(id=${product.id})}"
@@ -66,12 +69,9 @@
 									th:href="@{/cat-phone/admin/product/phone-manage(page=${page.number - 1})}"
 									aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
 								</a></li>
-								<li class="page-item"
-									th:each="i : ${#numbers.sequence(0, page.totalPages - 1)}"
-									th:classappend="${i == page.number ? 'active' : ''}"><a
-									class="page-link"
-									th:href="@{/cat-phone/admin/product/phone-manage(page=${i})}"
-									th:text="${i + 1}"></a></li>
+								<li class="page-item disabled"><a class="page-link"> <span
+										th:text="'Page ' + ${page.number + 1} + ' of ' + ${page.totalPages}"></span>
+								</a></li>
 								<li class="page-item"
 									th:classappend="${page.number + 1 >= page.totalPages ? 'disabled' : ''}">
 									<a class="page-link"
