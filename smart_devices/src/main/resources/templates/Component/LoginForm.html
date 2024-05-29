@@ -1,5 +1,5 @@
 <html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorate="~{/index}">
+	layout:decorate="~{/Page/AuthPage}">
 
 <body>
 	<div layout:fragment="Content">
@@ -13,28 +13,33 @@
 						<div class="mb-3">
 							<label for="exampleInputEmail1" class="form-label">Email
 								address</label> <input type="email" class="form-control"
-								id="exampleInputEmail1" aria-describedby="emailHelp">
+								id="exampleInputEmail1" aria-describedby="emailHelp"
+								name="username">
 						</div>
 						<div class="mb-3">
 							<label for="exampleInputPassword1" class="form-label">Password</label>
 							<input type="password" class="form-control"
-								id="exampleInputPassword1">
+								id="exampleInputPassword1" name="password">
 						</div>
-						<div class="mb-3 form-check">
-							<input type="checkbox" class="form-check-input"
-								id="exampleCheck1"> <label class="form-check-label"
-								for="exampleCheck1">Check me out</label>
+						<div class="mb-3 form-check d-flex justify-content-between">
+							<label class="form-check-label" for="exampleCheck1"><input
+								type="checkbox" class="form-check-input" id="exampleCheck1">Check
+								me out</label> <a href="/auth/register">Register</a>
 						</div>
-						<div class="col">
-							<a th:href="@{/oauth2/authorization/facebook}" class="fb btn"><i
-								class="fa fa-facebook fa-fw"></i> Login with Facebook</a> <a
-								th:href="@{/oauth2/authorization/google}" class="google btn"><i
-								class="fa fa-google fa-fw"></i> Login with Google+</a>
+						<div class="col d-flex justify-content-between mb-3">
+							<a th:href="@{/oauth2/authorization/facebook}"
+								class="bg-primary text-light btn"><i
+								class="fab fa-facebook me-2"></i>Login with Facebook </a> <a
+								th:href="@{/oauth2/authorization/google}"
+								class="bg-danger text-light btn"><i
+								class="fab fa-google me-2"></i> Login with Google+</a>
 						</div>
-						<button type="submit" class="btn btn-primary">Submit</button>
+						<button type="submit" class="btn btn-primary w-100">Sign
+							In</button>
 					</form>
 				</div>
 				<div class="col-lg-6"></div>
+
 			</div>
 		</div>
 	</div>

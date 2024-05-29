@@ -7,17 +7,29 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+
+
 @Controller
 @RequestMapping("/auth")
-public class AuthForm {
+public class AuthController {
 
 	@GetMapping("/login")
 	public String showLoginForm() {
-
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		if (authentication == null || authentication instanceof AnonymousAuthenticationToken) {
-			return "page/AuthPage";
+			return "Component/LoginForm";
 		}
 		return "redirect:/";
 	}
+	
+	
+	@GetMapping("/register")
+	public String showRegisterForm() {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		if (authentication == null || authentication instanceof AnonymousAuthenticationToken) {
+			return "Page/AuthPage";
+		}
+		return "redirect:/";
+	}
+
 }

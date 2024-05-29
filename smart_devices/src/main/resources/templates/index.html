@@ -1,50 +1,62 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"> 
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name="Description" content="Enter your description here" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Kodchasan:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500;1,600;1,700&display=swap"
-        rel="stylesheet">
-    <title>Title</title>
-    <style>
-        * {
-            font-family: "kodchasan";
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="Description" content="Enter your description here" />
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<script defer
+	src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+	href="https://fonts.googleapis.com/css2?family=Kodchasan:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500;1,600;1,700&display=swap"
+	rel="stylesheet">
+<title>Title</title>
+<style>
+* {
+	font-family: "kodchasan";
+}
+</style>
 </head>
 
-<body x-data="{ open: false }">
-   <div layout:replace="~{component/Header :: Header}"></div>
+<body>
+	<div layout:replace="~{component/Header :: Header}"></div>
 
-    <div layout:fragment="Content"></div>
-    
-    <div layout:replace="~{component/Footer :: Footer}"></div>
-   
-    <div class="modal fade" id="authModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-body text-center">
-                    <img th:src="@{/image/R.png}" class="card-img-top p-5" style="width: 12rem;" alt="">
-                    <p class="text-center">Please log in to your account to view offers and pay more easily.</p>
-                    <div class="d-flex justify-content-between gap-5">
-                        <button type="button" class="btn btn-outline-dark w-50">Sign In</button>
-                        <button type="button" class="btn btn-dark w-50">Sign Up</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/js/bootstrap.min.js"></script>
+	<div layout:fragment="Content"></div>
+
+	<div layout:replace="~{component/Footer :: Footer}"></div>
+
+	<div class="modal fade" id="authModal" tabindex="-1"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-body text-center">
+					<img th:src="@{/image/R.png}" class="card-img-top p-5"
+						style="width: 12rem;" alt="">
+					<p class="text-center">Please log in to your account to view
+						offers and pay more easily.</p>
+					<div class="d-flex justify-content-between gap-5">
+						<a type="button" class="btn btn-outline-dark w-50"
+							href="/auth/login">Sign In</a> <a type="button"
+							class="btn btn-dark w-50">Sign Up</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/js/bootstrap.min.js"></script>
 </body>
 
 </html>

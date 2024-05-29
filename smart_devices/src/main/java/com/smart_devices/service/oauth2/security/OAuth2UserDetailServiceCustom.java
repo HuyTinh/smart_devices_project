@@ -73,7 +73,7 @@ public class OAuth2UserDetailServiceCustom extends DefaultOAuth2UserService {
 
 		return new OAuth2UserDetailCustom(
 				userDetail.getId(),
-				userDetail.getUsername(),
+				userDetail.getEmail(),
 				userDetail.getPassword(),
 				userDetail.getRoles().stream().map(r -> new SimpleGrantedAuthority(r.getName())).collect(Collectors.toList()));
 	}
@@ -82,6 +82,8 @@ public class OAuth2UserDetailServiceCustom extends DefaultOAuth2UserService {
 		User user = new User();
 		user.setUsername(oAuth2UserDetails.getName());
 		user.setEmail(oAuth2UserDetails.getEmail());
+		user.setFirstName(oAuth2UserDetails.getFirstName());
+		user.setLastName(oAuth2UserDetails.getLastName());
 		user.setProviderId(userRequest.getClientRegistration().getRegistrationId());
 		user.setEnabled(true);
 		user.setAccountNonLocked(true);
@@ -94,7 +96,7 @@ public class OAuth2UserDetailServiceCustom extends DefaultOAuth2UserService {
 	}
 
 	public User updateOAuth2UserDetail(User user, OAuth2UserDetails oAuth2UserDetails) {
-		user.setUsername(oAuth2UserDetails.getEmail());
+		user.setEmail(oAuth2UserDetails.getEmail());
 		return userRepository.save(user);
 	}
 

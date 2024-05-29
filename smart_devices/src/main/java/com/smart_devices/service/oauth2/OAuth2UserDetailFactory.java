@@ -12,7 +12,7 @@ public class OAuth2UserDetailFactory {
 		if(registrantionId.equals(Provider.google.name())) {
 			return new OAuth2GoogleUser(attributes);
 		} else if(registrantionId.equals(Provider.facebook.name())) {
-			return new OAuth2GoogleUser(attributes);
+			return new OAuth2FacebookUser(attributes);
 		} else {
 			throw new BaseException("400", "Sorry! Loggin with " + registrantionId + "is not supported!");
 		}

@@ -21,6 +21,13 @@ public class OAuth2GoogleUser extends OAuth2UserDetails {
 		return (String) attributes.get("email");
 	}
 	
+	@Override
+	public String getFirstName() {
+		return (String) attributes.get("family_name");
+	}
 	
-
+	@Override
+	public String getLastName() {
+		return (String) attributes.get("given_name");
+	}
 }

@@ -5,7 +5,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -15,7 +14,6 @@ import org.springframework.util.ObjectUtils;
 import com.smart_devices.dto.UserDto;
 import com.smart_devices.enums.Provider;
 import com.smart_devices.exception.BaseException;
-import com.smart_devices.model.Cart;
 import com.smart_devices.model.Role;
 import com.smart_devices.model.User;
 import com.smart_devices.repository.CartRepository;
@@ -63,9 +61,9 @@ public class UserServiceImlp implements UserService {
 	}
 
 	@Override
-	public User findByUsername(String username) {
+	public User findByEmail(String email) {
 		// TODO Auto-generated method stub
-		return null;
+		return userRepository.findByEmail(email);
 	}
 	
 

@@ -18,7 +18,16 @@ public class OAuth2FacebookUser extends OAuth2UserDetails {
 	@Override
 	public String getEmail() {
 		// TODO Auto-generated method stub
-		return (String) attributes.get("email");
+		return null;
 	}
 
+	@Override
+	public String getFirstName() {
+		return null;
+	}
+	
+	@Override
+	public String getLastName() {
+		return null;
+	}
 }

@@ -1,0 +1,102 @@
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{/index}">
+<body>
+	<div layout:fragment="Content">
+		<div class="container py-2">
+			<div class="bg-dark px-4 py-1 mb-2 rounded-pill">
+				<nav aria-label="breadcrumbm">
+					<ol class="breadcrumb m-0">
+						<li class="breadcrumb-item"><a href="" class="text-secondary"><i
+								class="fas fa-home me-2"></i>Home</a></li>
+						<li class="breadcrumb-item text-light" aria-current="page">Cart</li>
+					</ol>
+				</nav>
+			</div>
+			<div class="row p-4 pt-0">
+				<h3 class="text-center mb-3">Your Shop Cart</h3>
+				<div class="row">
+					<div class="col-lg-8 bg-light overflow-auto"
+						style="max-height: 31.5rem;">
+						<table class="table">
+							<thead>
+								<tr>
+									<th scope="col">#</th>
+									<th scope="col">Product</th>
+									<th scope="col">Name</th>
+									<th scope="col">Price</th>
+									<th scope="col">Quantity</th>
+									<th scope="col">Remove</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="cart, cartStatus : ${carts}">
+									<th scope="row" th:text="${cartStatus.index + 1}"></th>
+
+									<td>
+										<div class="card" style="width: 100px">
+											<img class="card-img-top"
+												th:src="${cart.productDetail.productImage.get(0).imagePath}"
+												alt="Card image">
+										</div>
+									</td>
+									<td>
+										<p
+											th:text="${cart.productDetail.title + ' ' + cart.productDetail.storage.capacity + 'GB'}"></p>
+									</td>
+									<td
+										th:text="${#numbers.formatDecimal(cart.productDetail.price, 0, 'COMMA', 0, 'POINT') + ' VND'}">Otto</td>
+									<td>
+										<div class="btn-group">
+											<form method="POST">
+												<button th:formaction="@{'/cart/plus/'+${cartStatus.index}}"
+													type="submit" class="btn btn-primary">
+													+</a>
+													<button type="button" class="btn btn-light"
+														disabled="disabled" th:text="${cart.quantity}"></button>
+													<button
+														th:formaction="@{'/cart/minus/'+${cartStatus.index}}"
+														type="submit" class="btn btn-primary">
+														-</a>
+											</form>
+										</div>
+									</td>
+									<td>
+										<form method="POST">
+											<button
+												th:formaction="@{'/cart/remove/'+${cartStatus.index}}"
+												type="submit" class="btn btn-danger">
+												Remove</a>
+										</form>
+
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="col-lg-4">
+						<div
+							class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Order
+							summary</div>
+						<div class="p-4">
+							<p class="font-italic mb-4">Shipping and additional costs are
+								calculated based on values you have entered.</p>
+							<ul class="list-unstyled mb-4">
+								<li class="d-flex justify-content-between py-3 border-bottom"><strong
+									class="text-muted">Total</strong>
+									<h5 class="font-weight-bold"
+										th:text="${#numbers.formatDecimal(amount, 0, 'COMMA', 0, 'POINT') + ' VND'}"></h5>
+								</li>
+							</ul>
+							<a
+								th:href="@{/payment/vnpay(amount = ${#numbers.formatDecimal(amount, 0, 'NONE', 0, 'POINT')})}"
+								class="btn btn-dark rounded-pill py-2 btn-block">Procceed to
+								checkout</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
+
