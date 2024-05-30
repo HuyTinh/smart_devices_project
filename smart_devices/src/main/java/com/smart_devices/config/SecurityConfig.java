@@ -39,7 +39,7 @@ public class SecurityConfig {
 	public UserDetailsService userDetailsService() {
 		return new UserDetailsServiceCustom();
 	}
-
+	
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
 		// TODO Auto-generated method stub
@@ -51,19 +51,18 @@ public class SecurityConfig {
 		AuthenticationManager manager = builder.build();
 		return httpSecurity.csrf(AbstractHttpConfigurer::disable).authenticationManager(manager).httpBasic((httpBs) -> {
 		}).authorizeHttpRequests(register -> {
-//			register.requestMatchers("/product/**","/").hasAnyRole("USER",ROLE+);
 			register.requestMatchers("/admin/**").hasAuthority("ADMIN");
 			register.requestMatchers("/cart/**","/payment").hasAuthority("USER");
 			register.anyRequest().permitAll();
 		}).exceptionHandling(exception -> {
 			exception.accessDeniedPage("/403");
 		}).formLogin(formLoginConfig -> {
-			formLoginConfig.loginPage("/auth/login")
-							.loginProcessingUrl("/sign-in")
+			formLoginConfig.loginPage("/auth/sign-in")
+							.loginProcessingUrl("/$2a$12$Bonr8SHeaNAmq7KblDXlzuOtkCozCpEwRwMK5iAaRyW238O5Ck")
 							.defaultSuccessUrl("/", true)
 							.permitAll();
 		}).oauth2Login(formLoginConfig -> {
-			formLoginConfig.loginPage("/auth/login").defaultSuccessUrl("/", true)
+			formLoginConfig.loginPage("/auth/sign-in").defaultSuccessUrl("/", true)
 							.userInfoEndpoint((uIE)-> {uIE.userService(oAuth2UserDetailServiceCustom);})
 							.successHandler(oAuth2SuccessHandlerCustom)
 							.failureHandler(oAuth2FailureHandlerCustom);

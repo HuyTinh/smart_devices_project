@@ -3,6 +3,7 @@ package com.smart_devices.service;
 import java.util.List;
 
 import com.smart_devices.dto.UserDto;
+import com.smart_devices.dto.UserSignUpDto;
 import com.smart_devices.model.User;
 import com.smart_devices.response.BaseResponse;
 
@@ -15,7 +16,7 @@ public interface UserService {
 	
 	User findByEmail(String email);
 	
-	BaseResponse registerAccount(UserDto userDTO);
+	BaseResponse registerAccount(UserSignUpDto userSignUpDto);
 	
 	void save(User user);
 	

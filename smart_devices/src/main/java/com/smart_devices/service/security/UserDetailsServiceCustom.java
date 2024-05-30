@@ -24,7 +24,6 @@ public class UserDetailsServiceCustom implements UserDetailsService {
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		// TODO Auto-generated method stub
 		UserDetailsCustom userDetailsCustom = getUserDetailsCustom(username);
-		System.out.println(username);
 		if (ObjectUtils.isEmpty(userDetailsCustom)) {
 			throw new UsernameNotFoundException("User not found");
 		}

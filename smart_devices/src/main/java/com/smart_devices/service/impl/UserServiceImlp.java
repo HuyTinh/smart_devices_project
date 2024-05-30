@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
 import com.smart_devices.dto.UserDto;
+import com.smart_devices.dto.UserSignUpDto;
 import com.smart_devices.enums.Provider;
 import com.smart_devices.exception.BaseException;
 import com.smart_devices.model.Role;
@@ -79,14 +80,14 @@ public class UserServiceImlp implements UserService {
 	}
 	
 	@Override
-	public BaseResponse registerAccount(UserDto userDTO) {
+	public BaseResponse registerAccount(UserSignUpDto userSignUpDto) {
 		// TODO Auto-generated method stub
 		BaseResponse response = new BaseResponse();
 
 		// validate data from client
-		validateAccount(userDTO);
+		validateAccount(userSignUpDto);
 
-		User user = insertUser(userDTO);
+		User user = insertUser(userSignUpDto);
 
 		try {
 			userRepository.save(user);
@@ -96,18 +97,21 @@ public class UserServiceImlp implements UserService {
 			response.setCode(String.valueOf(HttpStatus.SERVICE_UNAVAILABLE.value()));
 			response.setMessage("Service Unavailable");
 		}
+		
 		return response;
 	}
 
-	private User insertUser(UserDto userDTO) {
+	private User insertUser(UserSignUpDto userSignUpDto) {
 		User user = new User();
-		user.setEmail(userDTO.getEmail());
-		user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
+		user.setEmail(userSignUpDto.getEmail());
+		user.setPassword(passwordEncoder.encode(userSignUpDto.getPassword()));
 
 		Set<Role> roles = new HashSet<>();
-		roles.add(roleRepository.findByName(userDTO.getRole()));
+		roles.add(roleRepository.findByName("USER"));
 		user.setRoles(roles);
 
+		user.setFirstName(userSignUpDto.getFirstName());
+		user.setLastName(userSignUpDto.getLastName());
 		user.setEnabled(true);
 		user.setAccountNonExpired(true);
 		user.setAccountNonLocked(true);
@@ -118,30 +122,30 @@ public class UserServiceImlp implements UserService {
 		return user;
 	}
 
-	private void validateAccount(UserDto userDTO) {
-		if (ObjectUtils.isEmpty(userDTO)) {
+	private void validateAccount(UserSignUpDto userSignUpDto) {
+		if (ObjectUtils.isEmpty(userSignUpDto)) {
 			throw new BaseException(String.valueOf(HttpStatus.BAD_REQUEST.value()), "Request data not found!");
 		}
 
-		try {
-			if (!ObjectUtils.isEmpty(userDTO.checkProperties())) {
-				throw new BaseException(String.valueOf(HttpStatus.BAD_REQUEST.value()), "Request data not found!");
-			}
-		} catch (IllegalAccessException e) {
-			throw new BaseException(String.valueOf(HttpStatus.SERVICE_UNAVAILABLE.value()), "Service Unavailable");
-		}
+//		try {
+//			if (!ObjectUtils.isEmpty(userSignUpDto.checkProperties())) {
+//				throw new BaseException(String.valueOf(HttpStatus.BAD_REQUEST.value()), "Request data not found!");
+//			}
+//		} catch (IllegalAccessException e) {
+//			throw new BaseException(String.valueOf(HttpStatus.SERVICE_UNAVAILABLE.value()), "Service Unavailable");
+//		}
 
-		List<String> roles = roleRepository.findAll().stream().map(Role::getName).toList();
-
-		if (!roles.contains(userDTO.getRole())) {
-			throw new BaseException(String.valueOf(HttpStatus.BAD_REQUEST.value()), "Invalid role");
-		}
-
-		User user = userRepository.findByEmail(userDTO.getEmail());
-
-		if (!ObjectUtils.isEmpty(user)) {
-			throw new BaseException(String.valueOf(HttpStatus.BAD_REQUEST.value()), "User had existed!!!");
-		}
+//		List<String> roles = roleRepository.findAll().stream().map(Role::getName).toList();
+//
+//		if (!roles.contains(userSignUpDto.getRole())) {
+//			throw new BaseException(String.valueOf(HttpStatus.BAD_REQUEST.value()), "Invalid role");
+//		}
+//
+//		User user = userRepository.findByEmail(userSignUpDto.getEmail());
+//
+//		if (!ObjectUtils.isEmpty(user)) {
+//			throw new BaseException(String.valueOf(HttpStatus.BAD_REQUEST.value()), "User had existed!!!");
+//		}
 
 	}
 

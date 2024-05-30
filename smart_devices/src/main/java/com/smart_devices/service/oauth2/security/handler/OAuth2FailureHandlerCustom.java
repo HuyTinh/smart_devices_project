@@ -16,6 +16,6 @@ public class OAuth2FailureHandlerCustom extends SimpleUrlAuthenticationFailureHa
 	public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
 			AuthenticationException exception) throws IOException, ServletException {
 		// TODO Auto-generated method stub
-		getRedirectStrategy().sendRedirect(request, response, "/auth/login");
+		getRedirectStrategy().sendRedirect(request, response, "/auth/sign-in");
 	}
 }
