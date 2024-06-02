@@ -13,72 +13,75 @@
 			</div>
             <div class="card">
                 <div class="card-body">
-                    <form>
+                    <form  method="post" th:object="${productDetail}" enctype="multipart/form-data">
                         <div class="row">
                             <div class="col">
                                 <div class="mb-3">
-                                    <img id="selectedImage" src="" width="100">
+                                    <img id="selectedImage" src="" width="100" >
                                 </div>
                                 <div class="mb-3">
-                                    <input type="file" id="imageInput" style="display: none" accept="image/*">
+                                    <input type="file" id="imageInput" name="files" style="display: none" accept="image/*" multiple>
                                     <button type="button" class="btn btn-secondary"
                                         onclick="document.getElementById('imageInput').click();">Select
                                         Photo</button>
                                 </div>
                                 <div class="mb-3">
+                                	<input type="hidden" th:field="*{id}" name="id" style="display: none" >
                                     <label for="lineOfProduct" class="form-label">Line Of
                                         Product:</label> <input type="text" class="form-control" id="lineOfProduct"
-                                        name="lineOfProduct">
+                                        name="lineOfProduct" th:field="${product.lineOfProduct || productDetail.product.lineOfProduct}" readonly="readonly">
                                 </div>
                                 <div class="mb-3">
                                     <label for="series" class="form-label">Series:</label> <input type="text" class="form-control"
-                                        id="series" name="series">
+                                        id="series" name="series" th:field="*{series}">
                                 </div>
                                 <div class="mb-3">
                                     <label for="version" class="form-label">Version:</label> <input type="text" class="form-control"
-                                        id="version" name="version">
+                                        id="version" name="version" th:field="*{version}">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="name" class="form-label">Name :</label> <input type="text" class="form-control"
-                                        id="name" name="name">
+                                    <label for="title" class="form-label">Name :</label> <input type="text" class="form-control"
+                                        id="title" name="title" th:field="*{title}">
                                 </div>
                                 <div class="mb-3">
                                     <label for="size" class="form-label">Size:</label> <input type="text" class="form-control" id="size"
-                                        name="size">
+                                        name="size" th:field="*{size}">
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="mb-3">
                                     <label for="weight" class="form-label">Weight:</label> <input type="text" class="form-control"
-                                        id="weight" name="weight">
+                                        id="weight" name="weight" th:field="*{weight}">
                                 </div>
                                 <div class="mb-3">
                                     <label for="stock" class="form-label">Stock:</label> <input type="number" class="form-control"
-                                        id="stock" name="stock">
+                                        id="stock" name="stock" th:field="*{stock}">
                                 </div>
                                 <div class="mb-3">
                                     <label for="price" class="form-label">Price:</label> <input type="text" class="form-control"
-                                        id="price" name="price">
+                                        id="price" name="price" th:field="*{price}">
                                 </div>
                                 <div class="mb-3">
                                     <label for="category" class="form-label">Category:</label> <select id="category" class="form-select"
-                                        aria-label="Default select example" name="category">
+                                        aria-label="Default select example" name="category" disabled>
                                         <option th:each="category : ${categoryList}" th:value="${category.id}"
-                                            th:text="${category.title}">
+                                            th:text="${category.title}" th:selected="${brand.id == product.category.id || brand.id == productDetail.product.category.id}">
                                         </option>
                                     </select>
                                 </div>
                                 <div class="mb-3">
                                     <label for="brand" class="form-label">Brand:</label> <select id="brand" class="form-select"
-                                        aria-label="Default select example" name="brand">
-                                        <option th:each="brand : ${brandList}" th:value="${brand.id}" th:text="${brand.title}">
+                                        aria-label="Default select example" name="brand" disabled>
+                                        <option th:each="brand : ${brandList}" th:value="${brand.id}" th:text="${brand.title}" 
+                                        th:selected="${brand.id == product.brand.id || brand.id == productDetail.product.brand.id}">
                                         </option>
                                     </select>
                                 </div>
                                 <div class="mb-3">
                                     <label for="gpu" class="form-label">GPU :</label> <select id="gpu" class="form-select"
                                         aria-label="Default select example" name="gpu">
-                                        <option th:each="gpu : ${gpuList}" th:value="${gpu.id}" th:text="${gpu.capacity}">
+                                        <option th:each="gpu : ${gpuList}" th:value="${gpu.id}" th:text="${gpu.capacity}"
+                                        th:selected="${gpu.id == productDetail.gpu.id}">
                                         </option>
                                     </select>
                                 </div>
@@ -88,7 +91,7 @@
                                     <label for="storage" class="form-label">Storage :</label> <select id="storage" class="form-select"
                                         aria-label="Default select example" name="storage">
                                         <option th:each="storage : ${storageList}" th:value="${storage.id}"
-                                            th:text="${storage.capacity}">
+                                            th:text="${storage.capacity}" th:selected="${storage.id == productDetail.storage.id}">
                                         </option>
                                     </select>
                                 </div>
@@ -96,7 +99,7 @@
                                     <label for="processor" class="form-label">Processor :</label> <select id="processor"
                                         class="form-select" aria-label="Default select example" name="processor">
                                         <option th:each="processor : ${processorList}" th:value="${processor.id}"
-                                            th:text="${processor.title}">
+                                            th:text="${processor.title}" th:selected="${processor.id == productDetail.processor.id}">
                                         </option>
                                     </select>
                                 </div>
@@ -105,21 +108,23 @@
                                         System :</label> <select id="operatingSystem" class="form-select"
                                         aria-label="Default select example" name="operatingSystem">
                                         <option th:each="operatingSystem : ${operatingSystemList}" th:value="${operatingSystem.id}"
-                                            th:text="${operatingSystem.name}">
+                                            th:text="${operatingSystem.name}" th:selected="${operatingSystem.id == productDetail.operatingSystem.id}">
                                         </option>
                                     </select>
                                 </div>
                                 <div class="mb-3">
                                     <label for="ram" class="form-label">Ram :</label> <select id="ram" class="form-select"
                                         aria-label="Default select example" name="ram">
-                                        <option th:each="ram : ${ramList}" th:value="${ram.id}" th:text="${ram.capacity}">
+                                        <option th:each="ram : ${ramList}" th:value="${ram.id}" th:text="${ram.capacity}"
+                                        th:selected="${ram.id == productDetail.ram.id}">
                                         </option>
                                     </select>
                                 </div>
                             </div>
                         </div>
                         <button type="button" class="btn btn-outline-info">New</button>
-                        <button type="button" class="btn btn-outline-primary">Add</button>
+                        <button type="submit" th:attr="formaction=@{/cat-phone/admin/product/phone-form/add(productId=${product.id})}" 
+                         class="btn btn-outline-primary">Add</button>
                         <button type="button" class="btn btn-outline-success">Save</button>
                         <button type="button" class="btn btn-outline-danger">Delete</button>
                     </form>

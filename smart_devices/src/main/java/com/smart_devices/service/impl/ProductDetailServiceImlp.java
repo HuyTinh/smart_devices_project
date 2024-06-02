@@ -51,6 +51,11 @@ public class ProductDetailServiceImlp implements ProductDetailService {
 		 productDetailRespository.saveAll(entities);
 	}
 
+	@Override
+	public ProductDetail save(ProductDetail entity) {
+		return productDetailRespository.save(entity);
+	}
+
 	
 	
 

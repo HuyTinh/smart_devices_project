@@ -13,8 +13,8 @@
 					<input class="form-control me-2" type="text" placeholder="Search">
 				</div>
 				<div class="col mt-5 d-flex justify-content-end">
-					<a href="/cat-phone/admin/product/phone-form"
-						class="btn btn-outline-primary me-2">Add</a>
+					<button data-bs-toggle="modal" data-bs-target="#listProduct"
+						type="button" class="btn btn-outline-primary me-2">Add</button>
 					<button type="button" class="btn btn-outline-danger me-2">Delete</button>
 					<form action="" method="POST" enctype="multipart/form-data">
 						<input type="file" name="importExcel">
@@ -54,7 +54,7 @@
 									th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 0, 'POINT') + ' VND'}"></td>
 								<td th:text="${product.stock}"></td>
 								<td><a
-									th:href="@{/cat-phone/admin/product/phone-form/{id}(id=${product.id})}"
+									th:href="@{/cat-phone/admin/product/phone-form(productId=${product.id})}"
 									class="btn btn-primary">Edit</a></td>
 							</tr>
 						</tbody>
@@ -85,7 +85,46 @@
 				</div>
 			</div>
 		</div>
-
+		<div class="modal fade" id="listProduct" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg">
+		  <div class="modal-content">
+			<div class="modal-header">
+			  <h5 class="modal-title" id="exampleModalLabel">Product</h5>
+			  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+			<a class="btn btn-outline-primary" href="/cat-phone/admin/product/phone/add">Add</a>
+			<hr>
+				<table class="table">
+					<thead>
+					  <tr>
+						<th scope="col">No.</th>
+						<th scope="col">Product ID</th>
+						<th scope="col">Line Of Product</th>
+						<th scope="col">Category</th>
+						<th scope="col">Brand</th>
+						<th scope="col">Action</th>
+					  </tr>
+					</thead>
+					<tbody>
+					  <tr th:each="product,productStart  : ${productList}">
+							<td th:text="${productStart.count}"></td>
+							<td th:text="${product.id}"></td>
+							<td th:text="${product.lineOfProduct}"></td>
+							<td th:text="${product.category.title}"></td>
+							<td th:text="${product.brand.title}"></td>
+							<td> <a th:href="@{/cat-phone/admin/product/phone-form(productId=${product.id})}" class="btn btn-info">Select</a> 
+								<a th:href="@{/cat-phone/admin/product/phone/delete(productId=${product.id})}" class="btn btn-danger">Delete</a> 
+								<a th:href="@{/cat-phone/admin/product/phone/edit(productId=${product.id})}" class="btn btn-primary">Edit</a> 
+							</td>
+					  </tr>
+					  
+					</tbody>
+				  </table>
+			</div>
+		  </div>
+		</div>
+	  </div>
 	</div>
 </body>
 </html>

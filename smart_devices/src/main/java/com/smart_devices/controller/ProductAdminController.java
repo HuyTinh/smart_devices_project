@@ -1,6 +1,8 @@
 package com.smart_devices.controller;
 
 import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -10,23 +12,32 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.poiji.bind.Poiji;
 import com.smart_devices.dto.ProductDetailDto;
+import com.smart_devices.enums.ProductDetailStatus;
 import com.smart_devices.model.Brand;
+import com.smart_devices.model.Category;
+import com.smart_devices.model.Processor;
+import com.smart_devices.model.Product;
 import com.smart_devices.model.ProductDetail;
+import com.smart_devices.model.ProductImage;
 import com.smart_devices.service.BrandService;
 import com.smart_devices.service.CategoryService;
 import com.smart_devices.service.GpuService;
+import com.smart_devices.service.ImageUploadService;
 import com.smart_devices.service.OperatingSystemService;
 import com.smart_devices.service.ProcessorService;
 import com.smart_devices.service.ProductDetailService;
+import com.smart_devices.service.ProductImageService;
 import com.smart_devices.service.ProductService;
 import com.smart_devices.service.RamService;
 import com.smart_devices.service.StorageService;
@@ -66,7 +77,12 @@ public class ProductAdminController {
 	@Autowired
 	StorageService storageService;
 	
-
+	@Autowired
+	ImageUploadService imageUploadService;
+	
+	@Autowired
+	ProductImageService productImageService;
+	
 	@PostMapping("product/phone-manage")
 	public String productImportExcel(@RequestPart("importExcel") Part productExcelFile, HttpServletRequest request){
 		if(productExcelFile  != null && productExcelFile.getSize() > 0) {
@@ -106,11 +122,15 @@ public class ProductAdminController {
 
 	    model.addAttribute("productDetailList", pageResult.getContent());
 	    model.addAttribute("page", pageResult);
-
+	    model.addAttribute("brandList", brandService.findAll());
+		model.addAttribute("categoryList", categoryService.findAll());
+		model.addAttribute("productList", productService.findAll());
 	    return "page/phone-manage";
 	}
 	@GetMapping("product/phone-form")
-	public String phone_form(Model model) {
+	public String phone_form(Model model, @RequestParam("productId") Integer productId) {
+		Product product = productService.findById(productId);
+		model.addAttribute("product", product);
 		model.addAttribute("brandList", brandService.findAll());
 		model.addAttribute("categoryList", categoryService.findAll());
 		model.addAttribute("gpuList", gpuService.findAll());
@@ -131,6 +151,71 @@ public class ProductAdminController {
 		model.addAttribute("storageList", storageService.findAll());
 		return "page/phone-accessories";
 	}
+	//Phone
+	@PostMapping("product/phone/add")
+	public String addProduct(@ModelAttribute("product") Product product) {
+		productService.save(product);
+		return "redirect:/cat-phone/admin/product/phone-form?productId="+product.getId();
+	}
+	@ModelAttribute("productDetail")
+	public ProductDetail getProductDetail() {
+		return ProductDetail.builder().build();
+	}
+	@ModelAttribute("product")
+	public Product getProduct() {
+		return Product.builder().build();
+	}
+	@GetMapping("product/phone/add")
+	public String showAddPhoneForm(Model model) {
+	    model.addAttribute("brandList", brandService.findAll());
+		model.addAttribute("categoryList", categoryService.findAll());
+		return "page/addPhoneForm";
+	}
+	@GetMapping("product/phone/edit")
+	public String editAddPhoneForm(Model model , @RequestParam("productId") Integer productId) {
+		model.addAttribute("product", productService.findById(productId));
+	    model.addAttribute("brandList", brandService.findAll());
+		model.addAttribute("categoryList", categoryService.findAll());
+		return "page/addPhoneForm";
+	}
+	@PostMapping("product/phone/save")
+	public String updateProduct(@ModelAttribute("product") Product product) {
+		productService.save(product);
+			return "redirect:/cat-phone/admin/product/phone-manage";
+	}
+	@RequestMapping("product/phone/delete")
+		public String deleteProduct(@RequestParam("productId") Integer productId) {
+			productService.deleteById(productId);
+			return "redirect:/cat-phone/admin/product/phone-manage";
+		}
+	@PostMapping("product/phone-form/add")
+	public String addProductDetail(@ModelAttribute("productDetail") ProductDetail productDetail ,@RequestParam("files") MultipartFile[] files, 
+									@RequestParam("productId") Integer productId
+			) {
+		productDetail.setProduct(productService.findById(productId));
+		productDetail.setStatus(ProductDetailStatus.AVAILABLE);
+		productDetailService.save(productDetail);
+	    for (MultipartFile file : files) {
+	        if (!file.isEmpty()) {
+	            try {
+	                String imageUrl = imageUploadService.uploadImage(file);
+	                ProductImage productImage = new ProductImage();
+	                productImage.setProductDetail(productDetail);
+	                productImage.setImagePath(imageUrl);
+	                productImageService.save(productImage);
+	            } catch (IOException e) {
+	                e.printStackTrace();
+	            }
+	        }
+	    }
+		return "redirect:/cat-phone/admin/product/phone-manage";
+	}
+	@GetMapping("product/phone-form/edit")
+	public String editProductDetail(@RequestParam("productId") Integer productId, Model model) {
+		model.addAttribute("productDetail", productDetailService.findById(productId));
+		return "phone-form";
+	}
+	//Brand
 	@ModelAttribute("brand")
 	public Brand getBrand() {
 		return Brand.builder().build();
@@ -140,7 +225,7 @@ public class ProductAdminController {
 		return "page/brand-form";
 	}
 	@GetMapping("product/phone-accessories/brand/edit")
-	public String editAccessories(Model model, @RequestParam("brandid") Integer branid) {
+	public String editBrand(Model model, @RequestParam("brandid") Integer branid) {
 		model.addAttribute("brand", brandService.getById(branid));
 		return "page/brand-form";
 	}
@@ -159,8 +244,64 @@ public class ProductAdminController {
 		brandService.deleteById(brandid);
 		return "redirect:/cat-phone/admin/product/phone-accessories";
 	}
-
-	
+	//Category
+	@ModelAttribute("category")
+	public Category getCategory() {
+		return Category.builder().build();
+	}
+	@GetMapping("product/phone-accessories/category")
+	public String category_form() {
+		return "page/categories-form";
+	}
+	@GetMapping("product/phone-accessories/category/edit")
+	public String editCategory(Model model, @RequestParam("categoryid") Integer categoryid) {
+		model.addAttribute("category", categoryService.getById(categoryid));
+		return "page/categories-form";
+	}
+	@PostMapping("product/phone-accessories/category/add")
+	public String addCategory(@ModelAttribute("category") Category category) {
+		categoryService.save(category);
+		return "redirect:/cat-phone/admin/product/phone-accessories";
+	}
+	@PostMapping("product/phone-accessories/category/update")
+	public String updateCategory(@ModelAttribute("category") Category category) {
+		categoryService.save(category);
+		return "redirect:/cat-phone/admin/product/phone-accessories";
+	}
+	@RequestMapping("product/phone-accessories/category/delete")
+	public String deleteCategory(@RequestParam("categoryid") Integer categoryid) {
+		categoryService.deleteById(categoryid);
+		return "redirect:/cat-phone/admin/product/phone-accessories";
+	}
+	//Processor 
+	@ModelAttribute("processor")
+	public Processor getProcessor() {
+		return Processor.builder().build();
+	}
+	@GetMapping("product/phone-accessories/processor")
+	public String processor_form() {
+		return "page/processor-form";
+	}
+	@GetMapping("product/phone-accessories/processor/edit")
+	public String editProcessor(Model model, @RequestParam("processorid") Integer processorid) {
+		model.addAttribute("processor", processorService.getById(processorid));
+		return "page/processor-form";
+	}
+	@PostMapping("product/phone-accessories/processor/add")
+	public String addProcessor(@ModelAttribute("processor") Processor processor) {
+		processorService.save(processor);
+		return "redirect:/cat-phone/admin/product/phone-accessories";
+	}
+	@PostMapping("product/phone-accessories/processor/update")
+	public String updateProcessor(@ModelAttribute("processor") Processor processor) {
+		processorService.save(processor);
+		return "redirect:/cat-phone/admin/product/phone-accessories";
+	}
+	@RequestMapping("product/phone-accessories/processor/delete")
+	public String deleteProcessor(@RequestParam("processorid") Integer processorid) {
+		categoryService.deleteById(processorid);
+		return "redirect:/cat-phone/admin/product/phone-accessories";
+	}
 	@ModelAttribute("productDetailList")
 	public List<ProductDetail> getProductDetails(){
 		return productDetailService.findAll();

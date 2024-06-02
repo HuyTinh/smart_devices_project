@@ -53,4 +53,16 @@ public class ProductServiceImlp implements ProductService {
 		product.setProductDetails(productDetailRespository.findByProduct(product, sort));
 		return null;
 	}
+
+	@Override
+	public Product save(Product entity) {
+		return productRespository.save(entity);
+	}
+
+	@Override
+	public void deleteById(Integer id) {
+		productRespository.deleteById(id);
+	}
+	
+	
 }

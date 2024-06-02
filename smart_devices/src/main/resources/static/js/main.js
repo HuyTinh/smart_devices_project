@@ -1,11 +1,12 @@
-document.getElementById('imageInput').addEventListener('change', function(event) {
-	const file = event.target.files[0];
-	if (file) {
-		const reader = new FileReader();
-		reader.onload = function(e) {
-			document.getElementById('selectedImage').src = e.target.result;
-		}
-		reader.readAsDataURL(file);
-	}
-});
+document.getElementById('imageInput').addEventListener('change', function() {
+            const selectedImage = document.getElementById('selectedImage');
+            const files = this.files;
+            if (files && files.length > 0) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    selectedImage.src = e.target.result;
+                };
+                reader.readAsDataURL(files[0]); // Chỉ đọc và hiển thị ảnh đầu tiên
+            }
+        });
 

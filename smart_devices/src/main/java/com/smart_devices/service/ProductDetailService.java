@@ -23,4 +23,6 @@ public interface ProductDetailService {
 
 	Page<ProductDetail> findAllPage(Pageable pageable);
 
+	ProductDetail save(ProductDetail entity);
+
 }	
