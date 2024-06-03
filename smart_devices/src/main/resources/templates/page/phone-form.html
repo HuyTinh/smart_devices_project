@@ -151,7 +151,7 @@
 							th:attr="formaction=@{/cat-phone/admin/product/phone-form/add(productId=${product.id})}"
 							class="btn btn-outline-primary">Add</button>
 						<button type="submit"
-							formaction="/cat-phone/admin/product/phone-form/save"
+							th:attr="formaction=@{/cat-phone/admin/product/phone-form/save(productId=${productDetail.product.id})}"
 							class="btn btn-outline-success">Save</button>
 						<button type="submit"
 							th:attr="formaction=@{/cat-phone/admin/product/phone-form/delete(productDetailId=${productDetail.id})}"
