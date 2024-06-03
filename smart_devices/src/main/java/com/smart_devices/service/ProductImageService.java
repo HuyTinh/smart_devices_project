@@ -14,4 +14,6 @@ public interface ProductImageService {
 
 	ProductImage save(ProductImage entity);
 
+	List<String> findImagePathsByProductDetailId(Integer productDetailId);
+
 }

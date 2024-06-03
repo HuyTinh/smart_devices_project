@@ -56,6 +56,18 @@ public class ProductDetailServiceImlp implements ProductDetailService {
 		return productDetailRespository.save(entity);
 	}
 
+	@Override
+	public void deleteById(Integer id) {
+		productDetailRespository.deleteById(id);
+	}
+
+	@Override
+	public void deleteByProductDetailId(Integer id) {
+		productDetailRespository.deleteByProductDetailId(id);
+	}
+	
+
+
 	
 	
 

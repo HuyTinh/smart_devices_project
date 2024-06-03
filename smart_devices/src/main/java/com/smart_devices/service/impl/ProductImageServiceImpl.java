@@ -34,6 +34,12 @@ public class ProductImageServiceImpl implements ProductImageService {
 	public ProductImage getById(Integer id) {
 		return productImageRepository.getById(id);
 	}
+
+	@Override
+	public List<String> findImagePathsByProductDetailId(Integer productDetailId) {
+		return productImageRepository.findImagePathsByProductDetailId(productDetailId);
+	}
+
 	
 	
 }

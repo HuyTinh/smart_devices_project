@@ -21,9 +21,11 @@
 						<button type="submit"
 							formaction="/cat-phone/admin/product/phone-manage"
 							class="btn btn-outline-secondary me-2">Import Excel</button>
+						<button type="button" data-bs-toggle="modal"
+							data-bs-target="#columnModal" class="btn btn-outline-success">Export
+							Excel</button>
 					</form>
-					<button type="button" class="btn btn-outline-success">Export
-						Excel</button>
+
 				</div>
 			</div>
 			<hr>
@@ -54,7 +56,7 @@
 									th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 0, 'POINT') + ' VND'}"></td>
 								<td th:text="${product.stock}"></td>
 								<td><a
-									th:href="@{/cat-phone/admin/product/phone-form(productId=${product.id})}"
+									th:href="@{/cat-phone/admin/product/phone-form/edit(productDetailId=${product.id})}"
 									class="btn btn-primary">Edit</a></td>
 							</tr>
 						</tbody>
@@ -85,46 +87,131 @@
 				</div>
 			</div>
 		</div>
-		<div class="modal fade" id="listProduct" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog modal-lg">
-		  <div class="modal-content">
-			<div class="modal-header">
-			  <h5 class="modal-title" id="exampleModalLabel">Product</h5>
-			  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		<div class="modal fade" id="listProduct" tabindex="-1"
+			aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Product</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal"
+							aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<a class="btn btn-outline-primary"
+							href="/cat-phone/admin/product/phone/add">Add</a>
+						<hr>
+						<table class="table">
+							<thead>
+								<tr>
+									<th scope="col">No.</th>
+									<th scope="col">Product ID</th>
+									<th scope="col">Line Of Product</th>
+									<th scope="col">Category</th>
+									<th scope="col">Brand</th>
+									<th scope="col">Action</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="product,productStart  : ${productList}">
+									<td th:text="${productStart.count}"></td>
+									<td th:text="${product.id}"></td>
+									<td th:text="${product.lineOfProduct}"></td>
+									<td th:text="${product.category.title}"></td>
+									<td th:text="${product.brand.title}"></td>
+									<td><a
+										th:href="@{/cat-phone/admin/product/phone-form(productId=${product.id})}"
+										class="btn btn-info">Select</a> <a
+										th:href="@{/cat-phone/admin/product/phone/delete(productId=${product.id})}"
+										class="btn btn-danger">Delete</a> <a
+										th:href="@{/cat-phone/admin/product/phone/edit(productId=${product.id})}"
+										class="btn btn-primary">Edit</a></td>
+								</tr>
+
+							</tbody>
+						</table>
+					</div>
+				</div>
 			</div>
-			<div class="modal-body">
-			<a class="btn btn-outline-primary" href="/cat-phone/admin/product/phone/add">Add</a>
-			<hr>
-				<table class="table">
-					<thead>
-					  <tr>
-						<th scope="col">No.</th>
-						<th scope="col">Product ID</th>
-						<th scope="col">Line Of Product</th>
-						<th scope="col">Category</th>
-						<th scope="col">Brand</th>
-						<th scope="col">Action</th>
-					  </tr>
-					</thead>
-					<tbody>
-					  <tr th:each="product,productStart  : ${productList}">
-							<td th:text="${productStart.count}"></td>
-							<td th:text="${product.id}"></td>
-							<td th:text="${product.lineOfProduct}"></td>
-							<td th:text="${product.category.title}"></td>
-							<td th:text="${product.brand.title}"></td>
-							<td> <a th:href="@{/cat-phone/admin/product/phone-form(productId=${product.id})}" class="btn btn-info">Select</a> 
-								<a th:href="@{/cat-phone/admin/product/phone/delete(productId=${product.id})}" class="btn btn-danger">Delete</a> 
-								<a th:href="@{/cat-phone/admin/product/phone/edit(productId=${product.id})}" class="btn btn-primary">Edit</a> 
-							</td>
-					  </tr>
-					  
-					</tbody>
-				  </table>
-			</div>
-		  </div>
 		</div>
-	  </div>
+		<div class="modal fade" id="columnModal" tabindex="-1"
+			aria-labelledby="columnModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="columnModalLabel">Select column to export</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal"
+							aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<form id="exportForm"
+							method="post">
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" name="ID"
+									checked> <label class="form-check-label">ID</label>
+							</div>
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" name="Product ID"
+									checked> <label class="form-check-label">Product
+									ID</label>
+							</div>
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" name="Series"
+									checked> <label class="form-check-label">Series</label>
+							</div>
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" name="Version"
+									checked> <label class="form-check-label">Version</label>
+							</div>
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" name="Title"
+									checked> <label class="form-check-label">Title</label>
+							</div>
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" name="GPU"
+									checked> <label class="form-check-label">GPU</label>
+							</div>
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" name="Storage"
+									checked> <label class="form-check-label">Storage</label>
+							</div>
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" name="Processor"
+									checked> <label class="form-check-label">Processor</label>
+							</div>
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" name="Operating System"
+									checked> <label class="form-check-label">Operating System</label>
+							</div>
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" name="Size"
+									checked> <label class="form-check-label">Size</label>
+							</div>
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" name="Weight"
+									checked> <label class="form-check-label">Weight</label>
+							</div>
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" name="Stock"
+									checked> <label class="form-check-label">Stock</label>
+							</div>
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" name="Price"
+									checked> <label class="form-check-label">Price</label>
+							</div>
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" name="RAM"
+									checked> <label class="form-check-label">RAM</label>
+							</div>
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" name="Status"
+									checked> <label class="form-check-label">Status</label>
+							</div>
+							<button type="submit" class="btn btn-primary" formaction="/cat-phone/admin/product/phone-manage/exportExcel">Export</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 </body>
 </html>

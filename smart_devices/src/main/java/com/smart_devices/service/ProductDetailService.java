@@ -25,4 +25,8 @@ public interface ProductDetailService {
 
 	ProductDetail save(ProductDetail entity);
 
+	void deleteById(Integer id);
+
+	void deleteByProductDetailId(Integer id);
+
 }	
