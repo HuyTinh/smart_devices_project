@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.smart_devices.enums.OrderStatus;
 import com.smart_devices.model.Cart;
 import com.smart_devices.model.Order;
 import com.smart_devices.model.OrderDetail;
@@ -35,15 +36,15 @@ public class CartController {
 	@GetMapping
 	public String showCart(@RequestParam(required = false, name = "paid") String paid) {
 		if (paid != null) {
-			List<Cart> carts = getCarts();
-			Order order = Order.builder().user(carts.get(0).getUser()).shippingAddress("a").build();
-			List<OrderDetail> orderDetails = carts.stream()
-					.map(cart -> OrderDetail.builder().order(order).productDetail(cart.getProductDetail())
-							.quantity(cart.getQuantity()).price(cart.getProductDetail().getPrice()).build())
-					.collect(Collectors.toList());
-			order.setOrderDetails(orderDetails);
-			orderService.save(order);
-			cartService.clearCart();
+//			List<Cart> carts = getCarts();
+//			Order order = Order.builder().user(carts.get(0).getUser()).status(OrderStatus.PENDING).shippingAddress("as").build();
+//			List<OrderDetail> orderDetails = carts.stream()
+//					.map(cart -> OrderDetail.builder().order(order).productDetail(cart.getProductDetail())
+//							.quantity(cart.getQuantity()).price(cart.getProductDetail().getPrice()).build())
+//					.collect(Collectors.toList());
+//			order.setOrderDetails(orderDetails);
+//			orderService.save(order);
+//			cartService.clearCart();
 		}
 		return "page/CartPage";
 	}
@@ -52,6 +53,7 @@ public class CartController {
 	public String addCart(@PathVariable("id") int id) {
 		Cart cart = getCarts().get(id);
 		cart.setQuantity(cart.getQuantity() + 1);
+		System.out.println(cart.getUser().getId());
 		userService.save(cart.getUser());
 		return "redirect:/cart";
 	}
@@ -78,7 +80,7 @@ public class CartController {
 
 	@ModelAttribute("carts")
 	public List<Cart> getCarts() {
-		return userService.getCartList();
+		return userService.getCurrentUser().getCarts();
 	}
 
 	@ModelAttribute("amount")

@@ -21,6 +21,7 @@ import lombok.experimental.SuperBuilder;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.smart_devices.enums.ProductDetailStatus;
 
 import groovy.transform.EqualsAndHashCode;
@@ -89,6 +90,7 @@ public class ProductDetail extends Model {
 	ProductDetailStatus status;  
 	
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "productDetail", cascade = CascadeType.ALL)
+	@JsonIgnore
 	List<OrderDetail> orderDetails;
 	
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "productDetail", cascade = CascadeType.ALL)

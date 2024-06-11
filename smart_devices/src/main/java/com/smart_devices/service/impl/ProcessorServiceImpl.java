@@ -32,7 +32,7 @@ public class ProcessorServiceImpl implements ProcessorService{
 
 	@Override
 	public Processor getById(Integer id) {
-		return processorRepository.getById(id);
+		return processorRepository.findById(id).get();
 	}
 
 	@Override

@@ -2,20 +2,21 @@ package com.smart_devices.service;
 
 import java.util.List;
 
-import com.smart_devices.model.Cart;
+import com.smart_devices.dto.UserDto;
+import com.smart_devices.dto.UserSignUpDto;
 import com.smart_devices.model.User;
-
+import com.smart_devices.response.BaseResponse;
 
 public interface UserService {
 	List<User> findAll();
 	
-	List<Cart> getCartList();
-	
-	void setLoginUser(User user);
-	
-	User getLoginUser();
+	User getCurrentUser();
 	
 	User findById(int id);
+	
+	User findByEmail(String email);
+	
+	BaseResponse registerAccount(UserSignUpDto userSignUpDto);
 	
 	void save(User user);
 	

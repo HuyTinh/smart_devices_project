@@ -26,7 +26,7 @@ public class BrandServiceImpl implements BrandService {
 
 	@Override
 	public Brand getById(Integer id) {
-		return brandRespository.getById(id);
+		return brandRespository.findById(id).get();
 	}
 
 	@Override
