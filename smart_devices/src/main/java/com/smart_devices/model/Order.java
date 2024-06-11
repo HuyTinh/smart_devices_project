@@ -1,5 +1,6 @@
 package com.smart_devices.model;
 
+import java.util.Date;
 import java.util.List;
 
 import com.smart_devices.enums.OrderStatus;
@@ -17,6 +18,8 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -46,7 +49,10 @@ public class Order extends Model {
 	@Column(name = "order_status")
 	@Enumerated(EnumType.STRING)
 	@Builder.Default
-	OrderStatus status = OrderStatus.SHIPPING;
+	OrderStatus status = OrderStatus.PROCESSING;
+	@Column(name = "order_date")
+	@Temporal(TemporalType.DATE)
+	Date orderDate;
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "order", cascade = CascadeType.ALL)
 	List<OrderDetail> orderDetails;

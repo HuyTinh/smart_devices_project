@@ -3,6 +3,8 @@ package com.smart_devices.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.smart_devices.model.Cart;
@@ -18,9 +20,9 @@ public class UserServiceImlp implements UserService {
 
 	@Autowired
 	CartRepository cartRepository;
-	
+
 	private User user;
-	
+
 	@Override
 	public List<User> findAll() {
 		return userRepository.findAll();
@@ -37,14 +39,14 @@ public class UserServiceImlp implements UserService {
 		// TODO Auto-generated method stub
 		userRepository.save(user);
 	}
-	
+
 	@Override
 	public void delete(User user) {
 		// TODO Auto-generated method stub
 		userRepository.delete(user);
 	}
 
-	public List<Cart> getCartList(){
+	public List<Cart> getCartList() {
 		return this.user.getCarts();
 	}
 
@@ -53,11 +55,22 @@ public class UserServiceImlp implements UserService {
 		// TODO Auto-generated method stub
 		this.user = user;
 	}
-	
-@Override
+
+	@Override
 	public User getLoginUser() {
 		// TODO Auto-generated method stub
 		return this.user;
 	}
+
+	@Override
+	public Page<User> findAllPage(Pageable pageable) {
+		return userRepository.findAll(pageable);
+	}
+
+	@Override
+	public Page<User> searchUsers(String keyword, Pageable pageable) {
+		return userRepository.searchUsers(keyword, pageable);
+	}
+
 	
 }

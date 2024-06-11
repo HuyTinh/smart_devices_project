@@ -65,6 +65,18 @@ public class ProductDetailServiceImlp implements ProductDetailService {
 	public void deleteByProductDetailId(Integer id) {
 		productDetailRespository.deleteByProductDetailId(id);
 	}
+
+	@Override
+	public Page<ProductDetail> searchProductDetails(String title, Double minPrice, Double maxPrice, Integer minStock,
+			Integer maxStock, Pageable pageable) {
+		return productDetailRespository.searchProductDetails(title, minPrice, maxPrice, minStock, maxStock, pageable);
+	}
+
+	@Override
+	public List<ProductDetail> findAllById(List<Integer> ids) {
+		return productDetailRespository.findAllById(ids);
+	}
+
 	
 
 
