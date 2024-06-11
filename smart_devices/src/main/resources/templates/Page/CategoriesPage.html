@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{DashBoard}" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Categories</title>
+</head>
+<body>
+	<div layout:fragment="content">
+		<div class="container-fluid">
+			<div class="card">
+				<div class="card-body">
+					<form th:object="${category}" method="post">
+						<div class="row">
+							<div class="col">
+								<div class="mb-3">
+								<input name="id" type="hidden" th:field="*{id}" th:value="*{id}" style="display: none;" >
+									<label for="categoryid" class="form-label">Category Name:</label> <input
+										type="text" class="form-control" id="categoryid"
+										th:field="*{title}" th:value="*{title}" name="title">
+								</div>
+							</div>
+						</div>
+						<div class="d-flex justify-content-start">
+							<a href="/cat-phone/admin/product/phone-accessories/category" class="btn btn-outline-info me-2">New</a>
+							<button type="submit" formaction="/cat-phone/admin/product/phone-accessories/category/add" class="btn btn-outline-primary me-2">Add</button>
+							<button type="submit" formaction="/cat-phone/admin/product/phone-accessories/category/update" class="btn btn-outline-success me-2">Save</button>
+							<button type="submit"
+							th:attr="formaction=@{/cat-phone/admin/product/phone-accessories/category/delete(categoryid=${category.id})}"
+							 class="btn btn-outline-danger me-2">Delete</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

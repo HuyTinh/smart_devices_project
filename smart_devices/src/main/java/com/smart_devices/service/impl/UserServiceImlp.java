@@ -5,13 +5,14 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
-import com.smart_devices.dto.UserDto;
 import com.smart_devices.dto.UserSignUpDto;
 import com.smart_devices.enums.Provider;
 import com.smart_devices.exception.BaseException;
@@ -149,6 +150,16 @@ public class UserServiceImlp implements UserService {
 //			throw new BaseException(String.valueOf(HttpStatus.BAD_REQUEST.value()), "User had existed!!!");
 //		}
 
+	}
+
+	@Override
+	public Page<User> findAllPage(Pageable pageable) {
+		return userRepository.findAll(pageable);
+	}
+
+	@Override
+	public Page<User> searchUsers(String keyword, Pageable pageable) {
+		return userRepository.searchUsers(keyword, pageable);
 	}
 
 

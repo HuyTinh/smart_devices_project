@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{DashBoard}" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>CatPhone - Admin</title>
+
+</head>
+<body>
+	<div layout:fragment="content">
+		<div class="container mt-5">
+			<div id="revenueSection">
+				<div class="row mb-3">
+					<form method="get">
+						<div class="row">
+							<div class=" col-3">
+								<label for="search">Search:</label> <input
+									class="form-control me-2" type="text" placeholder="Search"
+									id="search" name="search">
+							</div>
+
+							<div class="col d-flex justify-content-start">
+								<div class="row">
+									<div class="form-group me-5 col">
+										<label for="startDate">From Date:</label> <input type="date"
+											class="form-control form-control-date" id="startDate"
+											name="startDate">
+									</div>
+									<div class="form-group col">
+										<label for="endDate">To Date:</label> <input type="date"
+											class="form-control form-control-date" id="endDate"
+											name="endDate">
+									</div>
+								</div>
+							</div>
+
+							<div class="col-4 d-flex justify-content-start ">
+								<div class="row">
+									<div class="form-group me-5 col">
+										<label for="minTotal">Value From:</label> <input type="number"
+											class="form-control" id="minTotal" name="minTotal"
+											placeholder="Min Total">
+									</div>
+									<div class="form-group col">
+										<label for="maxTotal">To :</label> <input type="number"
+											class="form-control" id="maxTotal" name="maxTotal"
+											placeholder="Max Total">
+									</div>
+								</div>
+							</div>
+							<div class="col-3 mt-2 ">
+								<div class="form-group">
+									<label for="orderStatus">Order Status:</label> <select
+										class="form-control" id="orderStatus" name="status">
+										<option value="" selected>Select Status</option>
+										<option th:each="status : ${orderStatuses}"
+											th:value="${status}" th:text="${status}"></option>
+									</select>
+								</div>
+							</div>
+							<div class="col mt-4">
+								<button type="submit" class="btn btn-outline-primary mt-2">Search</button>
+							</div>
+						</div>
+					</form>
+				</div>
+				<hr>
+				<div class="row mb-3">
+					<div class="col">
+						<button id="exportBtn" class="btn btn-success"
+							data-bs-toggle="modal" data-bs-target="#exportModal">Export Excel File</button>
+					</div>
+				</div>
+				<div class="row mb-3">
+					<div class="col">
+						<table class="table text-center" id="orderTable">
+							<thead>
+								<tr>
+									<th scope="col">No.</th>
+									<th scope="col">Order ID</th>
+									<th scope="col">Customer Name</th>
+									<th scope="col">Product Name</th>
+									<th scope="col">Quantity</th>
+									<th scope="col">Price</th>
+									<th scope="col">Total</th>
+									<th scope="col">Order Date</th>
+									<th scope="col">Shipping Address</th>
+									<th scope="col">Order Status</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="order, orderStat : ${orderList}">
+									<td th:text="${orderStat.index + 1}"></td>
+									<td th:text="${order.orderId}"></td>
+									<td th:text="${order.userName}"></td>
+									<td th:text="${order.productTitle}"></td>
+									<td th:text="${order.quantity}"></td>
+									<td
+										th:text="${#numbers.formatDecimal(order.price, 0, 'COMMA', 0, 'POINT') + ' VND'}"></td>
+										<td th:text="${#numbers.formatDecimal(order.price * order.quantity, 0, 'COMMA', 0, 'POINT') + ' VND'}"></td>
+									<td th:text="${#dates.format(order.orderDate, 'dd-MM-yyyy')}"></td>
+									<td th:text="${order.shippingAddress}"></td>
+									<td th:text="${order.orderStatus}"></td>
+								</tr>
+							</tbody>
+						</table>
+						<div th:if="${page.totalPages > 0}"
+						class="d-flex justify-content-center">
+						<nav aria-label="Page navigation example">
+							<ul class="pagination">
+								<!-- Link đến trang trước -->
+								<li class="page-item"
+									th:classappend="${page.number == 0 ? 'disabled' : ''}"><a
+									class="page-link"
+									th:href="@{/cat-phone/admin/report/revenue(page=${page.number - 1}, search=${search != null ? search : ''}, startDate=${startDate != '' ? #dates.format(startDate, 'yyyy-MM-dd') : ''},
+                endDate=${endDate != '' ? #dates.format(endDate, 'yyyy-MM-dd') : ''}, status=${status != null ? status : ''}, minTotal=${minTotal != null ? minTotal : ''}, maxTotal=${maxTotal != null ? maxTotal : ''})}"
+									aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+								</a></li>
+
+								<!-- Hiển thị thông tin trang hiện tại -->
+								<li class="page-item disabled"><a class="page-link"> <span
+										th:text="'Page ' + ${page.number + 1} + ' of ' + ${page.totalPages}"></span>
+								</a></li>
+
+								<!-- Link đến trang sau -->
+								<li class="page-item"
+									th:classappend="${page.number + 1 >= page.totalPages ? 'disabled' : ''}">
+									<a class="page-link"
+									th:href="@{/cat-phone/admin/report/revenue(page=${page.number + 1}, search=${search != null ? search : ''}, startDate=${startDate != '' ? #dates.format(startDate, 'yyyy-MM-dd') : ''},
+                endDate=${endDate != '' ? #dates.format(endDate, 'yyyy-MM-dd') : ''}, status=${status != null ? status : ''}, minTotal=${minTotal != null ? minTotal : ''}, maxTotal=${maxTotal != null ? maxTotal : ''})}"
+									aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+								</a>
+								</li>
+							</ul>
+						</nav>
+					</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal fade" id="exportModal" tabindex="-1"
+			aria-labelledby="exportModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exportModalLabel">Select Columns for Export File</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal"
+							aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<div class="form-check">
+							<input class="form-check-input" type="checkbox" value="Order ID"
+								id="colOrderId" checked> <label class="form-check-label"
+								for="colOrderId">Order ID</label>
+						</div>
+						<div class="form-check">
+							<input class="form-check-input" type="checkbox"
+								value="Customer Name" id="colCustomerName" checked> <label
+								class="form-check-label" for="colCustomerName">Customer
+								Name</label>
+						</div>
+						<div class="form-check">
+							<input class="form-check-input" type="checkbox"
+								value="Product Name" id="colProductName" checked> <label
+								class="form-check-label" for="colProductName">Product
+								Name</label>
+						</div>
+						<div class="form-check">
+							<input class="form-check-input" type="checkbox" value="Quantity"
+								id="colQuantity" checked> <label
+								class="form-check-label" for="colQuantity">Quantity</label>
+						</div>
+						<div class="form-check">
+							<input class="form-check-input" type="checkbox" value="Price"
+								id="colPrice" checked> <label class="form-check-label"
+								for="colPrice">Price</label>
+						</div>
+						<div class="form-check">
+							<input class="form-check-input" type="checkbox" value="Total"
+								id="colTotal" checked> <label class="form-check-label"
+								for="colTotal">Total</label>
+						</div>
+						<div class="form-check">
+							<input class="form-check-input" type="checkbox"
+								value="Order Date" id="colOrderDate" checked> <label
+								class="form-check-label" for="colOrderDate">Order Date</label>
+						</div>
+						<div class="form-check">
+							<input class="form-check-input" type="checkbox"
+								value="Shipping Address" id="colShippingAddress" checked>
+							<label class="form-check-label" for="colShippingAddress">Shipping
+								Address</label>
+						</div>
+						<div class="form-check">
+							<input class="form-check-input" type="checkbox"
+								value="Order Status" id="colOrderStatus" checked> <label
+								class="form-check-label" for="colOrderStatus">Order
+								Status</label>
+						</div>
+						
+						<hr>
+						<h4>The excel file will have the form:</h4>
+					
+						<hr>
+							<div id="checkboxContainer"></div>
+						<button type="button" id="confirmExportBtn"
+							class="btn btn-primary">Export File</button>
+
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary"
+							data-bs-dismiss="modal">Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

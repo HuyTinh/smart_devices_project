@@ -2,7 +2,9 @@ package com.smart_devices.service;
 
 import java.util.List;
 
-import com.smart_devices.dto.UserDto;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 import com.smart_devices.dto.UserSignUpDto;
 import com.smart_devices.model.User;
 import com.smart_devices.response.BaseResponse;
@@ -21,4 +23,8 @@ public interface UserService {
 	void save(User user);
 	
 	void delete(User user);
+
+	Page<User> findAllPage(Pageable pageable);
+
+	Page<User> searchUsers(String keyword, Pageable pageable);
 }

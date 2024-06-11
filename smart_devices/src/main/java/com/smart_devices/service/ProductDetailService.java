@@ -23,4 +23,11 @@ public interface ProductDetailService {
 
 	Page<ProductDetail> findAllPage(Pageable pageable);
 
+	ProductDetail save(ProductDetail entity);
+	void deleteById(Integer id);
+	void deleteByProductDetailId(Integer id);
+	Page<ProductDetail> searchProductDetails(String title, Double minPrice, Double maxPrice, Integer minStock, Integer maxStock, Pageable pageable);
+
+	List<ProductDetail> findAllById(List<Integer> ids);
+
 }	

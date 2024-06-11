@@ -16,5 +16,9 @@ public interface ProductService {
 	Product findByLineOfProduct(String lineOfProduct);
 	
 	Product findByLineOfProduct(String lineOfProduct, Sort sort);
+	
+	Product save(Product entity);
+
+	void deleteById(Integer id);
 }
 
