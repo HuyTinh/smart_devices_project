@@ -30,14 +30,14 @@ public class CartServiceImlp implements CartService {
 	@Override
 	public Double getAmount() {
 		// TODO Auto-generated method stub
-		User user = userService.getLoginUser();
+		User user = userService.getCurrentUser();
 		return user.getCarts().stream().mapToDouble((c) -> c.getQuantity() * c.getProductDetail().getPrice()).sum();
 	}
 
 	@Override
 	public void addToCart(ProductDetail productDetail) {
 		// TODO Auto-generated method stub
-		User user = userService.getLoginUser();
+		User user = userService.getCurrentUser();
 		List<Cart> carts = user.getCarts();
 		carts.stream().filter((pd) -> pd.getProductDetail().getId() == productDetail.getId()).findFirst().ifPresentOrElse((value) -> {
 			value.setQuantity(value.getQuantity() + 1);
@@ -49,7 +49,7 @@ public class CartServiceImlp implements CartService {
 	@Override
 	public void removeFromCart(int productDetailId) {
 		// TODO Auto-generated method stub
-		User user = userService.getLoginUser();
+		User user = userService.getCurrentUser();
 		List<Cart> carts = user.getCarts();
 		carts.stream().filter((pd) -> pd.getProductDetail().getId() == productDetailId).findFirst().ifPresent(carts::remove);
 		userService.save(user);
@@ -64,7 +64,7 @@ public class CartServiceImlp implements CartService {
 	@Override
 	public void clearCart() {
 		// TODO Auto-generated method stub
-		User user = userService.getLoginUser();
+		User user = userService.getCurrentUser();
 		List<Cart> carts = user.getCarts();
 		carts.clear();
 		userService.save(user);

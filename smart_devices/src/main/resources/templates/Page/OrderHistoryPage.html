@@ -1,0 +1,132 @@
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{/index}">
+<body>
+	<div layout:fragment="Content" x-data="{orderDetails: [1,2]}">
+		<div class="container py-2">
+			<div class="bg-dark px-4 py-1 mb-2 rounded-pill">
+				<nav aria-label="breadcrumbm">
+					<ol class="breadcrumb m-0">
+						<li class="breadcrumb-item"><a href="\" class="text-secondary"><i
+								class="fas fa-home me-2"></i>Home</a></li>
+						<li class="breadcrumb-item text-light" id="test"
+							aria-current="page">Order History</li>
+					</ol>
+				</nav>
+			</div>
+			<div class="row p-4 pt-0">
+				<h3 class="text-center my-5 fs-1 fw-bold">Your Order</h3>
+				<div class="row">
+					<div class="col-lg-12 bg-light overflow-auto"
+						style="max-height: 31.5rem;">
+						<table class="table">
+							<thead>
+								<tr>
+									<th scope="col">#</th>
+									<th scope="col">Payment Method</th>
+									<th scope="col">Shipping Address</th>
+									<th scope="col">Total Price</th>
+									<th scope="col">Order Date</th>
+									<th scope="col">Status</th>
+									<th scope="col"></th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="order,status : ${orderHistory}">
+									<th scope="row" th:text="${status.index + 1}"></th>
+
+									<td>
+
+										<p th:text="${order.paymentMethod}"></p>
+									</td>
+									<td>
+										<p th:text="${order.shippingAddress}"></p>
+									</td>
+									<td
+										th:text="${#numbers.formatDecimal(order.totalPrice, 0, 'COMMA', 0, 'POINT') + ' VND'}">Otto</td>
+									<td>
+										<p th:text="${order.orderDate}"></p>
+									</td>
+									<td>
+										<p th:text="${order.status}"></p>
+									</td>
+									<td>
+										<button th:data-orderId="${order.id}"  data-bs-toggle="modal"
+											data-bs-target="#orderDetails" class="orderDetailBtn btn btn-info">
+											Detail
+										</button>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+
+				</div>
+			</div>
+		</div>
+		<!-- Modal -->
+		<div class="modal fade" id="orderDetails" tabindex="-1"
+			aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Order Detail</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal"
+							aria-label="Close"></button>
+					</div>
+					<div class="modal-body" id="modal-body">
+						<table class="table">
+						<thead>
+							<tr>
+								<th scope="col">#</th>
+								<th scope="col">Product</th>
+								<th scope="col">Name</th>
+								<th scope="col">Price</th>
+								<th scope="col">Quantity</th>
+							</tr>
+						</thead>
+						<tbody id="table-body"></tbody>
+					</table>	
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<script type="text/javascript">
+	
+		
+			$('.orderDetailBtn').click(function(e) {
+				let orderId = $(this).attr('data-orderId');
+				var tableBodyContent;
+				$.get(`/api/users/order-history/${orderId}`).then((response) => {
+					response.forEach(function(orderDetail, index) {
+						tableBodyContent += `
+							<tr>
+							<th scope="row">${index + 1}</th>
+
+							<td>
+								<div class="card" style="width: 100px">
+									<img class="card-img-top"
+										src="${orderDetail.productImage}"
+										alt="Card image">
+								</div>
+							</td>
+							<td>
+								<p>${orderDetail.productTitle + ' ' + orderDetail.storage + 'GB'}</p>
+							</td>
+							<td>
+								<p>${orderDetail.price.toLocaleString()}</p>
+							</td>
+							<td>
+								<p>${orderDetail.quantity}</p>
+							</td>
+						</tr>
+						`
+					})
+					 $('#table-body').html(tableBodyContent)  
+				})
+			});
+		</script>
+	</div>
+</body>
+</html>
+

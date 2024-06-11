@@ -32,7 +32,6 @@ public class ProductController {
 
 	@GetMapping
 	public String showProductPage() {
-		userService.setLoginUser(userService.findById(2));
 		return "redirect:/product/iPhone";
 	}
 

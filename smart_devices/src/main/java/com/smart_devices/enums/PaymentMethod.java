@@ -1,3 +1,4 @@
+
 package com.smart_devices.enums;
 
 public enum PaymentMethod {

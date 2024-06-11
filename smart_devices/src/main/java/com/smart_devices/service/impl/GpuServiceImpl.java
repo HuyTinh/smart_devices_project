@@ -31,7 +31,7 @@ public class GpuServiceImpl implements GpuService{
 
 	@Override
 	public Gpu getById(Integer id) {
-		return gpuRespository.getById(id);
+		return gpuRespository.findById(id).get();
 	}
 
 	@Override

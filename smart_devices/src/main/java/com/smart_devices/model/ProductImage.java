@@ -1,6 +1,8 @@
 package com.smart_devices.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -31,10 +33,11 @@ public class ProductImage extends Model {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	int id;
 	
-	@Column(name = "image_path")
+	@Column(name = "image_path", length = 2000)
 	String imagePath;
 	
 	@ManyToOne
 	@JoinColumn(name = "product_detail_id")
+	@JsonIgnore
 	ProductDetail productDetail;
 }

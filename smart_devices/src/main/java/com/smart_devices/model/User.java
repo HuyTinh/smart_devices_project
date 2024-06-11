@@ -2,6 +2,7 @@ package com.smart_devices.model;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -16,6 +17,9 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
@@ -38,6 +42,9 @@ public class User {
 	@Column(name = "last_name")
 	String lastName;
 	
+	@Column(name = "username")
+	String username;
+	
 	@Column(name = "email")
 	String email;
 	
@@ -54,6 +61,26 @@ public class User {
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "dd-MM-yyyy")
 	Date birthDay;
+	
+	@Column(name = "account_non_expired")
+	boolean accountNonExpired;
+
+	@Column(name = "is_enabled")
+	boolean isEnabled;
+
+	@Column(name = "account_non_locked")
+	boolean accountNonLocked;
+
+	@Column(name = "credentials_non_expired")
+	boolean credentialsNonExpired;
+	
+	@Column(name = "provider_id")
+	String providerId;
+
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
+	@JoinTable(name = "user_role", joinColumns = 
+			@JoinColumn(name = "user_id", referencedColumnName = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "role_id"))
+	Set<Role> roles;
 
 	@Column(name = "gender")
 	@Enumerated(EnumType.STRING)
@@ -61,5 +88,8 @@ public class User {
 	
 	@OneToMany(fetch = FetchType.EAGER,mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
 	List<Cart> carts; 
+	
+	@OneToMany(fetch = FetchType.EAGER,mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+	List<Order> orders; 
 	
 }

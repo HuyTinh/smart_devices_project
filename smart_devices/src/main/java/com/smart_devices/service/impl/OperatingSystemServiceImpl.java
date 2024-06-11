@@ -32,7 +32,7 @@ public class OperatingSystemServiceImpl implements OperatingSystemService {
 
 	@Override
 	public OperatingSystem getById(Integer id) {
-		return operatingSystemRespository.getById(id);
+		return operatingSystemRespository.findById(id).get();
 	}
 
 	@Override

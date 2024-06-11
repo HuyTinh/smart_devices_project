@@ -31,7 +31,7 @@ public class CategoryServiceImlp implements CategoryService{
 
 	@Override
 	public Category getById(Integer id) {
-		return categoryRepository.getById(id);
+		return categoryRepository.findById(id).get();
 	}
 
 	@Override
