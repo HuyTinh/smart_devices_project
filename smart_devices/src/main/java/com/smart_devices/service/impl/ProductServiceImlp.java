@@ -53,4 +53,16 @@ public class ProductServiceImlp implements ProductService {
 		product.setProductDetails(productDetailRespository.findByProduct(product, sort));
 		return null;
 	}
+
+	@Override
+	public Product save(Product entity) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void deleteById(Integer id) {
+		// TODO Auto-generated method stub
+		
+	}
 }

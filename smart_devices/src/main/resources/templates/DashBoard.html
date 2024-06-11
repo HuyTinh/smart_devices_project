@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <link
@@ -17,88 +18,121 @@
 	rel="stylesheet">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-	<link
-        href="https://fonts.googleapis.com/css2?family=Kodchasan:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500;1,600;1,700&display=swap"
-        rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css2?family=Kodchasan:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500;1,600;1,700&display=swap"
+	rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.js"
+	integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+	crossorigin="anonymous"></script>
 <title>Admin</title>
 </head>
 <body>
-	 <div class="sidebar d-flex flex-column flex-shrink-0 p-3 bg-dark">
-        <a href="/cat-phone/admin" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-            <span class="fs-2">CatPhone - Admin</span>
-        </a>
-        <hr>
-        <ul class="nav nav-pills flex-column mb-auto" id="menu">
-            <li class="nav-item"><a id="dashboard" href="/cat-phone/admin" class="nav-link fs-4">DashBoard</a></li>
-            <li class="nav-item">
-                <a id="products" class="nav-link text-white fs-4" data-bs-toggle="collapse" href="#productsCollapse" role="button" aria-expanded="false" aria-controls="productsCollapse">Products
-                    <i class="fa-solid fa-sort-down p-1"></i>
-                </a>
-                <div class="collapse" id="productsCollapse">
-                    <ul class="nav flex-column">
-                        <li class="nav-item"><a id="phone-manage" class="nav-link text-white" href="/cat-phone/admin/product/phone-manage">Phone</a></li>
-                        <li class="nav-item"><a id="phone-accessories" class="nav-link text-white" href="/cat-phone/admin/product/phone-accessories">Phone Accessories</a></li>
-                    </ul>
-                </div>
-            </li>
-            <li class="nav-item"><a id="orders" href="/cat-phone/admin/oders" class="nav-link text-white fs-4">Orders</a></li>
-            <li class="nav-item"><a id="customer" href="/cat-phone/admin/customer" class="nav-link text-white fs-4">Customer</a></li>
-            <li class="nav-item"><a id="report" href="/cat-phone/admin/report" class="nav-link text-white fs-4">Report</a></li>
-        </ul>
-    </div>
+	
+	<div class="sidebar d-flex flex-column flex-shrink-0 p-3 bg-dark">
+		<a href="/cat-phone/admin"
+			class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+			<span class="fs-2">CatPhone - Admin</span>
+		</a>
+		<hr>
+		<ul class="nav nav-pills flex-column mb-auto" id="menu">
+			<li class="nav-item"><a id="dashboard" href="/cat-phone/admin"
+				class="nav-link fs-4">DashBoard</a></li>
+			<li class="nav-item"><a id="products"
+				class="nav-link text-white fs-4" data-bs-toggle="collapse"
+				href="#productsCollapse" role="button" aria-expanded="false"
+				aria-controls="productsCollapse">Products <i
+					class="fa-solid fa-sort-down p-1"></i>
+			</a>
+				<div class="collapse" id="productsCollapse">
+					<ul class="nav flex-column">
+						<li class="nav-item"><a id="phone-manage"
+							class="nav-link text-white"
+							href="/cat-phone/admin/product/phone-manage">Phone</a></li>
+						<li class="nav-item"><a id="phone-accessories"
+							class="nav-link text-white"
+							href="/cat-phone/admin/product/phone-accessories">Phone
+								Accessories</a></li>
+					</ul>
+				</div></li>
+			<li class="nav-item"><a id="orders"
+				href="/cat-phone/admin/orders" class="nav-link text-white fs-4">Orders</a></li>
+			<li class="nav-item"><a id="customer"
+				href="/cat-phone/admin/customer" class="nav-link text-white fs-4">Customer</a></li>
+			<li class="nav-item"><a class="nav-link text-white fs-4"
+				data-bs-toggle="collapse" href="#collapseReport" role="button"
+				aria-expanded="false" aria-controls="collapseReport"> Report </a>
+				<div class="collapse" id="collapseReport">
+					<ul class="nav flex-column">
+						<li class="nav-item"><a class="nav-link text-white fs-6"
+							href="/cat-phone/admin/report/revenue">Revenue</a></li>
+						<li class="nav-item"><a class="nav-link text-white fs-6"
+							href="/cat-phone/admin/report/product">Product</a></li>
+						<li class="nav-item"><a class="nav-link text-white fs-6"
+							href="/cat-phone/admin/report/customer">Customer</a></li>
+					</ul>
+				</div></li>
+		</ul>
+	</div>
 
-    <div class="content">
-        <div class="content-header d-flex justify-content-between align-items-center border-bottom pb-2 mb-3">
-            <h1 class="fs-3">Dashboard</h1>
-            <div class="d-flex align-items-center">
-                <img src="https://firebasestorage.googleapis.com/v0/b/mquizizz-a9ba4.appspot.com/o/image%2Fcoding.png?alt=media&token=15d4f3f4-2222-4440-8ab1-0e3bdbea6132" width="50" class="rounded-circle" alt="Avatar">
-            </div>
-        </div>
-        <div layout:fragment="content">
-            <div class="container-fluid">
-                <div class="location p-2">
-                    <span>Admin/DashBoard</span>
-                </div>
-                <div class="card">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col">
-                                <div class="card text-center">
-                                    <span class="card-title mt-1">Total Sales</span>
-                                    <div class="mt-5 mb-5"></div>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="card text-center">
-                                    <span class="card-title mt-1">Order</span>
-                                    <div class="mt-5 mb-5"></div>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="card text-center">
-                                    <span class="card-title mt-1">Transported Successfully</span>
-                                    <div class="mt-5 mb-5"></div>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="card text-center">
-                                    <span class="card-title mt-1">Shipping Failed</span>
-                                    <div class="mt-5 mb-5"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="chart mt-3">
-                            <img src="https://firebasestorage.googleapis.com/v0/b/test-a2c51.appspot.com/o/Excel-charts.png?alt=media&token=f7d9e0f3-b6ea-4ba5-b355-c4d3c14337a8" class="w-100" height="500">
-                        </div>
-                    </div>
-                </div>
+	<div class="content">
+		<div
+			class="content-header d-flex justify-content-between align-items-center border-bottom pb-2 mb-3">
+			<h1 class="fs-3">Dashboard</h1>
+			<div class="d-flex align-items-center">
+				<img
+					src="https://firebasestorage.googleapis.com/v0/b/mquizizz-a9ba4.appspot.com/o/image%2Fcoding.png?alt=media&token=15d4f3f4-2222-4440-8ab1-0e3bdbea6132"
+					width="50" class="rounded-circle" alt="Avatar">
+			</div>
+		</div>
+		<div layout:fragment="content">
+			<div class="container-fluid">
+				<div class="location p-2">
+					<span>Admin/DashBoard</span>
+				</div>
+				<div class="card">
+					<div class="card-body">
+						<div class="row">
+							<div class="col">
+								<div class="card text-center">
+									<span class="card-title mt-1">Total Sales</span>
+									<div class="mt-5 mb-5"></div>
+								</div>
+							</div>
+							<div class="col">
+								<div class="card text-center">
+									<span class="card-title mt-1">Order</span>
+									<div class="mt-5 mb-5"></div>
+								</div>
+							</div>
+							<div class="col">
+								<div class="card text-center">
+									<span class="card-title mt-1">Transported Successfully</span>
+									<div class="mt-5 mb-5"></div>
+								</div>
+							</div>
+							<div class="col">
+								<div class="card text-center">
+									<span class="card-title mt-1">Shipping Failed</span>
+									<div class="mt-5 mb-5"></div>
+								</div>
+							</div>
+						</div>
+						<div class="chart mt-3">
+							<canvas id="revenueChart" width="400" height="200"></canvas>
+						</div>
+						<div class="chart mt-3" th:if="${dailyRevenueData}">
+							<canvas id="dailyRevenueChart" width="400" height="200"></canvas>
+						</div>
+					</div>
+				</div>
 
-            </div>
-        </div>
+			</div>
+		</div>
 
-    </div>
-    <script src="/JS/main.js"></script>
-    <script>
+	</div>
+	<script src="/JS/main.js"></script>
+	<script>
         document.addEventListener('DOMContentLoaded', function() {
             // Lấy URL hiện tại
             const currentPath = window.location.pathname;
@@ -133,6 +167,348 @@
         });
         
     </script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script>
+		function updateOrderStatus(selectElement) {
+		    var orderId = $(selectElement).data("order-id");
+		    var newStatus = $(selectElement).val();
+		
+		    $.ajax({
+		        url: '/cat-phone/admin/orders/' + orderId + '/status',
+		        type: 'POST',
+		        data: { status: newStatus },
+		        success: function() {
+		            Swal.fire({
+		                icon: 'success',
+		                title: 'Success',
+		                text: 'Order status updated successfully.',
+		            });
+		        },
+		        error: function() {
+		            Swal.fire({
+		                icon: 'error',
+		                title: 'Error',
+		                text: 'Failed to update order status.',
+		            });
+		        }
+		    });
+		}
+	</script>
+	<script th:inline="javascript">
+        /*<![CDATA[*/
+        var revenueData = /*[[${revenueData}]]*/ [];
+        var labels = revenueData.map(item => item.month + '/' + item.year);
+        var revenue = revenueData.map(item => item.totalRevenue);
+	
+        var backgroundColors = revenueData.map(() => getRandomColor());
+        var borderColors = backgroundColors.map(color => color.replace(/, [\d.]+\)$/, ', 1)'));
+        
+
+        var ctx = document.getElementById('revenueChart').getContext('2d');
+        var revenueChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Monthly Revenue',
+                    data: revenue,
+                    backgroundColor: backgroundColors,
+                    borderColor: borderColors,
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        document.getElementById('revenueChart').onclick = function(evt) {
+            var activePoints = revenueChart.getElementsAtEventForMode(evt, 'nearest', { intersect: true }, true);
+            if (activePoints.length > 0) {
+                var firstPoint = activePoints[0];
+                var label = revenueChart.data.labels[firstPoint.index];
+                var [month, year] = label.split('/');
+                window.location.href = `/cat-phone/admin?month=${month}&year=${year}`;
+            }
+        };
+
+        var dailyRevenueData = /*[[${dailyRevenueData}]]*/ [];
+        if (dailyRevenueData.length > 0) {
+            var dailyLabels = dailyRevenueData.map(item => item.day);
+            var dailyRevenue = dailyRevenueData.map(item => item.totalRevenue);
+
+            var dailyBackgroundColors = dailyRevenueData.map(() => getRandomColor());
+            var dailyBorderColors = dailyBackgroundColors.map(color => color.replace(/, [\d.]+\)$/, ', 1)'));
+
+            var dailyCtx = document.getElementById('dailyRevenueChart').getContext('2d');
+            var dailyRevenueChart = new Chart(dailyCtx, {
+                type: 'line',
+                data: {
+                    labels: dailyLabels,
+                    datasets: [{
+                        label: 'Daily Revenue',
+                        data: dailyRevenue,
+                        backgroundColor: dailyBackgroundColors,
+                        borderColor: dailyBorderColors,
+                        borderWidth: 5,
+                        tension: 0.4 // Tension for smoother lines
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }
+        function getRandomColor() {
+            const r = Math.floor(Math.random() * 255);
+            const g = Math.floor(Math.random() * 255);
+            const b = Math.floor(Math.random() * 255);
+            const a = (Math.random() * 0.5 + 0.5).toFixed(2); 
+            return `rgba(${r}, ${g}, ${b}, ${a})`;
+        }
+        /*]]>*/
+    </script>
+	<script>
+	// Hàm để lấy giá trị của các checkbox được chọn
+	function getSelectedValColumns() {
+	    var selectedValColumns = [];
+	    // Duyệt qua tất cả các checkbox
+	    $('input[type=checkbox]').each(function() {
+	        // Nếu checkbox được chọn, thêm giá trị của nó vào mảng
+	        if ($(this).is(':checked')) {
+	        	selectedValColumns.push($(this).val());
+	        }
+	    });
+	    return selectedValColumns;
+	}
+	async function getAllTableData() {
+		  const allData = [];
+		  let currentPage = 0;
+		  const totalPages = parseInt($('.pagination li.disabled a').text().match(/\d+/g)[1]); // Lấy tổng số trang
+
+		  while (currentPage < totalPages) {
+		    const pageData = await goToPageAndGetData(currentPage);
+		    allData.push(...pageData);
+		    currentPage++;
+		  }
+
+		  return allData;
+		}
+
+	async function goToPageAndGetData(pageNumber) {
+		  const pageLink = $('.pagination li.page-item').eq(pageNumber + 1).find('a.page-link').attr('href');
+
+		  return new Promise((resolve, reject) => {
+		    $.ajax({
+		      type: 'GET',
+		      url: pageLink,
+		      data: { page: pageNumber }, // truyền tham số page vào trong request
+		      success: function(response) {
+		        const page = $(response);
+		        const pageData = extractDataFromPage(page);
+		        resolve(pageData);
+		      },
+		      error: function(xhr, status, error) {
+		        reject(error);
+		      }
+		    });
+		  });
+		}
+
+		function extractDataFromPage(page) {
+		  const pageData = [];
+		  const rows = $(page).find('#orderTable tbody tr');
+
+		  rows.each(function() {
+		    const rowData = {};
+		    $(this).find('td').each(function(index) {
+		      const columnName = $('#orderTable thead th').eq(index).text().trim();
+		      rowData[columnName] = $(this).text().trim();
+		    });
+		    pageData.push(rowData);
+		  });
+
+		  return pageData;
+		}
+	
+	$('#confirmExportBtn').click(async function() {
+	    var selectedValColumns = getSelectedValColumns();
+	    var tableData = await getAllTableData();
+	    $.ajax({
+	        type: 'POST',
+	        url: '/cat-phone/admin/report/revenue',
+	        contentType: 'application/json',
+	        data: JSON.stringify({ selectedValColumns: selectedValColumns, tableData: tableData }),
+	        success: function(response) {
+	        	
+	        	Swal.fire({
+	                icon: 'success',
+	                title: 'Excel đã được tạo thành công',
+	                showConfirmButton: false,
+	                timer: 1500
+	            }).then(function() {
+	                
+	            });
+	        	$('#exportModal').modal('hide');
+	        },
+	        error: function(xhr, status, error) {
+	            // Handle error
+	        }
+	    });
+	});
+	</script>
+	
+	<!-- Product -->
+	<script>
+	$('#exportExcelBtn').click(function() {
+	    var selectedColumns = getSelectedColumns();
+	    var selectedIds = getAllTableIds();
+	    console.log(selectedIds);
+	    // Gửi dữ liệu lên server bằng AJAX
+	    $.ajax({
+	        type: 'POST',
+	        url: '/cat-phone/admin/report/product/exportExcel',
+	        contentType: 'application/json',
+	        data: JSON.stringify({ selectedColumns: selectedColumns, selectedIds: selectedIds }),
+	        success: function(response) {
+	        	Swal.fire({
+	                icon: 'success',
+	                title: 'Excel đã được tạo thành công',
+	                showConfirmButton: false,
+	                timer: 1500
+	            }).then(function() {
+	                
+	            });
+	        	$('#columnModal').modal('hide');
+	        },
+	        error: function(xhr, status, error) {
+	            // Xử lý lỗi nếu có
+	        }
+	    });
+	});
+
+	function getSelectedColumns() {
+	    var selectedColumns = [];
+	    $('.form-check-input:checked').each(function() {
+	        selectedColumns.push($(this).attr('name'));
+	    });
+	    return selectedColumns;
+	}
+
+	function getAllTableIds() {
+	    var selectedIds = [];
+	    var hasNextPage = true;
+	    var currentPage = 1;
+
+	    // Hàm đệ quy để lấy dữ liệu từ từng trang
+	    function fetchIdsFromPage(pageUrl) {
+	        $.ajax({
+	            type: 'GET',
+	            url: pageUrl,
+	            async: false,
+	            success: function(response) {
+	                // Lấy ID từ các thẻ td ẩn trên trang hiện tại
+	                var currentPageIds = $(response).find('#productTableReport tbody .hidden-product-id').map(function() {
+	                    return $(this).text();
+	                }).get();
+	                // Nối ID từ trang hiện tại vào mảng selectedIds
+	                selectedIds = selectedIds.concat(currentPageIds);
+	                
+	                // Kiểm tra xem trang hiện tại có phải là trang cuối cùng không
+	                hasNextPage = !$(response).find('.pagination .page-item:last-child').hasClass('disabled');
+	                
+	                // Nếu còn trang tiếp theo, thực hiện lấy dữ liệu từ trang đó
+	                if (hasNextPage) {
+	                    var nextPageUrl = $(response).find('.pagination .page-item:last-child a').attr('href');
+	                    currentPage++;
+	                    fetchIdsFromPage(nextPageUrl);
+	                }
+	            }
+	        });
+	    }
+
+	    // Bắt đầu lấy dữ liệu từ trang đầu tiên
+	    var currentPageUrl = '/cat-phone/admin/report/product'; // Thay đổi URL của trang nếu cần
+	    fetchIdsFromPage(currentPageUrl);
+
+	    return selectedIds;
+	}
+	
+
+	</script>
+	<script>
+    var headers = {
+        "ID": "ID",
+        "ProductID": "Product ID",
+        "Series": "Series",
+        "Version": "Version",
+        "Title": "Title",
+        "GPU": "GPU",
+        "Storage": "Storage",
+        "Processor": "Processor",
+        "OperatingSystem": "Operating System",
+        "Size": "Size",
+        "Weight": "Weight",
+        "Stock": "Stock",
+        "Price": "Price",
+        "RAM": "RAM",
+        "Status": "Status"
+    };
+
+    var defaultCheckedHeaders = Object.keys(headers);
+
+    // Hiển thị header mặc định khi modal được mở
+    $(document).ready(function () {
+        displayHeader(defaultCheckedHeaders);
+    });
+
+    // Xử lý sự kiện khi checkbox được chọn hoặc bỏ chọn
+    $('.form-check-input').change(function () {
+        var checkedHeaders = getCheckedHeaders();
+        if (checkedHeaders.length > 0) {
+            displayHeader(checkedHeaders);
+        } else {
+            $('#headerDisplay').empty(); // Ẩn table khi không có checkbox nào được chọn
+        }
+    });
+
+    // Lấy danh sách các header được chọn
+    function getCheckedHeaders() {
+        var checkedHeaders = [];
+        $('.form-check-input:checked').each(function () {
+            var checkboxId = $(this).attr('id');
+            checkedHeaders.push(headers[checkboxId]);
+        });
+        return checkedHeaders;
+    }
+
+    // Hiển thị header tương ứng với checkbox được chọn
+    function displayHeader(checkedHeaders) {
+        var headerTable = '<table class="table"><thead><tr>';
+        checkedHeaders.forEach(function (header) {
+            headerTable += '<th>' + header + '</th>';
+        });
+        headerTable += '</tr></thead><tbody>';
+        // Thêm dòng dữ liệu mẫu
+        headerTable += '<tr>';
+        checkedHeaders.forEach(function () {
+            headerTable += '<td>Dữ liệu mẫu</td>'; // Thay 'Dữ liệu mẫu' bằng dữ liệu mẫu thực tế
+        });
+        headerTable += '</tr>';
+        headerTable += '</tbody></table>';
+        $('#headerDisplay').html(headerTable);
+    }
+</script>
+	
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script
 		src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
 		integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"

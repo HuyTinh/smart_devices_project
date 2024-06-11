@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{DashBoard}" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>RAM</title>
+</head>
+<body>
+	<div layout:fragment="content">
+		<div class="container-fluid">
+			<div class="card">
+				<div class="card-body">
+					<form th:object="${ram}" method="post">
+						<div class="row">
+							<div class="col">
+								<div class="mb-3">
+								<input name="id" type="hidden" th:field="*{id}" th:value="*{id}" style="display: none;" >
+									<label for="ramName" class="form-label">RAM Name:</label> <input
+										type="text" class="form-control" id="ramName"
+										th:field="*{capacity}" th:value="*{capacity}" name="capacity">
+								</div>
+							</div>
+						</div>
+						<div class="d-flex justify-content-start">
+							<a href="/cat-phone/admin/product/phone-accessories/ram" class="btn btn-outline-info me-2">New</a>
+							<button type="submit" formaction="/cat-phone/admin/product/phone-accessories/ram/add" class="btn btn-outline-primary me-2">Add</button>
+							<button type="submit" formaction="/cat-phone/admin/product/phone-accessories/ram/update" class="btn btn-outline-success me-2">Save</button>
+							<button type="submit"
+							th:attr="formaction=@{/cat-phone/admin/product/phone-accessories/ram/delete(ramid=${ram.id})}"
+							 class="btn btn-outline-danger me-2">Delete</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorate="~{dashBoard}" xmlns:th="http://www.thymeleaf.org">
+	layout:decorate="~{DashBoard}" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <title>CatPhone - Admin</title>
@@ -51,7 +51,8 @@
 										placeholder="Search">
 								</div>
 								<div class="col mt-5 d-flex justify-content-end">
-									<a href="/cat-phone/admin/product/phone-accessories/brand" class="btn btn-outline-primary me-2">Add</a>
+									<a href="/cat-phone/admin/product/phone-accessories/brand"
+										class="btn btn-outline-primary me-2">Add</a>
 									<button type="button" class="btn btn-outline-secondary me-2">Import
 										Excel</button>
 									<button type="button" class="btn btn-outline-success">Export
@@ -75,12 +76,10 @@
 											<td th:text="${brand.id}"></td>
 											<td th:text="${brand.title}"></td>
 											<td><a class="btn btn-outline-primary"
-												th:href="@{/cat-phone/admin/product/phone-accessories/brand/edit(brandid=${brand.id})}"
-												>Edit</a>
+												th:href="@{/cat-phone/admin/product/phone-accessories/brand/edit(brandid=${brand.id})}">Edit</a>
 												<a class="btn btn-outline-danger"
-												th:href="@{/cat-phone/admin/product/phone-accessories/brand/delete(brandid=${brand.id})}"
-												>Delete</a>
-												</td>
+												th:href="@{/cat-phone/admin/product/phone-accessories/brand/delete(brandid=${brand.id})}">Delete</a>
+											</td>
 										</tr>
 									</tbody>
 								</table>
@@ -94,7 +93,8 @@
 										placeholder="Search">
 								</div>
 								<div class="col mt-5 d-flex justify-content-end">
-									<button type="button" class="btn btn-outline-primary me-2">Add</button>
+									<a href="/cat-phone/admin/product/phone-accessories/category"
+										class="btn btn-outline-primary me-2">Add</a>
 									<button type="button" class="btn btn-outline-secondary me-2">Import
 										Excel</button>
 									<button type="button" class="btn btn-outline-success">Export
@@ -117,8 +117,10 @@
 											<th scope="row" th:text="${iterStat.count}"></th>
 											<td th:text="${category.id}"></td>
 											<td th:text="${category.title}"></td>
-											<td><a href="#" class="btn btn-outline-primary"
-												data-bs-toggle="modal" data-bs-target="#brandModal">Edit</a>
+											<td><a class="btn btn-outline-primary"
+												th:href="@{/cat-phone/admin/product/phone-accessories/category/edit(categoryid=${category.id})}">Edit</a>
+												<a class="btn btn-outline-danger"
+												th:href="@{/cat-phone/admin/product/phone-accessories/category/delete(categoryid=${category.id})}">Delete</a>
 											</td>
 										</tr>
 									</tbody>
@@ -133,7 +135,8 @@
 										placeholder="Search">
 								</div>
 								<div class="col mt-5 d-flex justify-content-end">
-									<button type="button" class="btn btn-outline-primary me-2">Add</button>
+									<a href="/cat-phone/admin/product/phone-accessories/processor"
+										class="btn btn-outline-primary me-2">Add</a>
 									<button type="button" class="btn btn-outline-secondary me-2">Import
 										Excel</button>
 									<button type="button" class="btn btn-outline-success">Export
@@ -156,8 +159,10 @@
 											<th scope="row" th:text="${iterStat.count}"></th>
 											<td th:text="${processor.id}"></td>
 											<td th:text="${processor.title}"></td>
-											<td><a href="#" class="btn btn-outline-primary"
-												data-bs-toggle="modal" data-bs-target="#brandModal">Edit</a>
+											<td><a class="btn btn-outline-primary"
+												th:href="@{/cat-phone/admin/product/phone-accessories/processor/edit(processorid=${processor.id})}">Edit</a>
+												<a class="btn btn-outline-danger"
+												th:href="@{/cat-phone/admin/product/phone-accessories/processor/delete(processorid=${processor.id})}">Delete</a>
 											</td>
 										</tr>
 									</tbody>
@@ -172,7 +177,8 @@
 										placeholder="Search">
 								</div>
 								<div class="col mt-5 d-flex justify-content-end">
-									<button type="button" class="btn btn-outline-primary me-2">Add</button>
+									<a href="/cat-phone/admin/product/phone-accessories/storage"
+										class="btn btn-outline-primary me-2">Add</a>
 									<button type="button" class="btn btn-outline-secondary me-2">Import
 										Excel</button>
 									<button type="button" class="btn btn-outline-success">Export
@@ -195,8 +201,10 @@
 											<th scope="row" th:text="${iterStat.count}"></th>
 											<td th:text="${storage.id}"></td>
 											<td th:text="${storage.capacity}"></td>
-											<td><a href="#" class="btn btn-outline-primary"
-												data-bs-toggle="modal" data-bs-target="#brandModal">Edit</a>
+											<td><a class="btn btn-outline-primary"
+												th:href="@{/cat-phone/admin/product/phone-accessories/storage/edit(storageid=${storage.id})}">Edit</a>
+												<a class="btn btn-outline-danger"
+												th:href="@{/cat-phone/admin/product/phone-accessories/storage/delete(storageid=${storage.id})}">Delete</a>
 											</td>
 										</tr>
 									</tbody>
@@ -211,7 +219,8 @@
 										placeholder="Search">
 								</div>
 								<div class="col mt-5 d-flex justify-content-end">
-									<button type="button" class="btn btn-outline-primary me-2">Add</button>
+									<a href="/cat-phone/admin/product/phone-accessories/gpu"
+										class="btn btn-outline-primary me-2">Add</a>
 									<button type="button" class="btn btn-outline-secondary me-2">Import
 										Excel</button>
 									<button type="button" class="btn btn-outline-success">Export
@@ -234,8 +243,11 @@
 											<th scope="row" th:text="${iterStat.count}"></th>
 											<td th:text="${gpu.id}"></td>
 											<td th:text="${gpu.capacity}"></td>
-											<td><a href="#" class="btn btn-outline-primary"
-												data-bs-toggle="modal" data-bs-target="#brandModal">Edit</a>
+											<td>
+												<a class="btn btn-outline-primary"
+												th:href="@{/cat-phone/admin/product/phone-accessories/gpu/edit(gpuid=${gpu.id})}">Edit</a>
+												<a class="btn btn-outline-danger"
+												th:href="@{/cat-phone/admin/product/phone-accessories/gpu/delete(gpuid=${gpu.id})}">Delete</a>
 											</td>
 										</tr>
 									</tbody>
@@ -250,7 +262,8 @@
 										placeholder="Search">
 								</div>
 								<div class="col mt-5 d-flex justify-content-end">
-									<button type="button" class="btn btn-outline-primary me-2">Add</button>
+									<a href="/cat-phone/admin/product/phone-accessories/ram"
+										class="btn btn-outline-primary me-2">Add</a>
 									<button type="button" class="btn btn-outline-secondary me-2">Import
 										Excel</button>
 									<button type="button" class="btn btn-outline-success">Export
@@ -273,8 +286,11 @@
 											<th scope="row" th:text="${iterStat.count}"></th>
 											<td th:text="${ram.id}"></td>
 											<td th:text="${ram.capacity}"></td>
-											<td><a href="#" class="btn btn-outline-primary"
-												data-bs-toggle="modal" data-bs-target="#brandModal">Edit</a>
+											<td>
+												<a class="btn btn-outline-primary"
+												th:href="@{/cat-phone/admin/product/phone-accessories/ram/edit(ramid=${ram.id})}">Edit</a>
+												<a class="btn btn-outline-danger"
+												th:href="@{/cat-phone/admin/product/phone-accessories/ram/delete(ramid=${ram.id})}">Delete</a>
 											</td>
 										</tr>
 									</tbody>
@@ -289,7 +305,8 @@
 										placeholder="Search">
 								</div>
 								<div class="col mt-5 d-flex justify-content-end">
-									<button type="button" class="btn btn-outline-primary me-2">Add</button>
+									<a href="/cat-phone/admin/product/phone-accessories/operatingSystem"
+										class="btn btn-outline-primary me-2">Add</a>
 									<button type="button" class="btn btn-outline-secondary me-2">Import
 										Excel</button>
 									<button type="button" class="btn btn-outline-success">Export
@@ -313,8 +330,11 @@
 											<th scope="row" th:text="${iterStat.count}"></th>
 											<td th:text="${operatingSystem.id}"></td>
 											<td th:text="${operatingSystem.name}"></td>
-											<td><a href="#" class="btn btn-outline-primary"
-												data-bs-toggle="modal" data-bs-target="#brandModal">Edit</a>
+											<td>
+											<a class="btn btn-outline-primary"
+												th:href="@{/cat-phone/admin/product/phone-accessories/operatingSystem/edit(operatingSystemid=${operatingSystem.id})}">Edit</a>
+												<a class="btn btn-outline-danger"
+												th:href="@{/cat-phone/admin/product/phone-accessories/operatingSystem/delete(operatingSystemid=${operatingSystem.id})}">Delete</a>
 											</td>
 										</tr>
 									</tbody>
@@ -325,180 +345,6 @@
 				</div>
 			</div>
 		</div>
-		
-		<div class="modal fade" id="categoryModal">
-			<div class="modal-dialog modal-lg">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h4 class="modal-title">Category</h4>
-						<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-					</div>
-					<div class="modal-body">
-						<form>
-							<div class="row">
-								<div class="col">
-									<div class="mb-3">
-										<label for="categoryName" class="form-label">Category
-											Name :</label> <input type="text" class="form-control"
-											id="categoryName" name="categoryName">
-									</div>
-								</div>
-							</div>
-						</form>
-					</div>
-					<div class="modal-footer d-flex justify-content-start">
-						<button type="button" class="btn btn-outline-info">New</button>
-						<button type="button" class="btn btn-outline-primary">Add</button>
-						<button type="button" class="btn btn-outline-success">Save</button>
-						<button type="button" class="btn btn-outline-danger">Delete</button>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="modal fade" id="processorModal">
-			<div class="modal-dialog modal-lg">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h4 class="modal-title">Processor</h4>
-						<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-					</div>
-					<div class="modal-body">
-						<form>
-							<div class="row">
-								<div class="col">
-									<div class="mb-3">
-										<label for="processorName" class="form-label">Processor
-											Name :</label> <input type="text" class="form-control"
-											id="processorName" name="processorName">
-									</div>
-								</div>
-							</div>
-						</form>
-					</div>
-					<div class="modal-footer d-flex justify-content-start">
-						<button type="button" class="btn btn-outline-info">New</button>
-						<button type="button" class="btn btn-outline-primary">Add</button>
-						<button type="button" class="btn btn-outline-success">Save</button>
-						<button type="button" class="btn btn-outline-danger">Delete</button>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="modal fade" id="storageModal">
-			<div class="modal-dialog modal-lg">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h4 class="modal-title">Storage</h4>
-						<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-					</div>
-					<div class="modal-body">
-						<form>
-							<div class="row">
-								<div class="col">
-									<div class="mb-3">
-										<label for="storageName" class="form-label">Storage
-											Name :</label> <input type="text" class="form-control"
-											id="storageName" name="storageName">
-									</div>
-								</div>
-							</div>
-						</form>
-					</div>
-					<div class="modal-footer d-flex justify-content-start">
-						<button type="button" class="btn btn-outline-info">New</button>
-						<button type="button" class="btn btn-outline-primary">Add</button>
-						<button type="button" class="btn btn-outline-success">Save</button>
-						<button type="button" class="btn btn-outline-danger">Delete</button>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="modal fade" id="gpuModal">
-			<div class="modal-dialog modal-lg">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h4 class="modal-title">GPU</h4>
-						<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-					</div>
-					<div class="modal-body">
-						<form>
-							<div class="row">
-								<div class="col">
-									<div class="mb-3">
-										<label for="gpuName" class="form-label">GPU Name :</label> <input
-											type="text" class="form-control" id="gpuName" name="gpuName">
-									</div>
-								</div>
-							</div>
-						</form>
-					</div>
-					<div class="modal-footer d-flex justify-content-start">
-						<button type="button" class="btn btn-outline-info">New</button>
-						<button type="button" class="btn btn-outline-primary">Add</button>
-						<button type="button" class="btn btn-outline-success">Save</button>
-						<button type="button" class="btn btn-outline-danger">Delete</button>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="modal fade" id="ramModal">
-			<div class="modal-dialog modal-lg">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h4 class="modal-title">RAM</h4>
-						<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-					</div>
-					<div class="modal-body">
-						<form>
-							<div class="row">
-								<div class="col">
-									<div class="mb-3">
-										<label for="ramName" class="form-label">RAM Name :</label> <input
-											type="text" class="form-control" id="ramName" name="ramName">
-									</div>
-								</div>
-							</div>
-						</form>
-					</div>
-					<div class="modal-footer d-flex justify-content-start">
-						<button type="button" class="btn btn-outline-info">New</button>
-						<button type="button" class="btn btn-outline-primary">Add</button>
-						<button type="button" class="btn btn-outline-success">Save</button>
-						<button type="button" class="btn btn-outline-danger">Delete</button>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="modal fade" id="operating_systemModal">
-			<div class="modal-dialog modal-lg">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h4 class="modal-title">Operating System</h4>
-						<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-					</div>
-					<div class="modal-body">
-						<form>
-							<div class="row">
-								<div class="col">
-									<div class="mb-3">
-										<label for="operating_systemName" class="form-label">Operating
-											System Name :</label> <input type="text" class="form-control"
-											id="operating_systemName" name="operating_systemName">
-									</div>
-								</div>
-							</div>
-						</form>
-					</div>
-					<div class="modal-footer d-flex justify-content-start">
-						<button type="button" class="btn btn-outline-info">New</button>
-						<button type="button" class="btn btn-outline-primary">Add</button>
-						<button type="button" class="btn btn-outline-success">Save</button>
-						<button type="button" class="btn btn-outline-danger">Delete</button>
-					</div>
-				</div>
-			</div>
-		</div>
 	</div>
-	
 </body>
 </html>

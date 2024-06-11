@@ -51,6 +51,37 @@ public class ProductDetailServiceImlp implements ProductDetailService {
 		 productDetailRespository.saveAll(entities);
 	}
 
+	@Override
+	public ProductDetail save(ProductDetail entity) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void deleteById(Integer id) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteByProductDetailId(Integer id) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Page<ProductDetail> searchProductDetails(String title, Double minPrice, Double maxPrice, Integer minStock,
+			Integer maxStock, Pageable pageable) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<ProductDetail> findAllById(List<Integer> ids) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	
 	
 
