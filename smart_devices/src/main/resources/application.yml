@@ -1,6 +1,7 @@
 spring:
   application:
     name: smart_devices
+    
   datasource:
     url: jdbc:sqlserver://localhost:1432;databaseName=laptop_store;encrypt=true;trustServerCertificate=true
     username: sa
@@ -30,3 +31,15 @@ spring:
             scope:
               - email
               - public_profile
+              
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: tinhnthps30150@fpt.edu.vn
+    password: eyqmautkudpvamfo
+    properties:
+     mail:
+       smtp: 
+         auth: true
+         starttls: 
+           enable: true

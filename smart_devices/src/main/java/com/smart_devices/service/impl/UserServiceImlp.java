@@ -74,6 +74,8 @@ public class UserServiceImlp implements UserService {
 		if(principal != null) {
 			String userName = principal.getName();
 			
+			System.out.println(userRepository.findByEmail(userName).getId());
+			
 			return userRepository.findByEmail(userName);
 		}
 		return null;

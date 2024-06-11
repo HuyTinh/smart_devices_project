@@ -89,4 +89,7 @@ public class User {
 	@OneToMany(fetch = FetchType.EAGER,mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
 	List<Cart> carts; 
 	
+	@OneToMany(fetch = FetchType.EAGER,mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+	List<Order> orders; 
+	
 }

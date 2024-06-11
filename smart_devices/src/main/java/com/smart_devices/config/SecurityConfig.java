@@ -52,7 +52,7 @@ public class SecurityConfig {
 		return httpSecurity.csrf(AbstractHttpConfigurer::disable).authenticationManager(manager).httpBasic((httpBs) -> {
 		}).authorizeHttpRequests(register -> {
 			register.requestMatchers("/admin/**").hasAuthority("ADMIN");
-			register.requestMatchers("/cart/**","/payment").hasAuthority("USER");
+			register.requestMatchers("/cart/**","/payment", "/api/**").hasAnyAuthority("USER","ADMIN");
 			register.anyRequest().permitAll();
 		}).exceptionHandling(exception -> {
 			exception.accessDeniedPage("/403");

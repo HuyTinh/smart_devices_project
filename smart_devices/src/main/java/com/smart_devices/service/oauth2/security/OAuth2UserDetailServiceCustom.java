@@ -36,6 +36,7 @@ public class OAuth2UserDetailServiceCustom extends DefaultOAuth2UserService {
 	public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
 		// TODO Auto-generated method stub
 		OAuth2User oAuth2User = super.loadUser(userRequest);
+
 		try {
 			return checkingOAuth2User(userRequest, oAuth2User);
 		} catch (AuthenticationException e) {
@@ -91,6 +92,7 @@ public class OAuth2UserDetailServiceCustom extends DefaultOAuth2UserService {
 		user.setCredentialsNonExpired(true);
 		user.setRoles(new HashSet<>());
 		user.getRoles().add(roleRepository.findByName("USER"));
+		
 		
 		return userRepository.save(user);
 	}
