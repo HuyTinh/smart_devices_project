@@ -73,8 +73,10 @@
 							<td
 								th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 0, 'POINT') + ' VND'}"></td>
 							<td th:text="${product.stock}"></td>
-							<td><a class="btn btn-primary" data-toggle="modal"
-								data-target="#chartModal">View Chart</a></td>
+							<td><a class="btn btn-primary"
+								th:href="@{/admin/cat-phone/report/product/chart(productDetailId=${product.id})}">View
+									Chart</a></td>
+
 
 						</tr>
 					</tbody>

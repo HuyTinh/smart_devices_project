@@ -70,7 +70,7 @@ public class OrderServiceImpl implements OrderService {
 	            monthlyRevenue.setDailyRevenues(dailyRevenues);
 	        }
 
-	        return new ArrayList<>();
+	        return monthlyRevenues;
 	    }
 
 

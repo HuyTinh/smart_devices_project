@@ -917,6 +917,41 @@ public class ProductAdminController {
 		}
 		return "redirect:/cat-phone/admin/report/product";
 	}
+	@GetMapping("report/product/chart")
+	public String showChartProduct(@RequestParam("productDetailId") Integer productDetailId,
+			@RequestParam(value = "secondProductId", required = false) Integer secondProductId,
+			@RequestParam(value = "startDate", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date startDate,
+			@RequestParam(value = "endDate", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date endDate,
+			Model model) {
 
+		List<RevenueProductDTO> revenueData = new ArrayList<>() ;
+		List<RevenueProductDTO> secondData = new ArrayList<>();
+
+		if (secondProductId == null) {
+			if (startDate != null && endDate != null) {
+				revenueData = productDetailService.findDailyRevenue(productDetailId, startDate, endDate);
+			} else {
+				revenueData = productDetailService.findTotalRevenueByDate(productDetailId);
+			}
+			model.addAttribute("revenueData", revenueData);
+		} else {
+			if (startDate != null && endDate != null) {
+				revenueData = productDetailService.findDailyRevenue(productDetailId, startDate, endDate);
+				secondData = productDetailService.findDailyRevenue(secondProductId, startDate, endDate);
+			} else {
+				revenueData = productDetailService.findTotalRevenueByDate(productDetailId);
+				secondData = productDetailService.findTotalRevenueByDate(secondProductId);
+			}
+			model.addAttribute("revenueData", revenueData);
+			model.addAttribute("secondData", secondData);
+		}
+		model.addAttribute("productDetails", productDetailService.findAll());
+		model.addAttribute("secondProductId", secondProductId);
+		model.addAttribute("productDetailId", productDetailId);
+		model.addAttribute("startDate", startDate);
+		model.addAttribute("endDate", endDate);
+
+		return "page/ProductChartPage";
+	}
  
 }
