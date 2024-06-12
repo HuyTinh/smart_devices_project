@@ -71,7 +71,6 @@
     
     var startDate = startDateElem ? startDateElem.value : null;
     var endDate = endDateElem ? endDateElem.value : null;
-
     if (startDate && endDate) {
         // Tính toán số ngày giữa startDate và endDate
         var diffInDays = Math.round((new Date(endDate) - new Date(startDate)) / (1000 * 60 * 60 * 24)) + 1;
@@ -125,7 +124,7 @@
 
     var ctx = document.getElementById('revenueChart').getContext('2d');
     var datasets = [{
-        label: 'Revenue (Product 1)',
+        label: 'Product 1',
         data: revenue,
         backgroundColor: 'rgba(75, 192, 192, 0.2)',
         borderColor: 'rgba(75, 192, 192, 1)',
@@ -135,7 +134,7 @@
 
     if (secondRevenue.length > 0) {
         datasets.push({
-            label: 'Revenue (Product 2)',
+            label: 'Product 2',
             data: secondRevenue,
             backgroundColor: 'rgba(192, 75, 192, 0.2)',
             borderColor: 'rgba(192, 75, 192, 1)',

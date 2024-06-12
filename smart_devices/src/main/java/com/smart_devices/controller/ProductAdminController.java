@@ -136,7 +136,7 @@ public class ProductAdminController {
 
 			productDetailService.saveAll(productDetails);
 		}
-		return "redirect:/cat-phone/admin/product/phone-manage";
+		return "redirect:/admin/cat-phone/product/phone-manage";
 	}
 
 	@PostMapping("product/phone-manage/exportExcel")
@@ -237,7 +237,7 @@ public class ProductAdminController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return "redirect:/cat-phone/admin/product/phone-manage";
+		return "redirect:/admin/cat-phone/product/phone-manage";
 	}
 
 	@GetMapping("product/phone-manage")
@@ -283,7 +283,7 @@ public class ProductAdminController {
 	@PostMapping("product/phone/add")
 	public String addProduct(@ModelAttribute("product") Product product) {
 		productService.save(product);
-		return "redirect:/cat-phone/admin/product/phone-form?productId=" + product.getId();
+		return "redirect:/admin/cat-phone/product/phone-form?productId=" + product.getId();
 	}
 
 	@ModelAttribute("productDetail")
@@ -314,13 +314,13 @@ public class ProductAdminController {
 	@PostMapping("product/phone/save")
 	public String updateProduct(@ModelAttribute("product") Product product) {
 		productService.save(product);
-		return "redirect:/cat-phone/admin/product/phone-manage";
+		return "redirect:/admin/cat-phone/product/phone-manage";
 	}
 
 	@RequestMapping("product/phone/delete")
 	public String deleteProduct(@RequestParam("productId") Integer productId) {
 		productService.deleteById(productId);
-		return "redirect:/cat-phone/admin/product/phone-manage";
+		return "redirect:/admin/cat-phone/product/phone-manage";
 	}
 
 	@PostMapping("product/phone-form/add")
@@ -342,7 +342,7 @@ public class ProductAdminController {
 				}
 			}
 		}
-		return "redirect:/cat-phone/admin/product/phone-manage";
+		return "redirect:/admin/cat-phone/product/phone-manage";
 	}
 
 	@GetMapping("product/phone-form/edit")
@@ -389,13 +389,13 @@ public class ProductAdminController {
 				productImageService.save(productImage);
 			}
 		}
-		return "redirect:/cat-phone/admin/product/phone-manage";
+		return "redirect:/admin/cat-phone/product/phone-manage";
 	}
 
 	@PostMapping("product/phone-form/delete")
 	public String deleteProductDetail(@RequestParam("productDetailId") Integer productDetailId) {
 		productDetailService.deleteByProductDetailId(productDetailId);
-		return "redirect:/cat-phone/admin/product/phone-manage";
+		return "redirect:/admin/cat-phone/product/phone-manage";
 	}
 
 	// Brand
@@ -418,19 +418,19 @@ public class ProductAdminController {
 	@PostMapping("product/phone-accessories/brand/add")
 	public String addBrand(@ModelAttribute("brand") Brand brand) {
 		brandService.save(brand);
-		return "redirect:/cat-phone/admin/product/phone-accessories";
+		return "redirect:/admin/cat-phone/product/phone-accessories";
 	}
 
 	@PostMapping("product/phone-accessories/brand/update")
 	public String updateBrand(@ModelAttribute("brand") Brand brand) {
 		brandService.save(brand);
-		return "redirect:/cat-phone/admin/product/phone-accessories";
+		return "redirect:/admin/cat-phone/product/phone-accessories";
 	}
 
 	@RequestMapping("product/phone-accessories/brand/delete")
 	public String deleteBrand(@RequestParam("brandid") Integer brandid) {
 		brandService.deleteById(brandid);
-		return "redirect:/cat-phone/admin/product/phone-accessories";
+		return "redirect:/admin/cat-phone/product/phone-accessories";
 	}
 
 	// Category
@@ -453,19 +453,19 @@ public class ProductAdminController {
 	@PostMapping("product/phone-accessories/category/add")
 	public String addCategory(@ModelAttribute("category") Category category) {
 		categoryService.save(category);
-		return "redirect:/cat-phone/admin/product/phone-accessories";
+		return "redirect:/admin/cat-phone/product/phone-accessories";
 	}
 
 	@PostMapping("product/phone-accessories/category/update")
 	public String updateCategory(@ModelAttribute("category") Category category) {
 		categoryService.save(category);
-		return "redirect:/cat-phone/admin/product/phone-accessories";
+		return "redirect:/admin/cat-phone/product/phone-accessories";
 	}
 
 	@RequestMapping("product/phone-accessories/category/delete")
 	public String deleteCategory(@RequestParam("categoryid") Integer categoryid) {
 		categoryService.deleteById(categoryid);
-		return "redirect:/cat-phone/admin/product/phone-accessories";
+		return "redirect:/admin/cat-phone/product/phone-accessories";
 	}
 
 	// Processor
@@ -488,19 +488,19 @@ public class ProductAdminController {
 	@PostMapping("product/phone-accessories/processor/add")
 	public String addProcessor(@ModelAttribute("processor") Processor processor) {
 		processorService.save(processor);
-		return "redirect:/cat-phone/admin/product/phone-accessories";
+		return "redirect:/admin/cat-phone/product/phone-accessories";
 	}
 
 	@PostMapping("product/phone-accessories/processor/update")
 	public String updateProcessor(@ModelAttribute("processor") Processor processor) {
 		processorService.save(processor);
-		return "redirect:/cat-phone/admin/product/phone-accessories";
+		return "redirect:/admin/cat-phone/product/phone-accessories";
 	}
 
 	@RequestMapping("product/phone-accessories/processor/delete")
 	public String deleteProcessor(@RequestParam("processorid") Integer processorid) {
 		categoryService.deleteById(processorid);
-		return "redirect:/cat-phone/admin/product/phone-accessories";
+		return "redirect:/admin/cat-phone/product/phone-accessories";
 	}
 
 	@ModelAttribute("productDetailList")
@@ -528,19 +528,19 @@ public class ProductAdminController {
 	@PostMapping("product/phone-accessories/storage/add")
 	public String addStorage(@ModelAttribute("storage") Storage storage) {
 		storageService.save(storage);
-		return "redirect:/cat-phone/admin/product/phone-accessories";
+		return "redirect:/admin/cat-phone/product/phone-accessories";
 	}
 
 	@PostMapping("product/phone-accessories/storage/update")
 	public String updateStorage(@ModelAttribute("storage") Storage storage) {
 		storageService.save(storage);
-		return "redirect:/cat-phone/admin/product/phone-accessories";
+		return "redirect:/admin/cat-phone/product/phone-accessories";
 	}
 
 	@RequestMapping("product/phone-accessories/storage/delete")
 	public String deleteStorage(@RequestParam("storageid") Integer storageid) {
 		storageService.deleteById(storageid);
-		return "redirect:/cat-phone/admin/product/phone-accessories";
+		return "redirect:/admin/cat-phone/product/phone-accessories";
 	}
 
 	// GPU
@@ -563,19 +563,19 @@ public class ProductAdminController {
 	@PostMapping("product/phone-accessories/gpu/add")
 	public String addGpu(@ModelAttribute("gpu") Gpu gpu) {
 		gpuService.save(gpu);
-		return "redirect:/cat-phone/admin/product/phone-accessories";
+		return "redirect:/admin/cat-phone/product/phone-accessories";
 	}
 
 	@PostMapping("product/phone-accessories/gpu/update")
 	public String updateGpu(@ModelAttribute("gpu") Gpu gpu) {
 		gpuService.save(gpu);
-		return "redirect:/cat-phone/admin/product/phone-accessories";
+		return "redirect:/admin/cat-phone/product/phone-accessories";
 	}
 
 	@RequestMapping("product/phone-accessories/gpu/delete")
 	public String deleteGpu(@RequestParam("gpuid") Integer gpuid) {
 		gpuService.deleteById(gpuid);
-		return "redirect:/cat-phone/admin/product/phone-accessories";
+		return "redirect:/admin/cat-phone/product/phone-accessories";
 	}
 
 	// RAM
@@ -598,19 +598,19 @@ public class ProductAdminController {
 	@PostMapping("product/phone-accessories/ram/add")
 	public String addRam(@ModelAttribute("ram") Ram ram) {
 		ramService.save(ram);
-		return "redirect:/cat-phone/admin/product/phone-accessories";
+		return "redirect:/admin/cat-phone/product/phone-accessories";
 	}
 
 	@PostMapping("product/phone-accessories/ram/update")
 	public String updateRam(@ModelAttribute("ram") Ram ram) {
 		ramService.save(ram);
-		return "redirect:/cat-phone/admin/product/phone-accessories";
+		return "redirect:/admin/cat-phone/product/phone-accessories";
 	}
 
 	@RequestMapping("product/phone-accessories/ram/delete")
 	public String deleteRam(@RequestParam("ramid") Integer ramid) {
 		ramService.deleteById(ramid);
-		return "redirect:/cat-phone/admin/product/phone-accessories";
+		return "redirect:/admin/cat-phone/product/phone-accessories";
 	}
 
 	// OperatingSystem
@@ -633,19 +633,19 @@ public class ProductAdminController {
 	@PostMapping("product/phone-accessories/operatingSystem/add")
 	public String addRam(@ModelAttribute("operatingSystem") OperatingSystem operatingSystem) {
 		operatingSystemService.save(operatingSystem);
-		return "redirect:/cat-phone/admin/product/phone-accessories";
+		return "redirect:/admin/cat-phone/product/phone-accessories";
 	}
 
 	@PostMapping("product/phone-accessories/operatingSystem/update")
 	public String updateoperatingSystem(@ModelAttribute("operatingSystem") OperatingSystem operatingSystem) {
 		operatingSystemService.save(operatingSystem);
-		return "redirect:/cat-phone/admin/product/phone-accessories";
+		return "redirect:/admin/cat-phone/product/phone-accessories";
 	}
 
 	@RequestMapping("product/phone-accessories/operatingSystem/delete")
 	public String deleteoperatingSystem(@RequestParam("operatingSystemid") Integer operatingSystemid) {
 		operatingSystemService.deleteById(operatingSystemid);
-		return "redirect:/cat-phone/admin/product/phone-accessories";
+		return "redirect:/admin/cat-phone/product/phone-accessories";
 	}
 
 	// Orders
@@ -685,7 +685,7 @@ public class ProductAdminController {
 	@PostMapping("orders/{orderId}/status")
 	public String updateOrderStatus(@PathVariable int orderId, @RequestParam OrderStatus status) {
 		orderService.updateOrderStatus(orderId, status);
-		return "redirect:/cat-phone/admin/orders";
+		return "redirect:/admin/cat-phone/orders";
 	}
 
 	// Customer
@@ -788,7 +788,7 @@ public class ProductAdminController {
 				e.printStackTrace();
 			}
 		}
-		return "redirect:/cat-phone/admin/report/revenue";
+		return "redirect:/admin/cat-phone/report/revenue";
 	}
 
 	@GetMapping("/report/product")
@@ -915,7 +915,7 @@ public class ProductAdminController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return "redirect:/cat-phone/admin/report/product";
+		return "redirect:/admin/cat-phone/report/product";
 	}
 	@GetMapping("report/product/chart")
 	public String showChartProduct(@RequestParam("productDetailId") Integer productDetailId,

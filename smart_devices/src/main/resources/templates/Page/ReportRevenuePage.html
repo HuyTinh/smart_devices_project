@@ -68,7 +68,8 @@
 				<div class="row mb-3">
 					<div class="col">
 						<button id="exportBtn" class="btn btn-success"
-							data-bs-toggle="modal" data-bs-target="#exportModal">Export Excel File</button>
+							data-bs-toggle="modal" data-bs-target="#exportModal">Export
+							Excel File</button>
 					</div>
 				</div>
 				<div class="row mb-3">
@@ -97,7 +98,8 @@
 									<td th:text="${order.quantity}"></td>
 									<td
 										th:text="${#numbers.formatDecimal(order.price, 0, 'COMMA', 0, 'POINT') + ' VND'}"></td>
-										<td th:text="${#numbers.formatDecimal(order.price * order.quantity, 0, 'COMMA', 0, 'POINT') + ' VND'}"></td>
+									<td
+										th:text="${#numbers.formatDecimal(order.price * order.quantity, 0, 'COMMA', 0, 'POINT') + ' VND'}"></td>
 									<td th:text="${#dates.format(order.orderDate, 'dd-MM-yyyy')}"></td>
 									<td th:text="${order.shippingAddress}"></td>
 									<td th:text="${order.orderStatus}"></td>
@@ -105,35 +107,35 @@
 							</tbody>
 						</table>
 						<div th:if="${page.totalPages > 0}"
-						class="d-flex justify-content-center">
-						<nav aria-label="Page navigation example">
-							<ul class="pagination">
-								<!-- Link đến trang trước -->
-								<li class="page-item"
-									th:classappend="${page.number == 0 ? 'disabled' : ''}"><a
-									class="page-link"
-									th:href="@{/admin/cat-phone/report/revenue(page=${page.number - 1}, search=${search != null ? search : ''}, startDate=${startDate != '' ? #dates.format(startDate, 'yyyy-MM-dd') : ''},
+							class="d-flex justify-content-center">
+							<nav aria-label="Page navigation example">
+								<ul class="pagination">
+									<!-- Link đến trang trước -->
+									<li class="page-item"
+										th:classappend="${page.number == 0 ? 'disabled' : ''}"><a
+										class="page-link"
+										th:href="@{/admin/cat-phone/report/revenue(page=${page.number - 1}, search=${search != null ? search : ''}, startDate=${startDate != '' ? #dates.format(startDate, 'yyyy-MM-dd') : ''},
                 endDate=${endDate != '' ? #dates.format(endDate, 'yyyy-MM-dd') : ''}, status=${status != null ? status : ''}, minTotal=${minTotal != null ? minTotal : ''}, maxTotal=${maxTotal != null ? maxTotal : ''})}"
-									aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
-								</a></li>
+										aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+									</a></li>
 
-								<!-- Hiển thị thông tin trang hiện tại -->
-								<li class="page-item disabled"><a class="page-link"> <span
-										th:text="'Page ' + ${page.number + 1} + ' of ' + ${page.totalPages}"></span>
-								</a></li>
+									<!-- Hiển thị thông tin trang hiện tại -->
+									<li class="page-item disabled"><a class="page-link"> <span
+											th:text="'Page ' + ${page.number + 1} + ' of ' + ${page.totalPages}"></span>
+									</a></li>
 
-								<!-- Link đến trang sau -->
-								<li class="page-item"
-									th:classappend="${page.number + 1 >= page.totalPages ? 'disabled' : ''}">
-									<a class="page-link"
-									th:href="@{/admin/cat-phone/report/revenue(page=${page.number + 1}, search=${search != null ? search : ''}, startDate=${startDate != '' ? #dates.format(startDate, 'yyyy-MM-dd') : ''},
+									<!-- Link đến trang sau -->
+									<li class="page-item"
+										th:classappend="${page.number + 1 >= page.totalPages ? 'disabled' : ''}">
+										<a class="page-link"
+										th:href="@{/admin/cat-phone/report/revenue(page=${page.number + 1}, search=${search != null ? search : ''}, startDate=${startDate != '' ? #dates.format(startDate, 'yyyy-MM-dd') : ''},
                 endDate=${endDate != '' ? #dates.format(endDate, 'yyyy-MM-dd') : ''}, status=${status != null ? status : ''}, minTotal=${minTotal != null ? minTotal : ''}, maxTotal=${maxTotal != null ? maxTotal : ''})}"
-									aria-label="Next"> <span aria-hidden="true">&raquo;</span>
-								</a>
-								</li>
-							</ul>
-						</nav>
-					</div>
+										aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+									</a>
+									</li>
+								</ul>
+							</nav>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -141,72 +143,73 @@
 
 		<div class="modal fade" id="exportModal" tabindex="-1"
 			aria-labelledby="exportModalLabel" aria-hidden="true">
-			<div class="modal-dialog">
+			<div class="modal-dialog custom-modal-xl">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h5 class="modal-title" id="exportModalLabel">Select Columns for Export File</h5>
+						<h5 class="modal-title" id="exportModalLabel">Select Columns
+							for Export File</h5>
 						<button type="button" class="btn-close" data-bs-dismiss="modal"
 							aria-label="Close"></button>
 					</div>
 					<div class="modal-body">
-						<div class="form-check">
-							<input class="form-check-input" type="checkbox" value="Order ID"
-								id="colOrderId" checked> <label class="form-check-label"
-								for="colOrderId">Order ID</label>
+						<div
+							class="form-check-container d-flex flex-wrap justify-content-between">
+							<div class="form-check mr-3" style="display: none">
+								<input class="form-check-input" type="checkbox" value="Order ID"
+									id="colOrderId" checked> <label
+									class="form-check-label" for="colOrderId">Order ID</label>
+							</div>
+							<div class="form-check mr-3">
+								<input class="form-check-input" type="checkbox"
+									value="Customer Name" id="colCustomerName" checked> <label
+									class="form-check-label" for="colCustomerName">Customer
+									Name</label>
+							</div>
+							<div class="form-check mr-3">
+								<input class="form-check-input" type="checkbox"
+									value="Product Name" id="colProductName" checked> <label
+									class="form-check-label" for="colProductName">Product
+									Name</label>
+							</div>
+							<div class="form-check mr-3">
+								<input class="form-check-input" type="checkbox" value="Quantity"
+									id="colQuantity" checked> <label
+									class="form-check-label" for="colQuantity">Quantity</label>
+							</div>
+							<div class="form-check mr-3">
+								<input class="form-check-input" type="checkbox" value="Price"
+									id="colPrice" checked> <label class="form-check-label"
+									for="colPrice">Price</label>
+							</div>
+							<div class="form-check mr-3">
+								<input class="form-check-input" type="checkbox" value="Total"
+									id="colTotal" checked> <label class="form-check-label"
+									for="colTotal">Total</label>
+							</div>
+							<div class="form-check mr-3">
+								<input class="form-check-input" type="checkbox"
+									value="Order Date" id="colOrderDate" checked> <label
+									class="form-check-label" for="colOrderDate">Order Date</label>
+							</div>
+							<div class="form-check mr-3">
+								<input class="form-check-input" type="checkbox"
+									value="Shipping Address" id="colShippingAddress" checked>
+								<label class="form-check-label" for="colShippingAddress">Shipping
+									Address</label>
+							</div>
+							<div class="form-check mr-3">
+								<input class="form-check-input" type="checkbox"
+									value="Order Status" id="colOrderStatus" checked> <label
+									class="form-check-label" for="colOrderStatus">Order
+									Status</label>
+							</div>
 						</div>
-						<div class="form-check">
-							<input class="form-check-input" type="checkbox"
-								value="Customer Name" id="colCustomerName" checked> <label
-								class="form-check-label" for="colCustomerName">Customer
-								Name</label>
-						</div>
-						<div class="form-check">
-							<input class="form-check-input" type="checkbox"
-								value="Product Name" id="colProductName" checked> <label
-								class="form-check-label" for="colProductName">Product
-								Name</label>
-						</div>
-						<div class="form-check">
-							<input class="form-check-input" type="checkbox" value="Quantity"
-								id="colQuantity" checked> <label
-								class="form-check-label" for="colQuantity">Quantity</label>
-						</div>
-						<div class="form-check">
-							<input class="form-check-input" type="checkbox" value="Price"
-								id="colPrice" checked> <label class="form-check-label"
-								for="colPrice">Price</label>
-						</div>
-						<div class="form-check">
-							<input class="form-check-input" type="checkbox" value="Total"
-								id="colTotal" checked> <label class="form-check-label"
-								for="colTotal">Total</label>
-						</div>
-						<div class="form-check">
-							<input class="form-check-input" type="checkbox"
-								value="Order Date" id="colOrderDate" checked> <label
-								class="form-check-label" for="colOrderDate">Order Date</label>
-						</div>
-						<div class="form-check">
-							<input class="form-check-input" type="checkbox"
-								value="Shipping Address" id="colShippingAddress" checked>
-							<label class="form-check-label" for="colShippingAddress">Shipping
-								Address</label>
-						</div>
-						<div class="form-check">
-							<input class="form-check-input" type="checkbox"
-								value="Order Status" id="colOrderStatus" checked> <label
-								class="form-check-label" for="colOrderStatus">Order
-								Status</label>
-						</div>
-						
 						<hr>
 						<h4>The excel file will have the form:</h4>
-					
 						<hr>
-							<div id="checkboxContainer"></div>
+						<div id="checkboxContainer"></div>
 						<button type="button" id="confirmExportBtn"
 							class="btn btn-primary">Export File</button>
-
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary"
@@ -215,6 +218,63 @@
 				</div>
 			</div>
 		</div>
+		<script>
+    var exportHeaders = {
+        "colOrderId": "Order ID",
+        "colCustomerName": "Customer Name",
+        "colProductName": "Product Name",
+        "colQuantity": "Quantity",
+        "colPrice": "Price",
+        "colTotal": "Total",
+        "colOrderDate": "Order Date",
+        "colShippingAddress": "Shipping Address",
+        "colOrderStatus": "Order Status"
+    };
+
+    var defaultCheckedExportHeaders = Object.keys(exportHeaders);
+
+    // Hiển thị header mặc định khi modal được mở
+    $(document).ready(function () {
+        displayExportHeader(defaultCheckedExportHeaders);
+    });
+
+    // Xử lý sự kiện khi checkbox được chọn hoặc bỏ chọn trong export modal
+    $('#exportModal .form-check-input').change(function () {
+        var checkedExportHeaders = getCheckedExportHeaders();
+        if (checkedExportHeaders.length > 0) {
+            displayExportHeader(checkedExportHeaders);
+        } else {
+            $('#checkboxContainer').empty(); // Ẩn bảng khi không có checkbox nào được chọn
+        }
+    });
+
+    // Lấy danh sách các header được chọn trong export modal
+    function getCheckedExportHeaders() {
+        var checkedExportHeaders = [];
+        $('#exportModal .form-check-input:checked').each(function () {
+            var checkboxId = $(this).attr('id');
+            checkedExportHeaders.push(exportHeaders[checkboxId]);
+        });
+        return checkedExportHeaders;
+    }
+
+    // Hiển thị header tương ứng với checkbox được chọn trong export modal
+    function displayExportHeader(checkedExportHeaders) {
+        var exportHeaderTable = '<table class="table"><thead><tr>';
+        checkedExportHeaders.forEach(function (header) {
+            exportHeaderTable += '<th>' + header + '</th>';
+        });
+        exportHeaderTable += '</tr></thead><tbody>';
+        // Thêm dòng dữ liệu mẫu
+        exportHeaderTable += '<tr>';
+        checkedExportHeaders.forEach(function () {
+            exportHeaderTable += '<td>Dữ liệu</td>'; // Thay 'Sample Data' bằng dữ liệu mẫu thực tế
+        });
+        exportHeaderTable += '</tr>';
+        exportHeaderTable += '</tbody></table>';
+        $('#checkboxContainer').html(exportHeaderTable);
+    }
+</script>
 	</div>
 </body>
 </html>

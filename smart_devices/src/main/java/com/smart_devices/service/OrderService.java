@@ -28,6 +28,14 @@ public interface OrderService {
 
 	Page<OrderDetailManageDto> searchOrders(String keyword, Date fromDate, Date toDate, OrderStatus status, Double minTotal, Double maxTotal, Pageable pageable);
 
+	Double getTotal();
+
+	Double getTotalOrder();
+
+	Double getTotalOrderCanceled();
+
+	Double getTotalOrderCompleted();
+
 
 
 

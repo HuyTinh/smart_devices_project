@@ -71,5 +71,15 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
 			+ "GROUP BY DAY(o.orderDate), MONTH(o.orderDate), YEAR(o.orderDate) " + "ORDER BY DAY(o.orderDate)")
 	List<DailyRevenueDto> findDailyRevenue(@Param("month") int month, @Param("year") int year);
 	
-
+	 
+	@Query(value = "Select SUM(orders.total_price) from orders where order_status != 'CANCELED'", nativeQuery = true)
+	Double getTotal();
+	
+	@Query(value = "Select COUNT(*) from orders", nativeQuery = true)
+	Double getTotalOrder();
+	
+	@Query(value = "Select COUNT(*) from orders where order_status = 'COMPLETED'" ,nativeQuery = true)
+	Double getTotalOrderCompleted();
+	@Query(value = "Select COUNT(*) from orders where order_status = 'CANCELED'" ,nativeQuery = true)
+	Double getTotalOrderCanceled();
 }

@@ -34,7 +34,10 @@ public class DashBoardController {
                 }
             }
         }
-
+        model.addAttribute("total", orderService.getTotal());
+        model.addAttribute("totalOrder", orderService.getTotalOrder());
+        model.addAttribute("totalOrderCompleted", orderService.getTotalOrderCompleted());
+        model.addAttribute("totalOrderCanceled", orderService.getTotalOrderCanceled());
         return "DashBoard";
     }
 	

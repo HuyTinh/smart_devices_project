@@ -73,6 +73,26 @@ public class OrderServiceImpl implements OrderService {
 	        return monthlyRevenues;
 	    }
 
+	@Override
+	public Double getTotal() {
+		return orderRepository.getTotal();
+	}
+
+	@Override
+	public Double getTotalOrder() {
+		return orderRepository.getTotalOrder();
+	}
+
+	@Override
+	public Double getTotalOrderCompleted() {
+		return orderRepository.getTotalOrderCompleted();
+	}
+
+	@Override
+	public Double getTotalOrderCanceled() {
+		return orderRepository.getTotalOrderCanceled();
+	}
+
 
 	
 	 

@@ -96,25 +96,33 @@
 							<div class="col">
 								<div class="card text-center">
 									<span class="card-title mt-1">Total Sales</span>
-									<div class="mt-5 mb-5"></div>
+									<div class="mt-5 mb-5">
+										<span th:text="${#numbers.formatDecimal(total, 0, 'COMMA', 0, 'POINT') + ' VND'}"></span>
+									</div>
 								</div>
 							</div>
 							<div class="col">
 								<div class="card text-center">
 									<span class="card-title mt-1">Order</span>
-									<div class="mt-5 mb-5"></div>
+									<div class="mt-5 mb-5">
+										<span th:text="${#numbers.formatDecimal(totalOrder, 0, 'COMMA', 0, 'POINT')}"></span>
+									</div>
 								</div>
 							</div>
 							<div class="col">
 								<div class="card text-center">
-									<span class="card-title mt-1">Transported Successfully</span>
-									<div class="mt-5 mb-5"></div>
+									<span class="card-title mt-1">Orders Completed</span>
+									<div class="mt-5 mb-5">
+										<span th:text="${#numbers.formatDecimal(totalOrderCompleted, 0, 'COMMA', 0, 'POINT')}"></span>
+									</div>
 								</div>
 							</div>
 							<div class="col">
 								<div class="card text-center">
-									<span class="card-title mt-1">Shipping Failed</span>
-									<div class="mt-5 mb-5"></div>
+									<span class="card-title mt-1">Orders Canceled</span>
+									<div class="mt-5 mb-5">
+										<span th:text="${#numbers.formatDecimal(totalOrderCanceled, 0, 'COMMA', 0, 'POINT')}"></span>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -356,7 +364,7 @@
 
 	        	Swal.fire({
 	                icon: 'success',
-	                title: 'Excel đã được tạo thành công',
+	                title: 'Excel has been created successfully',
 	                showConfirmButton: false,
 	                timer: 1500
 	            }).then(function() {
@@ -386,7 +394,7 @@
 	        success: function(response) {
 	        	Swal.fire({
 	                icon: 'success',
-	                title: 'Excel đã được tạo thành công',
+	                title: 'Excel has been created successfully',
 	                showConfirmButton: false,
 	                timer: 1500
 	            }).then(function() {
@@ -512,6 +520,7 @@
         $('#headerDisplay').html(headerTable);
     }
 </script>
+
 	
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script
