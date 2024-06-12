@@ -59,7 +59,7 @@
 								<li class="page-item"
 									th:classappend="${page.number == 0 ? 'disabled' : ''}"><a
 									class="page-link"
-									th:href="@{/cat-phone/admin/customer(page=${page.number - 1}, search=${search})}"
+									th:href="@{/admin/cat-phone/customer(page=${page.number - 1}, search=${search})}"
 									aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
 								</a></li>
 								<li class="page-item disabled"><a class="page-link"> <span
@@ -68,7 +68,7 @@
 								<li class="page-item"
 									th:classappend="${page.number + 1 >= page.totalPages ? 'disabled' : ''}">
 									<a class="page-link"
-									th:href="@{/cat-phone/admin/customer(page=${page.number + 1}, search=${search})}"
+									th:href="@{/admin/cat-phone/customer(page=${page.number + 1}, search=${search})}"
 									aria-label="Next"> <span aria-hidden="true">&raquo;</span>
 								</a>
 								</li>

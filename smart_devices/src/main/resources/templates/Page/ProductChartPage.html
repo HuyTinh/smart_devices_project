@@ -52,7 +52,45 @@
 			</div>
 
 		</form>
-
+		<div class="container mt-4 mb-3">
+			<div class="row">
+				<!-- Card for the first product -->
+				<div class="col-md-6">
+					<div class="card">
+						<div class="card-body">
+							<th:block th:if="${infoProduct1 != null}">
+								<h5 class="card-title" th:text="${infoProduct1.title}">Product
+									Title</h5>
+								<p class="card-text">
+									<span>Total:</span>
+								<h4
+									th:text="${#numbers.formatDecimal(infoProduct1.totalRevenue, 0, 'COMMA', 0, 'POINT') + ' VND'}">0
+									VND</h4>
+								</p>
+							</th:block>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<th:block th:if="${secondProductId != null}">
+						<div class="card">
+							<div class="card-body">
+								<th:block th:if="${infoProduct2 != null}">
+									<h5 class="card-title" th:text="${infoProduct2.title}">Product
+										Title</h5>
+									<p class="card-text">
+										<span>Total:</span>
+									<h4
+										th:text="${#numbers.formatDecimal(infoProduct2.totalRevenue, 0, 'COMMA', 0, 'POINT') + ' VND'}">0
+										VND</h4>
+									</p>
+								</th:block>
+							</div>
+						</div>
+					</th:block>
+				</div>
+			</div>
+		</div>
 		<!-- Canvas element for the chart -->
 		<canvas id="revenueChart" width="400" height="200"></canvas>
 
@@ -178,6 +216,7 @@
         window.location.href = newUrl;
     }
 </script>
+
 
 
 

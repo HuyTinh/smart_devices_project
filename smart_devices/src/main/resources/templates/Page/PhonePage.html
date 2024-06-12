@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{DashBoard}" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Phone-Form</title>
+</head>
+<body>
+	<div layout:fragment="content">
+		<div class="container-fluid">
+			<div class="location p-2">
+				<span>Admin/Product/Phone-Form</span>
+			</div>
+			<div class="card">
+				<div class="card-body">
+					<form method="post" enctype="multipart/form-data">
+						<div class="row">
+							<div class="col">
+								<div class="mb-3">
+									<img id="selectedImage"
+										th:if="${productDetail.id != null or (productDetail.productImage != null and not productDetail.productImage.empty)}"
+										th:src="${productDetail.productImage != null and not productDetail.productImage.empty ? productDetail.productImage[0].imagePath : ''}"
+										width="100">
+								</div>
+								<div class="mb-3">
+									<input type="file" id="imageInput" name="files"
+										style="display: none" accept="image/*" multiple>
+									<button type="button" class="btn btn-secondary"
+										onclick="document.getElementById('imageInput').click();">Select
+										Photo</button>
+								</div>
+								<div class="mb-3">
+									<input type="hidden" th:field="${productDetail.id}" name="id"
+										style="display: none"> <label for="lineOfProduct"
+										class="form-label">Line Of Product:</label> <input type="text"
+										class="form-control" id="lineOfProduct" name="lineOfProduct"
+										th:value="${#strings.defaultString(productDetail?.product?.lineOfProduct, product.lineOfProduct)}"
+										readonly="readonly">
+								</div>
+								<div class="mb-3">
+									<label for="series" class="form-label">Series:</label> <input
+										type="text" class="form-control" id="series" name="series"
+										th:field="${productDetail.series}">
+								</div>
+								<div class="mb-3">
+									<label for="version" class="form-label">Version:</label> <input
+										type="text" class="form-control" id="version" name="version"
+										th:field="${productDetail.version}">
+								</div>
+								<div class="mb-3">
+									<label for="title" class="form-label">Name :</label> <input
+										type="text" class="form-control" id="title" name="title"
+										th:field="${productDetail.title}">
+								</div>
+								<div class="mb-3">
+									<label for="size" class="form-label">Size:</label> <input
+										type="text" class="form-control" id="size" name="size"
+										th:field="${productDetail.size}">
+								</div>
+							</div>
+							<div class="col">
+								<div class="mb-3">
+									<label for="weight" class="form-label">Weight:</label> <input
+										type="text" class="form-control" id="weight" name="weight"
+										th:field="${productDetail.weight}">
+								</div>
+								<div class="mb-3">
+									<label for="stock" class="form-label">Stock:</label> <input
+										type="number" class="form-control" id="stock" name="stock"
+										th:field="${productDetail.stock}">
+								</div>
+								<div class="mb-3">
+									<label for="price" class="form-label">Price:</label> <input
+										type="text" class="form-control" id="price" name="price"
+										th:field="${productDetail.price}">
+								</div>
+								<div class="mb-3">
+									<label for="category" class="form-label">Category:</label> <select
+										id="category" class="form-select"
+										aria-label="Default select example" name="category" disabled>
+										<option th:each="category : ${categoryList}"
+											th:value="${category.id}" th:text="${category.title}"
+											th:selected="${category.id == productDetail?.product?.category?.id} or ${category.id == product?.category?.id}">
+										</option>
+									</select>
+								</div>
+								<div class="mb-3">
+									<label for="brand" class="form-label">Brand:</label> <select
+										id="brand" class="form-select"
+										aria-label="Default select example" name="brand" disabled>
+										<option th:each="brand : ${brandList}" th:value="${brand.id}"
+											th:text="${brand.title}"
+											th:selected="${brand.id == productDetail?.product?.category?.id} or ${brand.id == product?.category?.id}">
+										</option>
+									</select>
+								</div>
+								<div class="mb-3">
+									<label for="gpu" class="form-label">GPU :</label> <select
+										id="gpu" class="form-select"
+										aria-label="Default select example" name="gpu">
+										<option th:each="gpu : ${gpuList}" th:value="${gpu.id}"
+											th:text="${gpu.capacity}"
+											th:selected="${productDetail.gpu != null and gpu.id == productDetail.gpu.id}"></option>
+									</select>
+								</div>
+							</div>
+							<div class="col">
+								<div class="mb-3">
+									<label for="storage" class="form-label">Storage :</label> <select
+										id="storage" class="form-select"
+										aria-label="Default select example" name="storage">
+										<option th:each="storage : ${storageList}"
+											th:value="${storage.id}" th:text="${storage.capacity}"
+											th:selected="${productDetail.storage != null and storage.id == productDetail.storage.id}">
+										</option>
+									</select>
+								</div>
+								<div class="mb-3">
+									<label for="processor" class="form-label">Processor :</label> <select
+										id="processor" class="form-select"
+										aria-label="Default select example" name="processor">
+										<option th:each="processor : ${processorList}"
+											th:value="${processor.id}" th:text="${processor.title}"
+											th:selected="${productDetail.processor != null and processor.id == productDetail.processor.id}">
+										</option>
+									</select>
+								</div>
+								<div class="mb-3">
+									<label for="operatingSystem" class="form-label">Operating
+										System :</label> <select id="operatingSystem" class="form-select"
+										aria-label="Default select example" name="operatingSystem">
+										<option th:each="operatingSystem : ${operatingSystemList}"
+											th:value="${operatingSystem.id}"
+											th:text="${operatingSystem.name}"
+											th:selected="${productDetail.operatingSystem != null and operatingSystem.id == productDetail.operatingSystem.id}">
+										</option>
+									</select>
+								</div>
+								<div class="mb-3">
+									<label for="ram" class="form-label">Ram :</label> <select
+										id="ram" class="form-select"
+										aria-label="Default select example" name="ram">
+										<option th:each="ram : ${ramList}" th:value="${ram.id}"
+											th:text="${ram.capacity}"
+											th:selected="${productDetail.ram != null and ram.id == productDetail.ram.id}"></option>
+									</select>
+								</div>
+							</div>
+						</div>
+						<button type="submit"
+							th:attr="formaction=@{/admin/cat-phone/product/phone-form/add(productId=${product.id})}"
+							class="btn btn-outline-primary">Add</button>
+
+						<button type="submit"
+							th:if="${productDetail?.product?.id != null}"
+							th:attr="formaction=@{/admin/cat-phone/product/phone-form/save(productId=${productDetail.product.id})}"
+							class="btn btn-outline-success">Save</button>
+						<button type="submit" th:if="${productDetail?.product?.id != null}"
+							th:attr="formaction=@{/admin/cat-phone/product/phone-form/delete(productDetailId=${productDetail.id})}"
+							class="btn btn-outline-danger">Delete</button>
+
+					</form>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript">
+			document.getElementById('imageInput').addEventListener(
+					'change',
+					function() {
+						const selectedImage = document
+								.getElementById('selectedImage');
+						const files = this.files;
+						if (files && files.length > 0) {
+							const reader = new FileReader();
+							reader.onload = function(e) {
+								selectedImage.src = e.target.result;
+							};
+							reader.readAsDataURL(files[0]); // Chỉ đọc và hiển thị ảnh đầu tiên
+						}
+					});
+		</script>
+	</div>
+</body>
+</html>
