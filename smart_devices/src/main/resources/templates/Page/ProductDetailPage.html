@@ -87,12 +87,14 @@
 
 								<hr />
 
-								<a href="#" class="btn btn-warning shadow-0"> Buy now </a> <a
-									th:if="${session.user == null}" href="/cart" type="button"
+								<a href="#" class="btn btn-warning shadow-0"> Buy now </a>
+								<a
+									sec:authorize="!isAuthenticated()" type="button"
 									class="btn btn-primary shadow-0" data-bs-toggle="modal"
 									data-bs-target="#authModal"> <i
 									class="me-1 fa fa-shopping-basket"></i> Add to cart
-								</a> <a th:if="${session.user != null}"
+								</a>
+								<a sec:authorize="isAuthenticated()"
 									th:href="@{'add/'+${productDetail.id}}"
 									class="btn btn-primary shadow-0"> <i
 									class="me-1 fa fa-shopping-basket"></i> Add to cart

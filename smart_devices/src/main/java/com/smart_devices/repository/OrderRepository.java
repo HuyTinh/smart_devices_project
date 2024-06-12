@@ -3,6 +3,7 @@ package com.smart_devices.repository;
 import java.util.Date;
 import java.util.List;
 
+import com.smart_devices.dto.OrderDetailManageDto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -19,12 +20,12 @@ import com.smart_devices.model.Order;
 @Repository
 public interface OrderRepository extends JpaRepository<Order, Integer> {
 
-	@Query("SELECT new com.smart_devices.dto.OrderDetailDto(" + "o.id, " + "CONCAT(u.firstName, ' ', u.lastName), "
+	@Query("SELECT new com.smart_devices.dto.OrderDetailManageDto(" + "o.id, " + "CONCAT(u.firstName, ' ', u.lastName), "
 			+ "pd.title, " + "od.quantity, " + "od.price, " + "o.orderDate, " + "o.shippingAddress," + "o.status)"
 			+ "FROM Order o " + "JOIN o.user u " + "JOIN o.orderDetails od " + "JOIN od.productDetail pd ")
-	Page<OrderDetailDto> findAllOrderDetails(Pageable pageable);
+	Page<OrderDetailManageDto> findAllOrderDetails(Pageable pageable);
 
-	@Query("SELECT new com.smart_devices.dto.OrderDetailDto(" +
+	@Query("SELECT new com.smart_devices.dto.OrderDetailManageDto(" +
 		       "o.id, " +
 		       "CONCAT(u.firstName, ' ', u.lastName), " +
 		       "pd.title, " +
@@ -49,7 +50,7 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
 		       "AND (:status IS NULL OR o.status = :status) " +
 		       "AND (:minTotal IS NULL OR (od.quantity * od.price) >= :minTotal) " +
 		       "AND (:maxTotal IS NULL OR (od.quantity * od.price) <= :maxTotal)")
-		Page<OrderDetailDto> searchOrders(
+		Page<OrderDetailManageDto> searchOrders(
 		    @Param("keyword") String keyword,
 		    @Param("fromDate") Date fromDate,
 		    @Param("toDate") Date toDate,

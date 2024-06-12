@@ -30,13 +30,13 @@
 <body>
 	
 	<div class="sidebar d-flex flex-column flex-shrink-0 p-3 bg-dark">
-		<a href="/cat-phone/admin"
+		<a href="/admin/cat-phone"
 			class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
 			<span class="fs-2">CatPhone - Admin</span>
 		</a>
 		<hr>
 		<ul class="nav nav-pills flex-column mb-auto" id="menu">
-			<li class="nav-item"><a id="dashboard" href="/cat-phone/admin"
+			<li class="nav-item"><a id="dashboard" href="/admin/cat-phone"
 				class="nav-link fs-4">DashBoard</a></li>
 			<li class="nav-item"><a id="products"
 				class="nav-link text-white fs-4" data-bs-toggle="collapse"
@@ -48,28 +48,28 @@
 					<ul class="nav flex-column">
 						<li class="nav-item"><a id="phone-manage"
 							class="nav-link text-white"
-							href="/cat-phone/admin/product/phone-manage">Phone</a></li>
+							href="/admin/cat-phone/product/phone-manage">Phone</a></li>
 						<li class="nav-item"><a id="phone-accessories"
 							class="nav-link text-white"
-							href="/cat-phone/admin/product/phone-accessories">Phone
+							href="/admin/cat-phone/product/phone-accessories">Phone
 								Accessories</a></li>
 					</ul>
 				</div></li>
 			<li class="nav-item"><a id="orders"
-				href="/cat-phone/admin/orders" class="nav-link text-white fs-4">Orders</a></li>
+				href="/admin/cat-phone/orders" class="nav-link text-white fs-4">Orders</a></li>
 			<li class="nav-item"><a id="customer"
-				href="/cat-phone/admin/customer" class="nav-link text-white fs-4">Customer</a></li>
+				href="/admin/cat-phone/customer" class="nav-link text-white fs-4">Customer</a></li>
 			<li class="nav-item"><a class="nav-link text-white fs-4"
 				data-bs-toggle="collapse" href="#collapseReport" role="button"
 				aria-expanded="false" aria-controls="collapseReport"> Report </a>
 				<div class="collapse" id="collapseReport">
 					<ul class="nav flex-column">
 						<li class="nav-item"><a class="nav-link text-white fs-6"
-							href="/cat-phone/admin/report/revenue">Revenue</a></li>
+							href="/admin/cat-phone/report/revenue">Revenue</a></li>
 						<li class="nav-item"><a class="nav-link text-white fs-6"
-							href="/cat-phone/admin/report/product">Product</a></li>
+							href="/admin/cat-phone/report/product">Product</a></li>
 						<li class="nav-item"><a class="nav-link text-white fs-6"
-							href="/cat-phone/admin/report/customer">Customer</a></li>
+							href="/admin/cat-phone/report/customer">Customer</a></li>
 					</ul>
 				</div></li>
 		</ul>
@@ -126,7 +126,6 @@
 						</div>
 					</div>
 				</div>
-
 			</div>
 		</div>
 
@@ -165,16 +164,16 @@
                 }
             });
         });
-        
+
     </script>
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<script>
 		function updateOrderStatus(selectElement) {
 		    var orderId = $(selectElement).data("order-id");
 		    var newStatus = $(selectElement).val();
-		
+
 		    $.ajax({
-		        url: '/cat-phone/admin/orders/' + orderId + '/status',
+		        url: '/admin/cat-phone/orders/' + orderId + '/status',
 		        type: 'POST',
 		        data: { status: newStatus },
 		        success: function() {
@@ -199,10 +198,10 @@
         var revenueData = /*[[${revenueData}]]*/ [];
         var labels = revenueData.map(item => item.month + '/' + item.year);
         var revenue = revenueData.map(item => item.totalRevenue);
-	
+
         var backgroundColors = revenueData.map(() => getRandomColor());
         var borderColors = backgroundColors.map(color => color.replace(/, [\d.]+\)$/, ', 1)'));
-        
+
 
         var ctx = document.getElementById('revenueChart').getContext('2d');
         var revenueChart = new Chart(ctx, {
@@ -232,7 +231,7 @@
                 var firstPoint = activePoints[0];
                 var label = revenueChart.data.labels[firstPoint.index];
                 var [month, year] = label.split('/');
-                window.location.href = `/cat-phone/admin?month=${month}&year=${year}`;
+                window.location.href = `/admin/cat-phone?month=${month}&year=${year}`;
             }
         };
 
@@ -271,7 +270,7 @@
             const r = Math.floor(Math.random() * 255);
             const g = Math.floor(Math.random() * 255);
             const b = Math.floor(Math.random() * 255);
-            const a = (Math.random() * 0.5 + 0.5).toFixed(2); 
+            const a = (Math.random() * 0.5 + 0.5).toFixed(2);
             return `rgba(${r}, ${g}, ${b}, ${a})`;
         }
         /*]]>*/
@@ -338,24 +337,24 @@
 
 		  return pageData;
 		}
-	
+
 	$('#confirmExportBtn').click(async function() {
 	    var selectedValColumns = getSelectedValColumns();
 	    var tableData = await getAllTableData();
 	    $.ajax({
 	        type: 'POST',
-	        url: '/cat-phone/admin/report/revenue',
+	        url: '/admin/cat-phone/report/revenue',
 	        contentType: 'application/json',
 	        data: JSON.stringify({ selectedValColumns: selectedValColumns, tableData: tableData }),
 	        success: function(response) {
-	        	
+
 	        	Swal.fire({
 	                icon: 'success',
 	                title: 'Excel đã được tạo thành công',
 	                showConfirmButton: false,
 	                timer: 1500
 	            }).then(function() {
-	                
+
 	            });
 	        	$('#exportModal').modal('hide');
 	        },
@@ -365,7 +364,7 @@
 	    });
 	});
 	</script>
-	
+
 	<!-- Product -->
 	<script>
 	$('#exportExcelBtn').click(function() {
@@ -375,7 +374,7 @@
 	    // Gửi dữ liệu lên server bằng AJAX
 	    $.ajax({
 	        type: 'POST',
-	        url: '/cat-phone/admin/report/product/exportExcel',
+	        url: '/admin/cat-phone/report/product/exportExcel',
 	        contentType: 'application/json',
 	        data: JSON.stringify({ selectedColumns: selectedColumns, selectedIds: selectedIds }),
 	        success: function(response) {
@@ -385,7 +384,7 @@
 	                showConfirmButton: false,
 	                timer: 1500
 	            }).then(function() {
-	                
+
 	            });
 	        	$('#columnModal').modal('hide');
 	        },
@@ -421,10 +420,10 @@
 	                }).get();
 	                // Nối ID từ trang hiện tại vào mảng selectedIds
 	                selectedIds = selectedIds.concat(currentPageIds);
-	                
+
 	                // Kiểm tra xem trang hiện tại có phải là trang cuối cùng không
 	                hasNextPage = !$(response).find('.pagination .page-item:last-child').hasClass('disabled');
-	                
+
 	                // Nếu còn trang tiếp theo, thực hiện lấy dữ liệu từ trang đó
 	                if (hasNextPage) {
 	                    var nextPageUrl = $(response).find('.pagination .page-item:last-child a').attr('href');
@@ -436,12 +435,12 @@
 	    }
 
 	    // Bắt đầu lấy dữ liệu từ trang đầu tiên
-	    var currentPageUrl = '/cat-phone/admin/report/product'; // Thay đổi URL của trang nếu cần
+	    var currentPageUrl = '/admin/cat-phone/report/product'; // Thay đổi URL của trang nếu cần
 	    fetchIdsFromPage(currentPageUrl);
 
 	    return selectedIds;
 	}
-	
+
 
 	</script>
 	<script>

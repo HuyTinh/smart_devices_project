@@ -27,6 +27,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Data
 @Entity
@@ -56,9 +57,6 @@ public class Order extends Model {
 	@Builder.Default
 	OrderStatus status = OrderStatus.PROCESSING;
 
-	@Column(name = "order_date")
-	@Temporal(TemporalType.DATE)
-	Date orderDate;
 	@Column(name = "payment_method")
 	@Enumerated(EnumType.STRING)
 	PaymentMethod paymentMethod;

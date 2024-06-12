@@ -5,6 +5,11 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
@@ -46,6 +51,11 @@ public class UserServiceImlp implements UserService {
 	}
 
 	@Override
+	public User findByEmail(String email) {
+		return null;
+	}
+
+	@Override
 	public void save(User user) {
 		// TODO Auto-generated method stub
 		userRepository.save(user);
@@ -56,12 +66,6 @@ public class UserServiceImlp implements UserService {
 		// TODO Auto-generated method stub
 		userRepository.delete(user);
 	}
-
-	public List<Cart> getCartList() {
-		return this.user.getCarts();
-
-	}
-	
 
 	@Override
 	public User getCurrentUser() {

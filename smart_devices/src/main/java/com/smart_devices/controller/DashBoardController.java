@@ -13,7 +13,7 @@ import com.smart_devices.dto.MonthlyRevenueDto;
 import com.smart_devices.service.OrderService;
 
 @Controller
-@RequestMapping("cat-phone/admin")
+@RequestMapping("admin/cat-phone")
 public class DashBoardController {
 	@Autowired
 	OrderService orderService;
@@ -35,7 +35,7 @@ public class DashBoardController {
             }
         }
 
-        return "dashBoard";
+        return "DashBoard";
     }
 	
 }

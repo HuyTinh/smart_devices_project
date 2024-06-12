@@ -3,16 +3,13 @@ package com.smart_devices.controller;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import com.smart_devices.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -26,20 +23,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.poiji.bind.Poiji;
-import com.smart_devices.dto.ExportPRoductDto;
-import com.smart_devices.dto.ExportRevenueDto;
-import com.smart_devices.dto.MonthlyRevenueDto;
-import com.smart_devices.dto.OrderDetailDto;
-import com.smart_devices.dto.ProductDetailDto;
 import com.smart_devices.enums.OrderStatus;
 import com.smart_devices.enums.ProductDetailStatus;
 import com.smart_devices.model.Brand;
@@ -81,7 +71,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
 
 @Controller
-@RequestMapping("cat-phone/admin")
+@RequestMapping("admin/cat-phone")
 public class ProductAdminController {
 
 	@Autowired
@@ -260,7 +250,7 @@ public class ProductAdminController {
 		model.addAttribute("brandList", brandService.findAll());
 		model.addAttribute("categoryList", categoryService.findAll());
 		model.addAttribute("productList", productService.findAll());
-		return "page/phone-manage";
+		return "Page/PhoneManagePage";
 	}
 
 	@GetMapping("product/phone-form")
@@ -274,7 +264,7 @@ public class ProductAdminController {
 		model.addAttribute("processorList", processorService.findAll());
 		model.addAttribute("ramList", ramService.findAll());
 		model.addAttribute("storageList", storageService.findAll());
-		return "/page/phone-form";
+		return "Page/PhonePage";
 	}
 
 	@GetMapping("product/phone-accessories")
@@ -286,7 +276,7 @@ public class ProductAdminController {
 		model.addAttribute("processorList", processorService.findAll());
 		model.addAttribute("ramList", ramService.findAll());
 		model.addAttribute("storageList", storageService.findAll());
-		return "page/phone-accessories";
+		return "Page/PhoneAccessoriesPage";
 	}
 
 	// Phone
@@ -310,7 +300,7 @@ public class ProductAdminController {
 	public String showAddPhoneForm(Model model) {
 		model.addAttribute("brandList", brandService.findAll());
 		model.addAttribute("categoryList", categoryService.findAll());
-		return "page/addPhoneForm";
+		return "Page/AddPhonePage";
 	}
 
 	@GetMapping("product/phone/edit")
@@ -318,7 +308,7 @@ public class ProductAdminController {
 		model.addAttribute("product", productService.findById(productId));
 		model.addAttribute("brandList", brandService.findAll());
 		model.addAttribute("categoryList", categoryService.findAll());
-		return "page/addPhoneForm";
+		return "Page/AddPhonePage";
 	}
 
 	@PostMapping("product/phone/save")
@@ -366,7 +356,7 @@ public class ProductAdminController {
 		model.addAttribute("processorList", processorService.findAll());
 		model.addAttribute("ramList", ramService.findAll());
 		model.addAttribute("storageList", storageService.findAll());
-		return "page/phone-form";
+		return "Page/PhonePage";
 	}
 
 	@PostMapping("product/phone-form/save")
@@ -416,13 +406,13 @@ public class ProductAdminController {
 
 	@GetMapping("product/phone-accessories/brand")
 	public String brand_form() {
-		return "page/brand-form";
+		return "Page/BrandPage";
 	}
 
 	@GetMapping("product/phone-accessories/brand/edit")
 	public String editBrand(Model model, @RequestParam("brandid") Integer branid) {
 		model.addAttribute("brand", brandService.getById(branid));
-		return "page/brand-form";
+		return "Page/BrandPage";
 	}
 
 	@PostMapping("product/phone-accessories/brand/add")
@@ -451,13 +441,13 @@ public class ProductAdminController {
 
 	@GetMapping("product/phone-accessories/category")
 	public String category_form() {
-		return "page/categories-form";
+		return "Page/CategoriesPage";
 	}
 
 	@GetMapping("product/phone-accessories/category/edit")
 	public String editCategory(Model model, @RequestParam("categoryid") Integer categoryid) {
 		model.addAttribute("category", categoryService.getById(categoryid));
-		return "page/categories-form";
+		return "Page/CategoriesPage";
 	}
 
 	@PostMapping("product/phone-accessories/category/add")
@@ -486,13 +476,13 @@ public class ProductAdminController {
 
 	@GetMapping("product/phone-accessories/processor")
 	public String processor_form() {
-		return "page/processor-form";
+		return "Page/ProcessorPage";
 	}
 
 	@GetMapping("product/phone-accessories/processor/edit")
 	public String editProcessor(Model model, @RequestParam("processorid") Integer processorid) {
 		model.addAttribute("processor", processorService.getById(processorid));
-		return "page/processor-form";
+		return "Page/ProcessorPage";
 	}
 
 	@PostMapping("product/phone-accessories/processor/add")
@@ -526,13 +516,13 @@ public class ProductAdminController {
 
 	@GetMapping("product/phone-accessories/storage")
 	public String storage_form() {
-		return "page/storage-form";
+		return "Page/StoragePage";
 	}
 
 	@GetMapping("product/phone-accessories/storage/edit")
 	public String editStorage(Model model, @RequestParam("storageid") Integer storageid) {
 		model.addAttribute("storage", storageService.getById(storageid));
-		return "page/storage-form";
+		return "Page/StoragePage";
 	}
 
 	@PostMapping("product/phone-accessories/storage/add")
@@ -561,13 +551,13 @@ public class ProductAdminController {
 
 	@GetMapping("product/phone-accessories/gpu")
 	public String gpu_form() {
-		return "page/gpu-form";
+		return "Page/GpuPage";
 	}
 
 	@GetMapping("product/phone-accessories/gpu/edit")
 	public String editGpu(Model model, @RequestParam("gpuid") Integer gpuid) {
 		model.addAttribute("storage", gpuService.getById(gpuid));
-		return "page/gpu-form";
+		return "Page/GpuPage";
 	}
 
 	@PostMapping("product/phone-accessories/gpu/add")
@@ -596,13 +586,13 @@ public class ProductAdminController {
 
 	@GetMapping("product/phone-accessories/ram")
 	public String ram_form() {
-		return "page/ram-form";
+		return "Page/RamPage";
 	}
 
 	@GetMapping("product/phone-accessories/ram/edit")
 	public String editRam(Model model, @RequestParam("ramid") Integer ramid) {
 		model.addAttribute("ram", ramService.getById(ramid));
-		return "page/ram-form";
+		return "Page/RamPage";
 	}
 
 	@PostMapping("product/phone-accessories/ram/add")
@@ -631,13 +621,13 @@ public class ProductAdminController {
 
 	@GetMapping("product/phone-accessories/operatingSystem")
 	public String operatingSystem_form() {
-		return "page/operatingSystem-form";
+		return "Page/OperatingSystemPage";
 	}
 
 	@GetMapping("product/phone-accessories/operatingSystem/edit")
 	public String editoperatingSystem(Model model, @RequestParam("operatingSystemid") Integer operatingSystemid) {
 		model.addAttribute("operatingSystem", operatingSystemService.getById(operatingSystemid));
-		return "page/operatingSystem-form";
+		return "Page/OperatingSystemPage";
 	}
 
 	@PostMapping("product/phone-accessories/operatingSystem/add")
@@ -670,7 +660,7 @@ public class ProductAdminController {
 
 		int pageSize = 10;
 		Pageable pageable = PageRequest.of(page, pageSize);
-		Page<OrderDetailDto> pageResult;
+		Page<OrderDetailManageDto> pageResult;
 		if ("".equals(status)) {
 			pageResult = orderService.searchOrders(search, startDate, endDate, null, minTotal, maxTotal, pageable);
 		} else if (search != null || startDate != null || endDate != null || status != null || minTotal != null
@@ -689,7 +679,7 @@ public class ProductAdminController {
 		model.addAttribute("minTotal", minTotal);
 		model.addAttribute("maxTotal", maxTotal);
 		model.addAttribute("orderStatuses", OrderStatus.values());
-		return "page/orders";
+		return "Page/OrdersPage";
 	}
 
 	@PostMapping("orders/{orderId}/status")
@@ -713,7 +703,7 @@ public class ProductAdminController {
 		model.addAttribute("userList", pageResult.getContent());
 		model.addAttribute("page", pageResult);
 		model.addAttribute("search", search);
-		return "page/customer";
+		return "Page/CustomerPage";
 	}
 
 	// Report
@@ -729,7 +719,7 @@ public class ProductAdminController {
 
 		int pageSize = 10;
 		Pageable pageable = PageRequest.of(page, pageSize);
-		Page<OrderDetailDto> pageResult;
+		Page<OrderDetailManageDto> pageResult;
 		if ("".equals(status)) {
 			pageResult = orderService.searchOrders(search, startDate, endDate, null, minTotal, maxTotal, pageable);
 		} else if (search != null || startDate != null || endDate != null || status != null || minTotal != null
@@ -748,7 +738,7 @@ public class ProductAdminController {
 		model.addAttribute("minTotal", minTotal);
 		model.addAttribute("maxTotal", maxTotal);
 		model.addAttribute("orderStatuses", OrderStatus.values());
-		return "page/report-revenue";
+		return "Page/ReportRevenuePage";
 	}
 
 	@PostMapping("report/revenue")
@@ -824,7 +814,7 @@ public class ProductAdminController {
 		model.addAttribute("minStock", minStock);
 		model.addAttribute("maxStock", maxStock);
 
-		return "page/report-product";
+		return "Page/ReportProductPage";
 	}
 
 	@PostMapping("/report/product/exportExcel")

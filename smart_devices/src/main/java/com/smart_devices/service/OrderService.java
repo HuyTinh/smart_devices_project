@@ -4,11 +4,11 @@ package com.smart_devices.service;
 import java.util.Date;
 import java.util.List;
 
+import com.smart_devices.dto.OrderDetailManageDto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import com.smart_devices.dto.MonthlyRevenueDto;
-import com.smart_devices.dto.OrderDetailDto;
 import com.smart_devices.enums.OrderStatus;
 import com.smart_devices.model.Order;
 
@@ -18,7 +18,7 @@ public interface OrderService {
 	
 	Order save(Order order);
 
-	Page<OrderDetailDto> findAllOrderDetails(Pageable pageable);
+	Page<OrderDetailManageDto> findAllOrderDetails(Pageable pageable);
 
 	void updateOrderStatus(int orderId, OrderStatus status);
 
@@ -26,7 +26,7 @@ public interface OrderService {
 
 	List<MonthlyRevenueDto> findMonthlyRevenueWithDailyDetails();
 
-	Page<OrderDetailDto> searchOrders(String keyword, Date fromDate, Date toDate, OrderStatus status, Double minTotal, Double maxTotal, Pageable pageable);
+	Page<OrderDetailManageDto> searchOrders(String keyword, Date fromDate, Date toDate, OrderStatus status, Double minTotal, Double maxTotal, Pageable pageable);
 
 
 

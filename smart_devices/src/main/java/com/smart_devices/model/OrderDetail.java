@@ -1,14 +1,5 @@
-	package com.smart_devices.model;
-	
-	import com.smart_devices.dto.OrderDetailDto;
+package com.smart_devices.model;
 
-import java.sql.Date;
-
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.format.annotation.DateTimeFormat;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
 
 import jakarta.persistence.Column;
 
@@ -19,8 +10,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -46,11 +35,6 @@ public class OrderDetail {
 		@ManyToOne
 		@JoinColumn(name = "product_detail_id")
 		ProductDetail productDetail;
-		
-	@ManyToOne
-	@JoinColumn(name = "order_id")
-	@JsonIgnore
-	Order order;
 	
 		@Column(name = "quantity")
 		int quantity;
@@ -61,4 +45,4 @@ public class OrderDetail {
 		
 	}
 	
-}
+

@@ -5,6 +5,8 @@ import java.util.List;
 import com.smart_devices.dto.UserSignUpDto;
 import com.smart_devices.model.User;
 import com.smart_devices.response.BaseResponse;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 public interface UserService {
 	List<User> findAll();

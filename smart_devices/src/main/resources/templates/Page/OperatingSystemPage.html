@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{dashBoard}" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Operating System</title>
+</head>
+<body>
+	<div layout:fragment="content">
+		<div class="container-fluid">
+			<div class="card">
+				<div class="card-body">
+					<form th:object="${operatingSystem}" method="post">
+						<div class="row">
+							<div class="col">
+								<div class="mb-3">
+								<input name="id" type="hidden" th:field="*{id}" th:value="*{id}" style="display: none;" >
+									<label for="operatingSystemName" class="form-label">Operating System Name:</label> <input
+										type="text" class="form-control" id="operatingSystemName"
+										th:field="*{name}" th:value="*{name}" name="name">
+								</div>
+							</div>
+						</div>
+						<div class="d-flex justify-content-start">
+							<a href="/admin/cat-phone/product/phone-accessories/operatingSystem" class="btn btn-outline-info me-2">New</a>
+							<button type="submit" formaction="/admin/cat-phone/product/phone-accessories/operatingSystem/add" class="btn btn-outline-primary me-2">Add</button>
+							<button type="submit" formaction="/admin/cat-phone/product/phone-accessories/operatingSystem/update" class="btn btn-outline-success me-2">Save</button>
+							<button type="submit"
+							th:attr="formaction=@{/admin/cat-phone/product/phone-accessories/operatingSystem/delete(operatingSystemid=${operatingSystem.id})}"
+							 class="btn btn-outline-danger me-2">Delete</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

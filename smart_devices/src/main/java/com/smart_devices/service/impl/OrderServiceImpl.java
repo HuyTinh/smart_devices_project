@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.smart_devices.dto.OrderDetailManageDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -37,7 +38,7 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public Page<OrderDetailDto> findAllOrderDetails(Pageable pageable) {
+	public Page<OrderDetailManageDto> findAllOrderDetails(Pageable pageable) {
 		return orderRepository.findAllOrderDetails(pageable);
 	}
 	
@@ -50,10 +51,8 @@ public class OrderServiceImpl implements OrderService {
 
 	
 
-	
-
 	@Override
-	public Page<OrderDetailDto> searchOrders(String keyword, Date fromDate, Date toDate, OrderStatus status,
+	public Page<OrderDetailManageDto> searchOrders(String keyword, Date fromDate, Date toDate, OrderStatus status,
 			Double minTotal, Double maxTotal, Pageable pageable) {
 		return orderRepository.searchOrders(keyword, fromDate, toDate, status, minTotal, maxTotal, pageable);
 	}
@@ -65,13 +64,13 @@ public class OrderServiceImpl implements OrderService {
 	 @Override
 	public List<MonthlyRevenueDto> findMonthlyRevenueWithDailyDetails() {
 	        List<MonthlyRevenueDto> monthlyRevenues = orderRepository.findMonthlyRevenue();
-	        
+
 	        for (MonthlyRevenueDto monthlyRevenue : monthlyRevenues) {
 	            List<DailyRevenueDto> dailyRevenues = orderRepository.findDailyRevenue(monthlyRevenue.getMonth(), monthlyRevenue.getYear());
 	            monthlyRevenue.setDailyRevenues(dailyRevenues);
 	        }
-	        
-	        return monthlyRevenues;
+
+	        return new ArrayList<>();
 	    }
 
 

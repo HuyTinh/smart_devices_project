@@ -59,10 +59,9 @@ public class SecurityConfig {
 		}).formLogin(formLoginConfig -> {
 			formLoginConfig.loginPage("/auth/sign-in")
 							.loginProcessingUrl("/$2a$12$Bonr8SHeaNAmq7KblDXlzuOtkCozCpEwRwMK5iAaRyW238O5Ck")
-							.defaultSuccessUrl("/", true)
 							.permitAll();
 		}).oauth2Login(formLoginConfig -> {
-			formLoginConfig.loginPage("/auth/sign-in").defaultSuccessUrl("/", true)
+			formLoginConfig.loginPage("/auth/sign-in")
 							.userInfoEndpoint((uIE)-> {uIE.userService(oAuth2UserDetailServiceCustom);})
 							.successHandler(oAuth2SuccessHandlerCustom)
 							.failureHandler(oAuth2FailureHandlerCustom);

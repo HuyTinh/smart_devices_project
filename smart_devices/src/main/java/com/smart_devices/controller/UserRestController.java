@@ -3,6 +3,7 @@ package com.smart_devices.controller;
 import java.util.List;
 import java.util.Random;
 
+import com.smart_devices.dto.OrderDetailDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,7 +11,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.smart_devices.dto.OrderDetailDto;
 import com.smart_devices.mapper.OrderDetailMapper;
 import com.smart_devices.model.MailSender;
 import com.smart_devices.model.User;

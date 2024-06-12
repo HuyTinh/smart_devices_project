@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{dashBoard}" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Add Phone</title>
+</head>
+<body>
+	<div layout:fragment="content">
+		<div class="container-fluid">
+			<form method="post" class="form" th:object="${product}">
+    <div class="mb-3 mt-3">
+        <input type="hidden" th:field="*{id}">
+        <label for="lineOfProduct" class="form-label">Line Of Product:</label>
+        <input type="text" class="form-control" id="lineOfProduct" th:field="*{lineOfProduct}">
+    </div>
+    <div class="mb-3">
+        <label for="category" class="form-label">Category:</label>
+        <select id="category" class="form-select" th:field="*{category.id}">
+            <option th:each="category : ${categoryList}"
+                    th:value="${category.id}"
+                    th:text="${category.title}"
+                    th:selected="${category.id == product.category.id}">
+            </option>
+        </select>
+    </div>
+    <div class="mb-3">
+        <label for="brand" class="form-label">Brand:</label>
+        <select id="brand" class="form-select" th:field="*{brand.id}">
+            <option th:each="brand : ${brandList}"
+                    th:value="${brand.id}"
+                    th:text="${brand.title}"
+                    th:selected="${brand.id == product.brand.id}">
+            </option>
+        </select>
+    </div>
+    <div class="mb-3">
+        <a class="btn btn-info" href="admin/cat-phone/product/phone/add">New</a>
+        <button type="submit" class="btn btn-primary" formaction="/admin/cat-phone/product/phone/add">Add</button>
+        <button type="submit" class="btn btn-success" formaction="/admin/cat-phone/product/phone/save">Save</button>
+        <button type="submit" class="btn btn-danger" th:formaction="@{/admin/cat-phone/product/phone/delete(productId=${product.id})}">Delete</button>
+    </div>
+</form>
+		</div>
+	</div>
+</body>
+</html>
