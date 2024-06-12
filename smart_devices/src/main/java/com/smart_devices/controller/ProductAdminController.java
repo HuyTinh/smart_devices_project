@@ -941,11 +941,15 @@ public class ProductAdminController {
 			if (startDate != null && endDate != null) {
 				revenueData = productDetailService.findDailyRevenue(productDetailId, startDate, endDate);
 				secondData = productDetailService.findDailyRevenue(secondProductId, startDate, endDate);
-				model.addAttribute("infoProduct2", productDetailService.findTotalRevenueByProductDetailIdAndDateRange(productDetailId, startDate, endDate));
+				model.addAttribute("infoProduct1", productDetailService.findTotalRevenueByProductDetailIdAndDateRange(productDetailId, startDate, endDate));
+				model.addAttribute("infoProduct2", productDetailService.findTotalRevenueByProductDetailIdAndDateRange(secondProductId, startDate, endDate));
 			} else {
 				revenueData = productDetailService.findTotalRevenueByDate(productDetailId);
 				secondData = productDetailService.findTotalRevenueByDate(secondProductId);
+				model.addAttribute("infoProduct1", productDetailService.findTotalRevenueByProductId(productDetailId));
 				model.addAttribute("infoProduct2", productDetailService.findTotalRevenueByProductId(secondProductId));
+			
+
 			}
 			model.addAttribute("revenueData", revenueData);
 			model.addAttribute("secondData", secondData);
