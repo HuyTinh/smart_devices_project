@@ -13,6 +13,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import com.smart_devices.dto.DailyRevenueProductDTO;
 import com.smart_devices.dto.RevenueProductDTO;
 import com.smart_devices.dto.TotalRevenueProductDTO;
 import com.smart_devices.model.Product;
@@ -79,4 +80,23 @@ public interface ProductDetailRespository extends JpaRepository<ProductDetail, I
             + "WHERE pd.id = :productId "
             + "GROUP BY pd.product.id, pd.title")
 	TotalRevenueProductDTO findTotalRevenueByProductId(@Param("productId") Integer productId);
+	
+	@Query("SELECT new com.smart_devices.dto.DailyRevenueProductDTO( "
+			+ "pd.product.id, "
+	        + "SUM(od.price * od.quantity), "
+	        + "pd.title "
+	        + ") "
+	        + "FROM OrderDetail od "
+	        + "JOIN od.productDetail pd "
+	        + "JOIN od.order o "
+	        + "WHERE pd.id = :productDetailId "
+	        + "AND o.orderDate BETWEEN :startDate AND :endDate "
+	        + "GROUP BY pd.product.id, pd.title")
+	DailyRevenueProductDTO findTotalRevenueByProductDetailIdAndDateRange(
+	        @Param("productDetailId") Integer productDetailId,
+	        @Param("startDate") Date startDate,
+	        @Param("endDate") Date endDate);
+
+
+
 }

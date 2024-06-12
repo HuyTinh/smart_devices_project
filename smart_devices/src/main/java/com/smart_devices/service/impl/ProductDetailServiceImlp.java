@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import com.smart_devices.dto.DailyRevenueProductDTO;
 import com.smart_devices.dto.RevenueProductDTO;
 import com.smart_devices.dto.TotalRevenueProductDTO;
 import com.smart_devices.model.Product;
@@ -94,6 +95,16 @@ public class ProductDetailServiceImlp implements ProductDetailService {
 	public TotalRevenueProductDTO findTotalRevenueByProductId(Integer productId) {
 		return productDetailRespository.findTotalRevenueByProductId(productId);
 	}
+
+	@Override
+	public DailyRevenueProductDTO findTotalRevenueByProductDetailIdAndDateRange(Integer productDetailId, Date startDate,
+			Date endDate) {
+		return productDetailRespository.findTotalRevenueByProductDetailIdAndDateRange(productDetailId, startDate,
+				endDate);
+	}
+
+	
+
 
 	
 	

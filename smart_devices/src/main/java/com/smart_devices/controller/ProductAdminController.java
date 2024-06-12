@@ -930,26 +930,27 @@ public class ProductAdminController {
 		if (secondProductId == null) {
 			if (startDate != null && endDate != null) {
 				revenueData = productDetailService.findDailyRevenue(productDetailId, startDate, endDate);
+				model.addAttribute("infoProduct1", productDetailService.findTotalRevenueByProductDetailIdAndDateRange(productDetailId, startDate, endDate));
 			} else {
 				revenueData = productDetailService.findTotalRevenueByDate(productDetailId);
+				model.addAttribute("infoProduct1", productDetailService.findTotalRevenueByProductId(productDetailId));
+				
 			}
 			model.addAttribute("revenueData", revenueData);
-			model.addAttribute("infoProduct1", productDetailService.findTotalRevenueByProductId(productDetailId));
-			System.out.println(productDetailService.findTotalRevenueByProductId(productDetailId));
 		} else {
 			if (startDate != null && endDate != null) {
 				revenueData = productDetailService.findDailyRevenue(productDetailId, startDate, endDate);
 				secondData = productDetailService.findDailyRevenue(secondProductId, startDate, endDate);
+				model.addAttribute("infoProduct2", productDetailService.findTotalRevenueByProductDetailIdAndDateRange(productDetailId, startDate, endDate));
 			} else {
 				revenueData = productDetailService.findTotalRevenueByDate(productDetailId);
 				secondData = productDetailService.findTotalRevenueByDate(secondProductId);
+				model.addAttribute("infoProduct2", productDetailService.findTotalRevenueByProductId(secondProductId));
 			}
 			model.addAttribute("revenueData", revenueData);
 			model.addAttribute("secondData", secondData);
-			model.addAttribute("infoProduct1", productDetailService.findTotalRevenueByProductId(productDetailId));
-			model.addAttribute("infoProduct2", productDetailService.findTotalRevenueByProductId(secondProductId));
+			
 		}
-		
 		model.addAttribute("productDetails", productDetailService.findAll());
 		model.addAttribute("secondProductId", secondProductId);
 		model.addAttribute("productDetailId", productDetailId);

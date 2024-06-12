@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
+import com.smart_devices.dto.DailyRevenueProductDTO;
 import com.smart_devices.dto.RevenueProductDTO;
 import com.smart_devices.dto.TotalRevenueProductDTO;
 import com.smart_devices.model.Product;
@@ -38,5 +39,10 @@ public interface ProductDetailService {
 	List<RevenueProductDTO> findDailyRevenue(Integer productDetailId, Date startDate, Date endDate);
 
 	TotalRevenueProductDTO findTotalRevenueByProductId(Integer productId);
+
+	DailyRevenueProductDTO findTotalRevenueByProductDetailIdAndDateRange(Integer productDetailId, Date startDate, Date endDate);
+
+
+
 
 }	
