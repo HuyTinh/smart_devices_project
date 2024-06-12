@@ -195,26 +195,66 @@
 		}
 	</script>
 	<script th:inline="javascript">
-        /*<![CDATA[*/
-        var revenueData = /*[[${revenueData}]]*/ [];
-        var labels = revenueData.map(item => item.month + '/' + item.year);
-        var revenue = revenueData.map(item => item.totalRevenue);
-	
-        var backgroundColors = revenueData.map(() => getRandomColor());
-        var borderColors = backgroundColors.map(color => color.replace(/, [\d.]+\)$/, ', 1)'));
-        
+    /*<![CDATA[*/
+    var revenueData = /*[[${revenueData}]]*/ [];
+    var labels = revenueData.map(item => item.month + '/' + item.year);
+    var revenue = revenueData.map(item => item.totalRevenue);
 
-        var ctx = document.getElementById('revenueChart').getContext('2d');
-        var revenueChart = new Chart(ctx, {
-            type: 'bar',
+    var backgroundColors = revenueData.map(() => getRandomColor());
+    var borderColors = backgroundColors.map(color => color.replace(/, [\d.]+\)$/, ', 1)'));
+
+    var ctx = document.getElementById('revenueChart').getContext('2d');
+    var revenueChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Monthly Revenue',
+                data: revenue,
+                backgroundColor: backgroundColors,
+                borderColor: borderColors,
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
+    document.getElementById('revenueChart').onclick = function(evt) {
+        var activePoints = revenueChart.getElementsAtEventForMode(evt, 'nearest', { intersect: true }, true);
+        if (activePoints.length > 0) {
+            var firstPoint = activePoints[0];
+            var label = revenueChart.data.labels[firstPoint.index];
+            var [month, year] = label.split('/');
+            window.location.href = `/cat-phone/admin?month=${month}&year=${year}`;
+        }
+    };
+
+    var dailyRevenueData = /*[[${dailyRevenueData}]]*/ [];
+    if (dailyRevenueData.length > 0) {
+        var dailyLabels = dailyRevenueData.map(item => item.day);
+        var dailyRevenue = dailyRevenueData.map(item => item.totalRevenue);
+
+        var dailyBackgroundColors = dailyRevenueData.map(() => getRandomColor());
+        var dailyBorderColors = dailyBackgroundColors.map(color => color.replace(/, [\d.]+\)$/, ', 1)'));
+
+        var dailyCtx = document.getElementById('dailyRevenueChart').getContext('2d');
+        var dailyRevenueChart = new Chart(dailyCtx, {
+            type: 'line',
             data: {
-                labels: labels,
+                labels: dailyLabels,
                 datasets: [{
-                    label: 'Monthly Revenue',
-                    data: revenue,
-                    backgroundColor: backgroundColors,
-                    borderColor: borderColors,
-                    borderWidth: 1
+                    label: 'Daily Revenue',
+                    data: dailyRevenue,
+                    backgroundColor: dailyBackgroundColors,
+                    borderColor: dailyBorderColors,
+                    borderWidth: 5,
+                    tension: 0.4 // Tension for smoother lines
                 }]
             },
             options: {
@@ -226,56 +266,24 @@
             }
         });
 
-        document.getElementById('revenueChart').onclick = function(evt) {
-            var activePoints = revenueChart.getElementsAtEventForMode(evt, 'nearest', { intersect: true }, true);
-            if (activePoints.length > 0) {
-                var firstPoint = activePoints[0];
-                var label = revenueChart.data.labels[firstPoint.index];
-                var [month, year] = label.split('/');
-                window.location.href = `/cat-phone/admin?month=${month}&year=${year}`;
+        // Cuộn xuống phần tử dailyRevenueChart
+        setTimeout(() => {
+            var dailyChartElement = document.getElementById('dailyRevenueChart');
+            if (dailyChartElement) {
+                dailyChartElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
             }
-        };
+        }, 100); // Chờ một chút để chắc chắn rằng biểu đồ đã được render xong
+    }
 
-        var dailyRevenueData = /*[[${dailyRevenueData}]]*/ [];
-        if (dailyRevenueData.length > 0) {
-            var dailyLabels = dailyRevenueData.map(item => item.day);
-            var dailyRevenue = dailyRevenueData.map(item => item.totalRevenue);
-
-            var dailyBackgroundColors = dailyRevenueData.map(() => getRandomColor());
-            var dailyBorderColors = dailyBackgroundColors.map(color => color.replace(/, [\d.]+\)$/, ', 1)'));
-
-            var dailyCtx = document.getElementById('dailyRevenueChart').getContext('2d');
-            var dailyRevenueChart = new Chart(dailyCtx, {
-                type: 'line',
-                data: {
-                    labels: dailyLabels,
-                    datasets: [{
-                        label: 'Daily Revenue',
-                        data: dailyRevenue,
-                        backgroundColor: dailyBackgroundColors,
-                        borderColor: dailyBorderColors,
-                        borderWidth: 5,
-                        tension: 0.4 // Tension for smoother lines
-                    }]
-                },
-                options: {
-                    scales: {
-                        y: {
-                            beginAtZero: true
-                        }
-                    }
-                }
-            });
-        }
-        function getRandomColor() {
-            const r = Math.floor(Math.random() * 255);
-            const g = Math.floor(Math.random() * 255);
-            const b = Math.floor(Math.random() * 255);
-            const a = (Math.random() * 0.5 + 0.5).toFixed(2); 
-            return `rgba(${r}, ${g}, ${b}, ${a})`;
-        }
-        /*]]>*/
-    </script>
+    function getRandomColor() {
+        const r = Math.floor(Math.random() * 255);
+        const g = Math.floor(Math.random() * 255);
+        const b = Math.floor(Math.random() * 255);
+        const a = (Math.random() * 0.5 + 0.5).toFixed(2); 
+        return `rgba(${r}, ${g}, ${b}, ${a})`;
+    }
+    /*]]>*/
+</script>
 	<script>
 	// Hàm để lấy giá trị của các checkbox được chọn
 	function getSelectedValColumns() {

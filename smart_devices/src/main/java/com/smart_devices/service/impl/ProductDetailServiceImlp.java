@@ -1,5 +1,6 @@
 package com.smart_devices.service.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import com.smart_devices.dto.RevenueProductDTO;
 import com.smart_devices.model.Product;
 import com.smart_devices.model.ProductDetail;
 import com.smart_devices.repository.ProductDetailRespository;
@@ -76,6 +78,17 @@ public class ProductDetailServiceImlp implements ProductDetailService {
 	public List<ProductDetail> findAllById(List<Integer> ids) {
 		return productDetailRespository.findAllById(ids);
 	}
+
+	@Override
+	public List<RevenueProductDTO> findDailyRevenue(Integer productDetailId, Date startDate, Date endDate) {
+		return productDetailRespository.findDailyRevenue(productDetailId, startDate, endDate);
+	}
+
+	@Override
+	public List<RevenueProductDTO> findTotalRevenueByDate(Integer productDetailId) {
+		return productDetailRespository.findTotalRevenueByDate(productDetailId);
+	}
+
 
 	
 

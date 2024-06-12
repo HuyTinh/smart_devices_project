@@ -7,6 +7,7 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -40,6 +41,7 @@ import com.smart_devices.dto.ExportRevenueDto;
 import com.smart_devices.dto.MonthlyRevenueDto;
 import com.smart_devices.dto.OrderDetailDto;
 import com.smart_devices.dto.ProductDetailDto;
+import com.smart_devices.dto.RevenueProductDTO;
 import com.smart_devices.enums.OrderStatus;
 import com.smart_devices.enums.ProductDetailStatus;
 import com.smart_devices.model.Brand;
@@ -928,5 +930,43 @@ public class ProductAdminController {
 		return "redirect:/cat-phone/admin/report/product";
 	}
 
- 
+	@GetMapping("report/product/chart")
+	public String showChartProduct(@RequestParam("productDetailId") Integer productDetailId,
+			@RequestParam(value = "secondProductId", required = false) Integer secondProductId,
+			@RequestParam(value = "startDate", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date startDate,
+			@RequestParam(value = "endDate", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date endDate,
+			Model model) {
+
+		List<RevenueProductDTO> revenueData = new ArrayList<>() ;
+		List<RevenueProductDTO> secondData = new ArrayList<>();
+
+		if (secondProductId == null) {
+			if (startDate != null && endDate != null) {
+				revenueData = productDetailService.findDailyRevenue(productDetailId, startDate, endDate);
+			} else {
+				revenueData = productDetailService.findTotalRevenueByDate(productDetailId);
+			}
+			model.addAttribute("revenueData", revenueData);
+		} else {
+			if (startDate != null && endDate != null) {
+				revenueData = productDetailService.findDailyRevenue(productDetailId, startDate, endDate);
+				secondData = productDetailService.findDailyRevenue(secondProductId, startDate, endDate);
+			} else {
+				revenueData = productDetailService.findTotalRevenueByDate(productDetailId);
+				secondData = productDetailService.findTotalRevenueByDate(secondProductId);
+			}
+			model.addAttribute("revenueData", revenueData);
+			model.addAttribute("secondData", secondData);
+		}
+		System.out.println("Dữ liệu 1 :" +revenueData);
+		System.out.println("Dữ liệu 2 :" +secondData);
+		model.addAttribute("productDetails", productDetailService.findAll());
+		model.addAttribute("secondProductId", secondProductId);
+		model.addAttribute("productDetailId", productDetailId);
+		model.addAttribute("startDate", startDate);
+		model.addAttribute("endDate", endDate);
+
+		return "page/Product-chart-page";
+	}
+
 }

@@ -1,5 +1,6 @@
 package com.smart_devices.repository;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -12,6 +13,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import com.smart_devices.dto.RevenueProductDTO;
 import com.smart_devices.model.Product;
 import com.smart_devices.model.ProductDetail;
 
@@ -30,19 +32,35 @@ public interface ProductDetailRespository extends JpaRepository<ProductDetail, I
 	@Transactional
 	@Query("DELETE FROM ProductDetail pd WHERE pd.id = :id")
 	void deleteByProductDetailId(@Param("id") Integer id);
-	
-	@Query("SELECT pd FROM ProductDetail pd WHERE "
-	        + "(:title IS NULL OR pd.title LIKE %:title%) AND "
-	        + "(:minPrice IS NULL OR pd.price >= :minPrice) AND "
-	        + "(:maxPrice IS NULL OR pd.price <= :maxPrice) AND "
-	        + "(:minStock IS NULL OR pd.stock >= :minStock) AND "
-	        + "(:maxStock IS NULL OR pd.stock <= :maxStock)")
-	Page<ProductDetail> searchProductDetails(
-	        @Param("title") String title,
-	        @Param("minPrice") Double minPrice,
-	        @Param("maxPrice") Double maxPrice,
-	        @Param("minStock") Integer minStock,
-	        @Param("maxStock") Integer maxStock,
-	        Pageable pageable);
-	
+
+	@Query("SELECT pd FROM ProductDetail pd WHERE " + "(:title IS NULL OR pd.title LIKE %:title%) AND "
+			+ "(:minPrice IS NULL OR pd.price >= :minPrice) AND " + "(:maxPrice IS NULL OR pd.price <= :maxPrice) AND "
+			+ "(:minStock IS NULL OR pd.stock >= :minStock) AND " + "(:maxStock IS NULL OR pd.stock <= :maxStock)")
+	Page<ProductDetail> searchProductDetails(@Param("title") String title, @Param("minPrice") Double minPrice,
+			@Param("maxPrice") Double maxPrice, @Param("minStock") Integer minStock,
+			@Param("maxStock") Integer maxStock, Pageable pageable);
+
+	@Query("SELECT new com.smart_devices.dto.RevenueProductDTO( " + "pd.product.id, " + "pd.title, " + "o.orderDate, "
+			+ "SUM(od.price * od.quantity) " + ") " + "FROM OrderDetail od " + "JOIN od.productDetail pd "
+			+ "JOIN od.order o " + "WHERE pd.id = :productDetailId "
+			+ "AND o.orderDate BETWEEN :startDate AND :endDate " + "GROUP BY pd.product.id, pd.title, o.orderDate "
+			+ "ORDER BY o.orderDate ASC")
+	List<RevenueProductDTO> findDailyRevenue(@Param("productDetailId") Integer productDetailId,
+			@Param("startDate") Date startDate, @Param("endDate") Date endDate);
+
+	@Query("SELECT new com.smart_devices.dto.RevenueProductDTO( "
+		    + "pd.product.id, "
+		    + "pd.title, "
+		    + "o.orderDate, "
+		    + "SUM(od.price * od.quantity) "
+		    + ") "
+		    + "FROM OrderDetail od "
+		    + "JOIN od.productDetail pd "
+		    + "JOIN od.order o "
+		    + "WHERE pd.id = :productDetailId "
+		    + "GROUP BY pd.product.id, pd.title, o.orderDate "
+		    + "ORDER BY o.orderDate ASC")
+		List<RevenueProductDTO> findTotalRevenueByDate(@Param("productDetailId") Integer productDetailId);
+
+
 }
