@@ -55,7 +55,7 @@ public class SecurityConfig {
 			register.requestMatchers("/cart/**","/payment", "/api/**").hasAnyAuthority("USER","ADMIN");
 			register.anyRequest().permitAll();
 		}).exceptionHandling(exception -> {
-			exception.accessDeniedPage("/403");
+			exception.accessDeniedPage("/");
 		}).formLogin(formLoginConfig -> {
 			formLoginConfig.loginPage("/auth/sign-in")
 							.loginProcessingUrl("/$2a$12$Bonr8SHeaNAmq7KblDXlzuOtkCozCpEwRwMK5iAaRyW238O5Ck")

@@ -360,8 +360,7 @@ public class ProductAdminController {
 	}
 
 	@PostMapping("product/phone-form/save")
-	public String updateProductDetail(@ModelAttribute("productDetail") ProductDetail productDetail,
-			@ModelAttribute("productId") Integer productId, @RequestParam("files") MultipartFile[] files) {
+	public String updateProductDetail(@ModelAttribute("productDetail") ProductDetail productDetail, @ModelAttribute("productId") Integer productId, @RequestParam("files") MultipartFile[] files) {
 		productDetail.setStatus(ProductDetailStatus.AVAILABLE);
 		List<String> existingImages = productImageService.findImagePathsByProductDetailId(productDetail.getId());
 		productDetail.setProduct(productService.findById(productId));

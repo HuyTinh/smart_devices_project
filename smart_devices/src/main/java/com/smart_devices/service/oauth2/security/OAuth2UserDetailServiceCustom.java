@@ -92,8 +92,7 @@ public class OAuth2UserDetailServiceCustom extends DefaultOAuth2UserService {
 		user.setCredentialsNonExpired(true);
 		user.setRoles(new HashSet<>());
 		user.getRoles().add(roleRepository.findByName("USER"));
-		
-		
+
 		return userRepository.save(user);
 	}
 
